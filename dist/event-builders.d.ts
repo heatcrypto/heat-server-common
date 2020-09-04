@@ -1,0 +1,132 @@
+import { EventTypes, AssetTypes } from './constants';
+export interface EventStandardType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventStandardTypeData;
+}
+export interface EventStandardTypeData {
+    value: string;
+    addrXpub: string | undefined;
+    publicKey: string | undefined;
+    alias: string | undefined;
+    n: number;
+}
+export interface ExtendedAddrXpub {
+    addrXpub: string;
+    publicKey: string;
+    alias?: string;
+}
+export interface EventFeeType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventFeeTypeData;
+}
+export interface EventFeeTypeData {
+    value: string;
+}
+export interface EventOrderType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventOrderTypeData;
+}
+export interface EventOrderTypeData {
+    currencyType: AssetTypes;
+    currencyId: string;
+    quantity: string;
+    price: string;
+}
+export interface EventLeaseBalanceType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventLeaseBalanceTypeData;
+}
+export interface EventLeaseBalanceTypeData {
+    period: number;
+    addrXpub: string | undefined;
+    publicKey: string | undefined;
+    alias: string | undefined;
+}
+export interface EncryptedMessage {
+    encryptedMessage: {
+        data: string;
+        nonce: string;
+    };
+    isText: boolean;
+}
+export interface PlainMessage {
+    message: string;
+    isText: boolean;
+}
+export interface EventMessageType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventMessageTypeData;
+}
+export interface EventMessageTypeData {
+    addrXpub: string | undefined;
+    publicKey: string | undefined;
+    alias: string | undefined;
+    isText: boolean;
+    message: string | {
+        data: string;
+        nonce: string;
+    };
+}
+/**
+ * Builds Standard Type
+ * @param type
+ * @param addrXpub
+ * @param assetType
+ * @param assetId
+ * @param value
+ * @param n
+ */
+export declare function buildEventStandardType(type: EventTypes, addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+export declare function buildEventSend(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+export declare function buildEventReceive(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+export declare function buildEventOutput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+export declare function buildEventInput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+/**
+ * Builds EVENT_FEE
+ * @param value
+ * @param assetType [Optional, de]
+ * @param assetId
+ */
+export declare function buildEventFee(value: string, assetType?: AssetTypes, assetId?: string): EventFeeType;
+/**
+ * Builds Order Type
+ * @param type
+ * @param assetType
+ * @param assetId
+ * @param currencyType
+ * @param currencyId
+ * @param quantity
+ * @param price
+ */
+export declare function buildEventOrderType(type: EventTypes, assetType: AssetTypes, assetId: string, currencyType: AssetTypes, currencyId: string, quantity: string, price: string): EventOrderType;
+export declare function buildEventBuyOrder(assetType: AssetTypes, assetId: string, currencyType: AssetTypes, currencyId: string, quantity: string, price: string): EventOrderType;
+export declare function buildEventSellOrder(assetType: AssetTypes, assetId: string, currencyType: AssetTypes, currencyId: string, quantity: string, price: string): EventOrderType;
+export declare function buildEventCancelBuy(assetType: AssetTypes, assetId: string, currencyType: AssetTypes, currencyId: string, quantity: string, price: string): EventOrderType;
+export declare function buildEventCancelSell(assetType: AssetTypes, assetId: string, currencyType: AssetTypes, currencyId: string, quantity: string, price: string): EventOrderType;
+/**
+ * Builds EVENT_LEASE_BALANCE
+ * @param addrXpub
+ * @param period
+ * @param assetType
+ * @param assetId
+ */
+export declare function buildEventLeaseBalance(addrXpub: ExtendedAddrXpub | string, period: number, assetType?: AssetTypes, assetId?: string): EventLeaseBalanceType;
+/**
+ * Builds Message Type
+ * @param type
+ * @param addrXpub
+ * @param message
+ */
+export declare function buildEventMessageType(type: EventTypes, addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;
+export declare function buildEventMessageSend(addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;
+export declare function buildEventMessageReceive(addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;

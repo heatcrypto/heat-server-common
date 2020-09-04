@@ -1,0 +1,28 @@
+{
+  "name": "heat-server-common",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "prepublish": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "dennis@heatledger.com",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "devDependencies": {
+    "@types/lodash": "^4.14.161",
+    "@types/request": "^2.48.5",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.4.4",
+    "format-error": "^1.0.0",
+    "jsome": "^2.5.0",
+    "limiter": "^1.1.5",
+    "lodash": "^4.17.20",
+    "request": "^2.88.2",
+    "util": "^0.12.3"
+  }
+}

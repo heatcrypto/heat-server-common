@@ -20,6 +20,7 @@ __exportStar(require("./rate_limiter.class"), exports);
 __exportStar(require("./types/alias_lookup.interface"), exports);
 __exportStar(require("./types/balance_lookup.interface"), exports);
 __exportStar(require("./types/event_lookup.interface"), exports);
+__exportStar(require("./types/explorer.interface"), exports);
 __exportStar(require("./types/network_fee.interface"), exports);
 __exportStar(require("./types/network_status.interface"), exports);
 __exportStar(require("./types/publickey_lookup.interface"), exports);

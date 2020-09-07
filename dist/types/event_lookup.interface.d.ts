@@ -58,22 +58,23 @@ export interface EventLookupResult {
      * was send by the input address, the address in the event will be the
      * recipient and vice versa.
      */
-    events: Array<{
-        /**
-         * Enum event type (see Event Types)
-         */
-        type: EventTypes;
-        /**
-         * Enum of asset or token types
-         */
-        assetType: AssetTypes;
-        /**
-         * Unique identifier (erc20 contract addr, or '0' for native currency)
-         */
-        assetId: string;
-        /**
-         * Event data payload which differs based on the event type (see Event Types)
-         */
-        data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData;
-    }>;
+    events: Array<EventLookupEvent>;
+}
+export interface EventLookupEvent {
+    /**
+     * Enum event type (see Event Types)
+     */
+    type: EventTypes;
+    /**
+     * Enum of asset or token types
+     */
+    assetType: AssetTypes;
+    /**
+     * Unique identifier (erc20 contract addr, or '0' for native currency)
+     */
+    assetId: string;
+    /**
+     * Event data payload which differs based on the event type (see Event Types)
+     */
+    data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData;
 }

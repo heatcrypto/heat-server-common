@@ -1,16 +1,18 @@
 import { Blockchains, AssetTypes, SourceTypes, EventTypes } from '../constants'
-import { EventStandardTypeData, EventFeeTypeData, EventOrderTypeData, 
-  EventLeaseBalanceTypeData, EventMessageTypeData } from '../event-builders'
+import {
+  EventStandardTypeData, EventFeeTypeData, EventOrderTypeData,
+  EventLeaseBalanceTypeData, EventMessageTypeData
+} from '../event-builders'
 
 export interface EventLookupParam {
   /**
    * Enum of blockchain identifiers
-   */   
+   */
   blockchain: Blockchains,
 
   /**
    * Enum of asset or token types
-   */   
+   */
   assetType: AssetTypes,
 
   /**
@@ -20,18 +22,18 @@ export interface EventLookupParam {
 
   /**
    * Address or public key
-   */   
+   */
   addrXpub: string,
 
   /**
    * Zero indexed, events are ordered chronologically. 
    * The zero'd event is the newest
-   */ 
+   */
   from: number,
 
   /**
    * Events in range [from, to] are returned
-   */ 
+   */
   to: number,
 
   /**
@@ -72,27 +74,29 @@ export interface EventLookupResult {
    * was send by the input address, the address in the event will be the 
    * recipient and vice versa.
    */
-  events: Array<{
+  events: Array<EventLookupEvent>;
+}
 
-    /**
-     * Enum event type (see Event Types)
-     */
-    type: EventTypes;
+export interface EventLookupEvent {
 
-    /**
-     * Enum of asset or token types
-     */   
-    assetType: AssetTypes;
+  /**
+   * Enum event type (see Event Types)
+   */
+  type: EventTypes;
 
-    /**
-     * Unique identifier (erc20 contract addr, or '0' for native currency)
-     */
-    assetId: string;
+  /**
+   * Enum of asset or token types
+   */
+  assetType: AssetTypes;
 
-    /**
-     * Event data payload which differs based on the event type (see Event Types)
-     */
-    data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData |
-          EventLeaseBalanceTypeData | EventMessageTypeData;
-  }>; 
+  /**
+   * Unique identifier (erc20 contract addr, or '0' for native currency)
+   */
+  assetId: string;
+
+  /**
+   * Event data payload which differs based on the event type (see Event Types)
+   */
+  data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData |
+  EventLeaseBalanceTypeData | EventMessageTypeData;
 }

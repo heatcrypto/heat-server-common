@@ -32,7 +32,7 @@ export interface ExplorerApi {
     tokenDiscovery?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<{
         rateLimitted?: boolean;
         error?: string;
-        value?: TokenDiscoveryResult;
+        value?: Array<TokenDiscoveryResult>;
     }>;
     balanceLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<{
         rateLimitted?: boolean;
@@ -43,12 +43,12 @@ export interface ExplorerApi {
     eventsLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean) => Promise<{
         rateLimitted?: boolean;
         error?: string;
-        value?: EventLookupResult | Array<string>;
+        value?: Array<EventLookupResult> | Array<string>;
     }>;
     utxoLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<{
         rateLimitted?: boolean;
         error?: string;
-        value?: UtxoLookupResult;
+        value?: Array<UtxoLookupResult>;
     }>;
     broadcast?: (blockchain: Blockchains, assetType: AssetTypes, transactionHex: string) => Promise<{
         rateLimitted?: boolean;

@@ -33,52 +33,47 @@ export interface EventLookupParam {
 }
 export interface EventLookupResult {
     /**
-     * Result is an array
+     * Unix timestamp (ms since epoch)
      */
-    [index: number]: {
+    timestamp: number;
+    /**
+     * The tranasaction id
+     */
+    sourceId: string;
+    /**
+     * Enum of sourcetypes, always 0=TRANSACTION at this stage
+     */
+    sourceType: SourceTypes;
+    /**
+     * Number of confirmations.
+     * 0 means unconfirmed/in mem-pool
+     * 1 in latest block
+     * 2 in previous block
+     * etc ..
+     */
+    confirmations: number;
+    /**
+     * Lists events related to the input address, event contents always
+     * are relative to the input address. If for instance this transaction
+     * was send by the input address, the address in the event will be the
+     * recipient and vice versa.
+     */
+    events: Array<{
         /**
-         * Unix timestamp (ms since epoch)
+         * Enum event type (see Event Types)
          */
-        timestamp: number;
+        type: EventTypes;
         /**
-         * The tranasaction id
+         * Enum of asset or token types
          */
-        sourceId: string;
+        assetType: AssetTypes;
         /**
-         * Enum of sourcetypes, always 0=TRANSACTION at this stage
+         * Unique identifier (erc20 contract addr, or '0' for native currency)
          */
-        sourceType: SourceTypes;
+        assetId: string;
         /**
-         * Number of confirmations.
-         * 0 means unconfirmed/in mem-pool
-         * 1 in latest block
-         * 2 in previous block
-         * etc ..
+         * Event data payload which differs based on the event type (see Event Types)
          */
-        confirmations: number;
-        /**
-         * Lists events related to the input address, event contents always
-         * are relative to the input address. If for instance this transaction
-         * was send by the input address, the address in the event will be the
-         * recipient and vice versa.
-         */
-        events: Array<{
-            /**
-             * Enum event type (see Event Types)
-             */
-            type: EventTypes;
-            /**
-             * Enum of asset or token types
-             */
-            assetType: AssetTypes;
-            /**
-             * Unique identifier (erc20 contract addr, or '0' for native currency)
-             */
-            assetId: string;
-            /**
-             * Event data payload which differs based on the event type (see Event Types)
-             */
-            data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData;
-        }>;
-    };
+        data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData;
+    }>;
 }

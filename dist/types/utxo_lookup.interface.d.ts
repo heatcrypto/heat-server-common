@@ -19,32 +19,27 @@ export interface UtxoLookupParam {
 }
 export interface UtxoLookupResult {
     /**
-     * Result is an array
+     * The utxo value in satoshi
      */
-    [index: number]: {
-        /**
-         * The utxo value in satoshi
-         */
-        value: string;
-        /**
-         * Transaction id
-         */
-        txid: string;
-        /**
-         * Utxo index
-         */
-        vout: number;
-        /**
-         * Number of confirmations
-         */
-        confirmations: number;
-        /**
-         * Utxo locktime (or 0 if none)
-         */
-        lockTime: number;
-        /**
-         * For unconfirmed transactions this will return 0
-         */
-        height: number;
-    };
+    value: string;
+    /**
+     * Transaction id
+     */
+    txid: string;
+    /**
+     * Utxo index
+     */
+    vout: number;
+    /**
+     * Number of confirmations
+     */
+    confirmations: number;
+    /**
+     * Utxo locktime (or 0 if none)
+     */
+    lockTime: number;
+    /**
+     * For unconfirmed transactions this will return 0
+     */
+    height: number;
 }

@@ -18,29 +18,24 @@ export interface TokenDiscoveryParam {
 }
 
 export interface TokenDiscoveryResult {
+
   /**
-   * Result is an array
+   * Unique identifier (erc20 contract addr, or '0' for native currency)
    */
-  [index: number]: {
+  assetId: string;
 
-    /**
-     * Unique identifier (erc20 contract addr, or '0' for native currency)
-     */
-    assetId: string;
+  /**
+   * Enum of asset or token types
+   */   
+  assetType: number;
 
-    /**
-     * Enum of asset or token types
-     */   
-    assetType: number;
+  /**
+   * Amount/value in smallest unit on blockchain (satoshi, wei, etc)
+   */  
+  value: string;
 
-    /**
-     * Amount/value in smallest unit on blockchain (satoshi, wei, etc)
-     */  
-    value: string;
-
-    /**
-     * Indicates the address received atleast one transaction
-     */
-    exists: boolean;
-  }
+  /**
+   * Indicates the address received atleast one transaction
+   */
+  exists: boolean;
 }

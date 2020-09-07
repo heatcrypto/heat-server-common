@@ -47,7 +47,7 @@ export interface ExplorerApi {
   ) => Promise<{
     rateLimitted?: boolean;
     error?: string;
-    value?: TokenDiscoveryResult;
+    value?: Array<TokenDiscoveryResult>;
   }>;
 
   balanceLookup?: (
@@ -73,7 +73,7 @@ export interface ExplorerApi {
   ) => Promise<{
     rateLimitted?: boolean;
     error?: string;
-    value?: EventLookupResult | Array<string>
+    value?: Array<EventLookupResult> | Array<string>
   }>;
 
   utxoLookup?: (
@@ -84,7 +84,7 @@ export interface ExplorerApi {
   ) => Promise<{
     rateLimitted?: boolean;
     error?: string;
-    value?: UtxoLookupResult;
+    value?: Array<UtxoLookupResult>;
   }>;
 
   broadcast?: (

@@ -8,6 +8,10 @@ import { UtxoLookupResult } from './utxo_lookup.interface';
 import { TransactionStatusResult } from './transaction_status.interface';
 import { ResolveAliasResult, ReverseResolveAliasResult } from './alias_lookup.interface';
 import { PublicKeyLookupResult } from './publickey_lookup.interface';
+import { ModuleResponse } from '../module-response';
+import { BalanceLookupResult } from './balance_lookup.interface';
+import { CustomHeatAccountResult } from './custom_heat.interface';
+import { BroadcastResult } from './broadcast.interface';
 export interface ExplorerMiddleware {
     getAddress?(address: string): string;
     getNetworkFee?(input: string): {
@@ -19,82 +23,23 @@ export interface ExplorerApi {
     middleWare?: ExplorerMiddleware;
     rateLimiter?: RateLimiterClass;
     host: string;
-    status?: (blockchain?: Blockchains) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: NetworkStatusResult;
-    }>;
-    networkFee?: (blockchain: Blockchains) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: NetworkFeeResult;
-    }>;
-    tokenDiscovery?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: Array<TokenDiscoveryResult>;
-    }>;
-    balanceLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: string;
-        exists?: boolean;
-    }>;
-    eventsLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: Array<EventLookupResult> | Array<string>;
-    }>;
-    utxoLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: Array<UtxoLookupResult>;
-    }>;
-    broadcast?: (blockchain: Blockchains, assetType: AssetTypes, transactionHex: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: {
-            errorMessage: string;
-        } | {
-            transactionId: string;
-        };
-    }>;
-    transactionStatus?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: TransactionStatusResult;
-    }>;
-    resolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, alias: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: ResolveAliasResult;
-    }>;
-    reverseResolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: ReverseResolveAliasResult;
-    }>;
-    publicKey?: (blockchain: Blockchains, addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: PublicKeyLookupResult;
-    }>;
-    customHeatAccount?: (blockchain: Blockchains, _addrXpub: string) => Promise<{
-        rateLimitted?: boolean;
-        error?: string;
-        value?: {
-            id: string;
-            publicKey: string;
-            unconfirmedBalance: string;
-            effectiveBalance: string;
-            currentLessee: string;
-            currentLesseeName: string;
-            currentLeasingHeightFrom: number;
-            currentLeasingHeightTo: number;
-            nextLessee: string;
-            nextLesseeName: string;
-            nextLeasingHeightFrom: number;
-            nextLeasingHeightTo: number;
-        };
-    }>;
+    /**
+     * Standard module endpoints.
+     * Custom - chain specific - endpoints have to be listed below in the custom section.
+     */
+    status?: (blockchain?: Blockchains) => Promise<ModuleResponse<NetworkStatusResult>>;
+    networkFee?: (blockchain: Blockchains) => Promise<ModuleResponse<NetworkFeeResult>>;
+    tokenDiscovery?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
+    balanceLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<ModuleResponse<BalanceLookupResult>>;
+    eventsLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean) => Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>>;
+    utxoLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
+    broadcast?: (blockchain: Blockchains, assetType: AssetTypes, transactionHex: string) => Promise<ModuleResponse<BroadcastResult>>;
+    transactionStatus?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string) => Promise<ModuleResponse<TransactionStatusResult>>;
+    resolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, alias: string) => Promise<ModuleResponse<ResolveAliasResult>>;
+    reverseResolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<ModuleResponse<ReverseResolveAliasResult>>;
+    publicKey?: (blockchain: Blockchains, addrXpub: string) => Promise<ModuleResponse<PublicKeyLookupResult>>;
+    /**
+     * Custom endpoints.
+     */
+    customHeatAccount?: (blockchain: Blockchains, _addrXpub: string) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

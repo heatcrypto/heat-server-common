@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Logger } from '@nestjs/common';
+import { LoggerService } from '@nestjs/common';
 import { format as formatError } from 'format-error';
 import * as jsome from 'jsome';
 
@@ -17,7 +17,7 @@ export function prettyPrint(object: any) {
   }
 }
 
-export function tryParse(jsonStr: string, logger?: Logger) {
+export function tryParse(jsonStr: string, logger?: LoggerService) {
   try {
     return JSON.parse(jsonStr);
   } catch (e) {

@@ -13,6 +13,7 @@ import { BroadcastParam, BroadcastResult } from "./broadcast.interface";
 import { CustomHeatAccountParam, CustomHeatAccountResult } from "./custom_heat.interface";
 export interface ModuleProvider {
     balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>>;
+    broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
     eventLookup?: (context: CallContext, param: EventLookupParam) => Promise<ModuleResponse<Array<EventLookupResult>>>;
     networkFee?: (context: CallContext, param: NetworkFeeParam) => Promise<ModuleResponse<NetworkFeeResult>>;
     networkStatus?: (context: CallContext, param: NetworkStatusParam) => Promise<ModuleResponse<NetworkStatusResult>>;
@@ -22,6 +23,5 @@ export interface ModuleProvider {
     tokenDiscovery?: (context: CallContext, param: TokenDiscoveryParam) => Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
     transactionStatus?: (context: CallContext, param: TransactionStatusParam) => Promise<ModuleResponse<TransactionStatusResult>>;
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
-    broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

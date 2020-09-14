@@ -20,3 +20,4 @@ export * from './types/publickey_lookup.interface';
 export * from './types/token_discovery.interface';
 export * from './types/transaction_status.interface';
 export * from './types/utxo_lookup.interface';
+export * from './utils';

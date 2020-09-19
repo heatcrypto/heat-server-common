@@ -1,10 +1,10 @@
-import * as _ from 'lodash';
+import { isUndefined } from 'lodash';
 import { LoggerService } from '@nestjs/common';
 import { format as formatError } from 'format-error';
 import * as jsome from 'jsome';
 
 export function stringify(object: any, replacer?: any, indent?: any) {
-  if (!_.isUndefined(replacer) && !_.isUndefined(indent))
+  if (!isUndefined(replacer) && !isUndefined(indent))
     return JSON.stringify(object, replacer, indent);
   return JSON.stringify(object, null, 0);
 }
@@ -21,7 +21,7 @@ export function tryParse(jsonStr: string, logger?: LoggerService) {
   try {
     return JSON.parse(jsonStr);
   } catch (e) {
-    if (!_.isUndefined(logger)) {
+    if (!isUndefined(logger)) {
       logger.error(formatError(e));
       logger.log('Source data for previous error:');
       logger.log(jsonStr);

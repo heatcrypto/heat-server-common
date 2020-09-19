@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { isString, isUndefined, isObjectLike } from 'lodash';
 import { EventTypes, AssetTypes, NULL } from './constants';
 
 export interface EventStandardType {
@@ -117,10 +117,10 @@ export function buildEventStandardType(
     assetId,
     data: {
       value,
-      addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-      publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-      alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
-      n: _.isUndefined(n) ? 0 : n,
+      addrXpub: isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+      publicKey: isString(addrXpub) ? undefined : addrXpub.publicKey,
+      alias: isString(addrXpub) ? undefined : addrXpub.alias,
+      n: isUndefined(n) ? 0 : n,
     },
   };
 }
@@ -341,9 +341,9 @@ export function buildEventLeaseBalance(
     assetId,
     data: {
       period,
-      addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-      publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-      alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
+      addrXpub: isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+      publicKey: isString(addrXpub) ? undefined : addrXpub.publicKey,
+      alias: isString(addrXpub) ? undefined : addrXpub.alias,
     },
   };
 }
@@ -364,11 +364,11 @@ export function buildEventMessageType(
     assetType: AssetTypes.NATIVE,
     assetId: NULL,
     data: {
-      addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-      publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-      alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
+      addrXpub: isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+      publicKey: isString(addrXpub) ? undefined : addrXpub.publicKey,
+      alias: isString(addrXpub) ? undefined : addrXpub.alias,
       isText: message.isText,
-      message: _.isObjectLike((<EncryptedMessage>message).encryptedMessage)
+      message: isObjectLike((<EncryptedMessage>message).encryptedMessage)
         ? (<EncryptedMessage>message).encryptedMessage
         : (<PlainMessage>message).message,
     },

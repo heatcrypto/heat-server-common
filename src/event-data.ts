@@ -7,12 +7,12 @@ import {
   EventMessageTypeData,
 } from './event-builders';
 import { prettyPrint } from './json';
-import * as _ from 'lodash';
-import { Logger } from './types/logger.interface';
+import { isString, isUndefined, isObjectLike } from 'lodash';
+import { LoggerService } from './types/logger.interface';
 import { createLogger } from './logger-adapter';
 
-let _logger: Logger;
-function getLogger(): Logger {
+let _logger: LoggerService;
+function getLogger(): LoggerService {
   if (!_logger) {
     _logger = createLogger(__filename)
   }
@@ -116,14 +116,18 @@ export function unpackDataEventLeaseBalance(
 export function dataMessageType(data: EventMessageTypeData) {
   return [
     data.addrXpub,
-    _.isUndefined(data.publicKey) ? 0 : data.publicKey,
-    _.isUndefined(data.alias) ? 0 : data.alias,
+    isUndefined(data.publicKey) ? 0 : data.publicKey,
+    isUndefined(data.alias) ? 0 : data.alias,
     !!data.isText,
-    _.isString(data.message) ? data.message : 0,
-    // @ts-ignore
-    _.isObjectLike(data.message) ? data.message['data'] : 0,
-    // @ts-ignore
-    _.isObjectLike(data.message) ? data.message['nonce'] : 0,
+    isString(data.message) ? data.message : 0,    
+    isObjectLike(data.message) ? 
+      // @ts-ignore
+      data.message['data'] 
+      : 0,
+    isObjectLike(data.message) ? 
+      // @ts-ignore
+      data.message['nonce'] : 
+      0,
   ];
 }
 
@@ -132,7 +136,7 @@ export function unpackDataMessageType(data: Array<any>): EventMessageTypeData {
     _data = data[5],
     nonce = data[6];
   let message;
-  if (_.isString(_message)) {
+  if (isString(_message)) {
     message = _message;
   } else {
     message = {

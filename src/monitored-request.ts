@@ -1,10 +1,11 @@
-import * as _ from 'lodash';
-import { Logger, LoggerService } from '@nestjs/common';
+import { isUndefined, isFunction } from 'lodash';
 import { PrefixLogger } from './prefix-logger';
 import { stringify, prettyPrint } from './json';
 import { get, post } from 'request';
 import { promisify } from 'util';
 import { CoreOptions } from 'request';
+import { LoggerService } from './types/logger.interface';
+import { createLogger } from './logger-adapter';
 const [getAsync, postAsync] = [get, post].map(promisify);
 
 const DEBUG = true;
@@ -20,11 +21,11 @@ export class MonitoredRequest {
   private logger: LoggerService;
 
   constructor(logger?: LoggerService, prefix?: string) {
-    if (_.isUndefined(logger)) {
+    if (isUndefined(logger)) {
       if (DEBUG) {
-        this.logger = new Logger(MonitoredRequest.name);
+        this.logger = createLogger(MonitoredRequest.name);
       }
-    } else if (_.isUndefined(prefix)) {
+    } else if (isUndefined(prefix)) {
       this.logger = logger;
     } else {
       this.logger = new PrefixLogger(logger, prefix);
@@ -60,7 +61,7 @@ export class MonitoredRequest {
       );
     } else {
       this.log(`[${id}] OK ${response.body}`);
-      if (_.isFunction(requestObserver)) requestObserver(stringify(response));
+      if (isFunction(requestObserver)) requestObserver(stringify(response));
       return response.body;
     }
   }
@@ -90,7 +91,7 @@ export class MonitoredRequest {
       );
     } else {
       this.log(`[${id}] OK ${prettyPrint(response.body)}`);
-      if (_.isFunction(requestObserver))
+      if (isFunction(requestObserver))
         requestObserver(JSON.stringify(response));
       return response.body;
     }

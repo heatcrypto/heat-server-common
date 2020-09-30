@@ -1,6 +1,6 @@
-import { LoggerService } from "@nestjs/common";
 import { ExplorerMiddleware } from './explorer.interface'
 import { MonitoredRequest } from '../monitored-request'
+import { LoggerService } from './logger.interface'
 
 export interface CallContext {
   /**

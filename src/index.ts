@@ -1,3 +1,4 @@
+export * from './logger-adapter'
 export * from './constants'
 export * from './event-builders'
 export * from './event-data'

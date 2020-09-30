@@ -1,4 +1,3 @@
-import { Logger } from '@nestjs/common';
 import { EventTypes } from './constants';
 import {
   EventStandardTypeData,
@@ -9,8 +8,16 @@ import {
 } from './event-builders';
 import { prettyPrint } from './json';
 import * as _ from 'lodash';
+import { Logger } from './types/logger.interface';
+import { createLogger } from './logger-adapter';
 
-const logger = new Logger(__filename);
+let _logger: Logger;
+function getLogger(): Logger {
+  if (!_logger) {
+    _logger = createLogger(__filename)
+  }
+  return _logger;
+}
 
 /**
  * Creates the {data} field (which is an array) based on an event created
@@ -42,7 +49,7 @@ export function createEventData(event: { type: number, data: any }) {
     case EventTypes.EVENT_MESSAGE_RECEIVE:
       return dataMessageType(event.data);
   }
-  logger.warn('Unknown Event Type', prettyPrint(event));
+  getLogger().warn('Unknown Event Type', prettyPrint(event));
   return [];
 }
 

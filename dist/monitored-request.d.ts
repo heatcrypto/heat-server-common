@@ -1,5 +1,5 @@
-import { LoggerService } from '@nestjs/common';
 import { CoreOptions } from 'request';
+import { LoggerService } from './types/logger.interface';
 export declare class MonitoredRequestException extends Error {
     constructor(reason: string);
 }

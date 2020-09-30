@@ -20,11 +20,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tryParse = exports.prettyPrint = exports.stringify = void 0;
-var _ = __importStar(require("lodash"));
+var lodash_1 = require("lodash");
 var format_error_1 = require("format-error");
 var jsome = __importStar(require("jsome"));
 function stringify(object, replacer, indent) {
-    if (!_.isUndefined(replacer) && !_.isUndefined(indent))
+    if (!lodash_1.isUndefined(replacer) && !lodash_1.isUndefined(indent))
         return JSON.stringify(object, replacer, indent);
     return JSON.stringify(object, null, 0);
 }
@@ -43,7 +43,7 @@ function tryParse(jsonStr, logger) {
         return JSON.parse(jsonStr);
     }
     catch (e) {
-        if (!_.isUndefined(logger)) {
+        if (!lodash_1.isUndefined(logger)) {
             logger.error(format_error_1.format(e));
             logger.log('Source data for previous error:');
             logger.log(jsonStr);

@@ -1,7 +1,7 @@
 import { isUndefined } from 'lodash';
-import { LoggerService } from '@nestjs/common';
 import { format as formatError } from 'format-error';
 import * as jsome from 'jsome';
+import { LoggerService } from './types/logger.interface';
 
 export function stringify(object: any, replacer?: any, indent?: any) {
   if (!isUndefined(replacer) && !isUndefined(indent))

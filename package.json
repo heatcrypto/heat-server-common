@@ -19,7 +19,6 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@nestjs/common": "^7.4.4",
     "format-error": "^1.0.0",
     "jsome": "^2.5.0",
     "limiter": "^1.1.5",

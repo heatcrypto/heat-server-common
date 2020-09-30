@@ -1,5 +1,4 @@
 import { ExplorerApi, ExplorerMiddleware } from "./types/explorer.interface";
-import { LoggerService, Logger } from "@nestjs/common";
 import { CallContext } from "./types/call_context.interface";
 import { ModuleProvider } from "./types/module_provider.interface";
 import { PrefixLogger } from "./prefix-logger";
@@ -17,6 +16,8 @@ import { ResolveAliasResult, ReverseResolveAliasResult } from "./types/alias_loo
 import { PublicKeyLookupResult } from "./types/publickey_lookup.interface";
 import { MonitoredRequest } from "./monitored-request";
 import { BroadcastResult } from "./types/broadcast.interface";
+import { LoggerService } from "./types/logger.interface";
+import { createLogger } from "./logger-adapter";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -28,7 +29,7 @@ export class ExplorerBase implements ExplorerApi {
     private readonly provider: ModuleProvider,
     public readonly middleWare?: ExplorerMiddleware,
   ) {
-    const logger = new Logger()
+    const logger = createLogger()
     this.logger = new PrefixLogger(logger, this.id)
   }
 
@@ -37,7 +38,7 @@ export class ExplorerBase implements ExplorerApi {
       host: this.host,
       protocol: this.protocol,
       logger: this.logger,
-      req: new MonitoredRequest(new Logger(), label)
+      req: new MonitoredRequest(createLogger(), label)
     }
     return context
   }

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExplorerBase = void 0;
-var common_1 = require("@nestjs/common");
 var prefix_logger_1 = require("./prefix-logger");
 var monitored_request_1 = require("./monitored-request");
+var logger_adapter_1 = require("./logger-adapter");
 var ExplorerBase = /** @class */ (function () {
     function ExplorerBase(id, protocol, host, provider, middleWare) {
         this.id = id;
@@ -11,7 +11,7 @@ var ExplorerBase = /** @class */ (function () {
         this.host = host;
         this.provider = provider;
         this.middleWare = middleWare;
-        var logger = new common_1.Logger();
+        var logger = logger_adapter_1.createLogger();
         this.logger = new prefix_logger_1.PrefixLogger(logger, this.id);
     }
     ExplorerBase.prototype.createContext = function (label) {
@@ -19,7 +19,7 @@ var ExplorerBase = /** @class */ (function () {
             host: this.host,
             protocol: this.protocol,
             logger: this.logger,
-            req: new monitored_request_1.MonitoredRequest(new common_1.Logger(), label)
+            req: new monitored_request_1.MonitoredRequest(logger_adapter_1.createLogger(), label)
         };
         return context;
     };

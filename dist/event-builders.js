@@ -1,26 +1,7 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildEventMessageReceive = exports.buildEventMessageSend = exports.buildEventMessageType = exports.buildEventLeaseBalance = exports.buildEventCancelSell = exports.buildEventCancelBuy = exports.buildEventSellOrder = exports.buildEventBuyOrder = exports.buildEventOrderType = exports.buildEventFee = exports.buildEventInput = exports.buildEventOutput = exports.buildEventReceive = exports.buildEventSend = exports.buildEventStandardType = void 0;
-var _ = __importStar(require("lodash"));
+var lodash_1 = require("lodash");
 var constants_1 = require("./constants");
 /**
  * Builds Standard Type
@@ -38,10 +19,10 @@ function buildEventStandardType(type, addrXpub, assetType, assetId, value, n) {
         assetId: assetId,
         data: {
             value: value,
-            addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
-            n: _.isUndefined(n) ? 0 : n,
+            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
+            n: lodash_1.isUndefined(n) ? 0 : n,
         },
     };
 }
@@ -137,9 +118,9 @@ function buildEventLeaseBalance(addrXpub, period, assetType, assetId) {
         assetId: assetId,
         data: {
             period: period,
-            addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
+            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
         },
     };
 }
@@ -156,11 +137,11 @@ function buildEventMessageType(type, addrXpub, message) {
         assetType: constants_1.AssetTypes.NATIVE,
         assetId: constants_1.NULL,
         data: {
-            addrXpub: _.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: _.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: _.isString(addrXpub) ? undefined : addrXpub.alias,
+            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
             isText: message.isText,
-            message: _.isObjectLike(message.encryptedMessage)
+            message: lodash_1.isObjectLike(message.encryptedMessage)
                 ? message.encryptedMessage
                 : message.message,
         },

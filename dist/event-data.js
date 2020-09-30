@@ -20,11 +20,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpackDataMessageType = exports.dataMessageType = exports.unpackDataEventLeaseBalance = exports.dataEventLeaseBalance = exports.unpackDataOrderType = exports.dataOrderType = exports.unpackDataEventFee = exports.dataEventFee = exports.unpackDataStandardType = exports.dataStandardType = exports.createEventData = void 0;
-var common_1 = require("@nestjs/common");
 var constants_1 = require("./constants");
 var json_1 = require("./json");
 var _ = __importStar(require("lodash"));
-var logger = new common_1.Logger(__filename);
+var logger_adapter_1 = require("./logger-adapter");
+var _logger;
+function getLogger() {
+    if (!_logger) {
+        _logger = logger_adapter_1.createLogger(__filename);
+    }
+    return _logger;
+}
 /**
  * Creates the {data} field (which is an array) based on an event created
  * with any one of the {event-builder.js} event builder methods.
@@ -55,7 +61,7 @@ function createEventData(event) {
         case constants_1.EventTypes.EVENT_MESSAGE_RECEIVE:
             return dataMessageType(event.data);
     }
-    logger.warn('Unknown Event Type', json_1.prettyPrint(event));
+    getLogger().warn('Unknown Event Type', json_1.prettyPrint(event));
     return [];
 }
 exports.createEventData = createEventData;

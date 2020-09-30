@@ -12,25 +12,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -69,12 +50,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonitoredRequest = exports.MonitoredRequestException = void 0;
-var _ = __importStar(require("lodash"));
-var common_1 = require("@nestjs/common");
+var lodash_1 = require("lodash");
 var prefix_logger_1 = require("./prefix-logger");
 var json_1 = require("./json");
 var request_1 = require("request");
 var util_1 = require("util");
+var logger_adapter_1 = require("./logger-adapter");
 var _a = [request_1.get, request_1.post].map(util_1.promisify), getAsync = _a[0], postAsync = _a[1];
 var DEBUG = true;
 var COMPRESS = true;
@@ -88,12 +69,12 @@ var MonitoredRequestException = /** @class */ (function (_super) {
 exports.MonitoredRequestException = MonitoredRequestException;
 var MonitoredRequest = /** @class */ (function () {
     function MonitoredRequest(logger, prefix) {
-        if (_.isUndefined(logger)) {
+        if (lodash_1.isUndefined(logger)) {
             if (DEBUG) {
-                this.logger = new common_1.Logger(MonitoredRequest.name);
+                this.logger = logger_adapter_1.createLogger(MonitoredRequest.name);
             }
         }
-        else if (_.isUndefined(prefix)) {
+        else if (lodash_1.isUndefined(prefix)) {
             this.logger = logger;
         }
         else {
@@ -132,7 +113,7 @@ var MonitoredRequest = /** @class */ (function () {
                         }
                         else {
                             this.log("[" + id + "] OK " + response.body);
-                            if (_.isFunction(requestObserver))
+                            if (lodash_1.isFunction(requestObserver))
                                 requestObserver(json_1.stringify(response));
                             return [2 /*return*/, response.body];
                         }
@@ -169,7 +150,7 @@ var MonitoredRequest = /** @class */ (function () {
                         }
                         else {
                             this.log("[" + id + "] OK " + json_1.prettyPrint(response.body));
-                            if (_.isFunction(requestObserver))
+                            if (lodash_1.isFunction(requestObserver))
                                 requestObserver(JSON.stringify(response));
                             return [2 /*return*/, response.body];
                         }

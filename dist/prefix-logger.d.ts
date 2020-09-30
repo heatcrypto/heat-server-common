@@ -1,4 +1,4 @@
-import { LoggerService } from '@nestjs/common';
+import { LoggerService } from "./types/logger.interface";
 export declare class PrefixLogger implements LoggerService {
     private logger;
     private prefix;

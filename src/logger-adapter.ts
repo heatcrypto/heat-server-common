@@ -1,4 +1,5 @@
 import { Logger, LoggerService, LogLevel } from "./types/logger.interface";
+import { isUndefined } from "util";
 
 type LoggerConstructor = (context?: string, isTimestampEnabled?: boolean) => LoggerService;
 let loggerConstructor: LoggerConstructor;
@@ -17,33 +18,33 @@ class DefaultLogger implements LoggerService {
     console.error(message, {trace,context})
   }
   log(message: any, context?: string) {
-    console.log(message, context)
+    isUndefined(context) ? console.log(message) :  console.log(message, context)
   }
   warn(message: any, context?: string) {
-    console.warn(message, context)
+    isUndefined(context) ? console.warn(message) :  console.warn(message, context)
   }
   debug(message: any, context?: string) {
-    console.debug(message, context)
+    isUndefined(context) ? console.debug(message) :  console.debug(message, context)
   }
   verbose(message: any, context?: string) {
-    console.log(message, context)
+    isUndefined(context) ? console.log(message) :  console.log(message, context)
   }
   setContext(context: string) {}
   static overrideLogger(logger: LoggerService | LogLevel[] | boolean) {}
   static log(message: any, context?: string, isTimeDiffEnabled?: boolean) {
-    console.log(message, context)
+    isUndefined(context) ? console.log(message) :  console.log(message, context)
   }
   static error(message: any, trace?: string, context?: string, isTimeDiffEnabled?: boolean) {
-    console.error(message, {trace,context})
+    isUndefined(context) ? console.error(message) :  console.error(message, context)
   }
   static warn(message: any, context?: string, isTimeDiffEnabled?: boolean) {
-    console.warn(message, context)
+    isUndefined(context) ? console.warn(message) :  console.warn(message, context)
   }
   static debug(message: any, context?: string, isTimeDiffEnabled?: boolean) {
-    console.debug(message, context)
+    isUndefined(context) ? console.debug(message) :  console.debug(message, context)
   }
   static verbose(message: any, context?: string, isTimeDiffEnabled?: boolean) {
-    console.log(message, context)
+    isUndefined(context) ? console.log(message) :  console.log(message, context)
   }
 }
 

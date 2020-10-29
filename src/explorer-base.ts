@@ -38,7 +38,8 @@ export class ExplorerBase implements ExplorerApi {
       host: this.host,
       protocol: this.protocol,
       logger: this.logger,
-      req: new MonitoredRequest(createLogger(), label)
+      req: new MonitoredRequest(createLogger(), label),
+      middleWare: this.middleWare
     }
     return context
   }

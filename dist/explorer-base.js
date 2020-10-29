@@ -19,7 +19,8 @@ var ExplorerBase = /** @class */ (function () {
             host: this.host,
             protocol: this.protocol,
             logger: this.logger,
-            req: new monitored_request_1.MonitoredRequest(logger_adapter_1.createLogger(), label)
+            req: new monitored_request_1.MonitoredRequest(logger_adapter_1.createLogger(), label),
+            middleWare: this.middleWare
         };
         return context;
     };

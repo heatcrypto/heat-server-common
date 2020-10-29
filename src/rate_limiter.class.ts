@@ -1,7 +1,7 @@
 import { RateLimiter } from 'limiter';
 
 export class RateLimiterClass {
-  private limiter: RateLimiter;
+  protected limiter: RateLimiter;
 
   constructor(tokensPerSecond: number) {
     this.limiter = new RateLimiter(tokensPerSecond, 'second', true);

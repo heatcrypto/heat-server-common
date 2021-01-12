@@ -11,8 +11,9 @@ var constants_1 = require("./constants");
  * @param assetId
  * @param value
  * @param n
+ * @param specific This contains blockchain specific information like blockbook's 'ethereumSpecific'
  */
-function buildEventStandardType(type, addrXpub, assetType, assetId, value, n) {
+function buildEventStandardType(type, addrXpub, assetType, assetId, value, n, specific) {
     return {
         type: type,
         assetType: assetType,
@@ -23,24 +24,25 @@ function buildEventStandardType(type, addrXpub, assetType, assetId, value, n) {
             publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
             alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
             n: lodash_1.isUndefined(n) ? 0 : n,
+            specific: specific,
         },
     };
 }
 exports.buildEventStandardType = buildEventStandardType;
-function buildEventSend(addrXpub, assetType, assetId, value, n) {
-    return buildEventStandardType(constants_1.EventTypes.EVENT_SEND, addrXpub, assetType, assetId, value, n);
+function buildEventSend(addrXpub, assetType, assetId, value, n, specific) {
+    return buildEventStandardType(constants_1.EventTypes.EVENT_SEND, addrXpub, assetType, assetId, value, n, specific);
 }
 exports.buildEventSend = buildEventSend;
-function buildEventReceive(addrXpub, assetType, assetId, value, n) {
-    return buildEventStandardType(constants_1.EventTypes.EVENT_RECEIVE, addrXpub, assetType, assetId, value, n);
+function buildEventReceive(addrXpub, assetType, assetId, value, n, specific) {
+    return buildEventStandardType(constants_1.EventTypes.EVENT_RECEIVE, addrXpub, assetType, assetId, value, n, specific);
 }
 exports.buildEventReceive = buildEventReceive;
-function buildEventOutput(addrXpub, assetType, assetId, value, n) {
-    return buildEventStandardType(constants_1.EventTypes.EVENT_OUTPUT, addrXpub, assetType, assetId, value, n);
+function buildEventOutput(addrXpub, assetType, assetId, value, n, specific) {
+    return buildEventStandardType(constants_1.EventTypes.EVENT_OUTPUT, addrXpub, assetType, assetId, value, n, specific);
 }
 exports.buildEventOutput = buildEventOutput;
-function buildEventInput(addrXpub, assetType, assetId, value, n) {
-    return buildEventStandardType(constants_1.EventTypes.EVENT_INPUT, addrXpub, assetType, assetId, value, n);
+function buildEventInput(addrXpub, assetType, assetId, value, n, specific) {
+    return buildEventStandardType(constants_1.EventTypes.EVENT_INPUT, addrXpub, assetType, assetId, value, n, specific);
 }
 exports.buildEventInput = buildEventInput;
 /**

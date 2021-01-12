@@ -11,6 +11,7 @@ export interface EventStandardTypeData {
     publicKey: string | undefined;
     alias: string | undefined;
     n: number;
+    specific?: any;
 }
 export interface ExtendedAddrXpub {
     addrXpub: string;
@@ -85,12 +86,13 @@ export interface EventMessageTypeData {
  * @param assetId
  * @param value
  * @param n
+ * @param specific This contains blockchain specific information like blockbook's 'ethereumSpecific'
  */
-export declare function buildEventStandardType(type: EventTypes, addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
-export declare function buildEventSend(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
-export declare function buildEventReceive(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
-export declare function buildEventOutput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
-export declare function buildEventInput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number): EventStandardType;
+export declare function buildEventStandardType(type: EventTypes, addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number, specific?: any): EventStandardType;
+export declare function buildEventSend(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number, specific?: any): EventStandardType;
+export declare function buildEventReceive(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number, specific?: any): EventStandardType;
+export declare function buildEventOutput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number, specific?: any): EventStandardType;
+export declare function buildEventInput(addrXpub: ExtendedAddrXpub | string, assetType: AssetTypes, assetId: string, value: string, n: number, specific?: any): EventStandardType;
 /**
  * Builds EVENT_FEE
  * @param value

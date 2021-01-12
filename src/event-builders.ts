@@ -14,6 +14,7 @@ export interface EventStandardTypeData {
   publicKey: string | undefined;
   alias: string | undefined;
   n: number;
+  specific?: any;
 }
 
 export interface ExtendedAddrXpub {
@@ -102,6 +103,7 @@ export interface EventMessageTypeData {
  * @param assetId
  * @param value
  * @param n
+ * @param specific This contains blockchain specific information like blockbook's 'ethereumSpecific'
  */
 export function buildEventStandardType(
   type: EventTypes,
@@ -110,6 +112,7 @@ export function buildEventStandardType(
   assetId: string,
   value: string,
   n: number,
+  specific?: any
 ): EventStandardType {
   return {
     type,
@@ -121,6 +124,7 @@ export function buildEventStandardType(
       publicKey: isString(addrXpub) ? undefined : addrXpub.publicKey,
       alias: isString(addrXpub) ? undefined : addrXpub.alias,
       n: isUndefined(n) ? 0 : n,
+      specific: specific,
     },
   };
 }
@@ -131,6 +135,7 @@ export function buildEventSend(
   assetId: string,
   value: string,
   n: number,
+  specific?: any,
 ) {
   return buildEventStandardType(
     EventTypes.EVENT_SEND,
@@ -139,6 +144,7 @@ export function buildEventSend(
     assetId,
     value,
     n,
+    specific,
   );
 }
 
@@ -148,6 +154,7 @@ export function buildEventReceive(
   assetId: string,
   value: string,
   n: number,
+  specific?: any,
 ) {
   return buildEventStandardType(
     EventTypes.EVENT_RECEIVE,
@@ -156,6 +163,7 @@ export function buildEventReceive(
     assetId,
     value,
     n,
+    specific,
   );
 }
 
@@ -165,6 +173,7 @@ export function buildEventOutput(
   assetId: string,
   value: string,
   n: number,
+  specific?: any,
 ) {
   return buildEventStandardType(
     EventTypes.EVENT_OUTPUT,
@@ -173,6 +182,7 @@ export function buildEventOutput(
     assetId,
     value,
     n,
+    specific,
   );
 }
 
@@ -182,6 +192,7 @@ export function buildEventInput(
   assetId: string,
   value: string,
   n: number,
+  specific?: any,
 ) {
   return buildEventStandardType(
     EventTypes.EVENT_INPUT,
@@ -190,6 +201,7 @@ export function buildEventInput(
     assetId,
     value,
     n,
+    specific,
   );
 }
 

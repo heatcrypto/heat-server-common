@@ -13,7 +13,7 @@ export declare function createEventData(event: {
     type: number;
     data: any;
 }): any[];
-export declare function dataStandardType(data: EventStandardTypeData): (string | number | undefined)[];
+export declare function dataStandardType(data: EventStandardTypeData): any[];
 export declare function unpackDataStandardType(data: Array<any>): EventStandardTypeData;
 export declare function dataEventFee(data: EventFeeTypeData): string[];
 export declare function unpackDataEventFee(data: Array<any>): EventFeeTypeData;

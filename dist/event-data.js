@@ -53,6 +53,7 @@ function dataStandardType(data) {
         data.publicKey || 0,
         data.alias || 0,
         data.n,
+        data.specific,
     ];
 }
 exports.dataStandardType = dataStandardType;
@@ -63,6 +64,7 @@ function unpackDataStandardType(data) {
         publicKey: data[2],
         alias: data[3],
         n: data[4],
+        specific: data[5],
     };
 }
 exports.unpackDataStandardType = unpackDataStandardType;

@@ -60,6 +60,7 @@ export function dataStandardType(data: EventStandardTypeData) {
     data.publicKey || 0,
     data.alias || 0,
     data.n,
+    data.specific,
   ];
 }
 
@@ -72,6 +73,7 @@ export function unpackDataStandardType(
     publicKey: data[2],
     alias: data[3],
     n: data[4],
+    specific: data[5],
   };
 }
 

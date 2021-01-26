@@ -20,13 +20,21 @@ export interface EstimateGasParam {
      */
     addrXpub: string;
     /**
-     * Amount
+     * Amount value transferred in wei
      */
     value: string;
     /**
      * Abi
      */
     abi: string;
+    /**
+     * Sender
+     */
+    from: string;
+    /**
+     * The gaslimit for this transaction
+     */
+    gasLimit: string;
 }
 /**
  * Estimate gas

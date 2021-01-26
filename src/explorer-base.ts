@@ -207,13 +207,15 @@ export class ExplorerBase implements ExplorerApi {
     addrXpub: string,
     value: string,
     abi: string,
+    from: string,
+    gasLimit: string,
   ): Promise<ModuleResponse<EstimateGasResult>> {
     const { estimateGas } = this.provider
     if (!estimateGas) {
       return Promise.resolve({ error: 'Not implemented' })
     }
     return estimateGas(this.createContext('Estimate'), {
-      blockchain, assetType, assetId, addrXpub, value, abi
+      blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit
     })
   }
 

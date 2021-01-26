@@ -33,7 +33,7 @@ export declare class ExplorerBase implements ExplorerApi {
     transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string): Promise<ModuleResponse<TransactionStatusResult>>;
     resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string): Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string): Promise<ModuleResponse<ReverseResolveAliasResult>>;
-    estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string): Promise<ModuleResponse<EstimateGasResult>>;
+    estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string): Promise<ModuleResponse<EstimateGasResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
     /**
      * Custom endpoints.

@@ -126,13 +126,13 @@ var ExplorerBase = /** @class */ (function () {
             blockchain: blockchain, assetType: assetType, addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi) {
+    ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit) {
         var estimateGas = this.provider.estimateGas;
         if (!estimateGas) {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return estimateGas(this.createContext('Estimate'), {
-            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub, value: value, abi: abi
+            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub, value: value, abi: abi, from: from, gasLimit: gasLimit
         });
     };
     ExplorerBase.prototype.publicKey = function (blockchain, addrXpub) {

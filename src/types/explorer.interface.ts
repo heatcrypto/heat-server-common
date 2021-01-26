@@ -104,6 +104,8 @@ export interface ExplorerApi {
     addrXpub: string,
     value: string,
     abi: string,
+    from: string,
+    gasLimit: string,    
   ) => Promise<ModuleResponse<EstimateGasResult>>;
 
   publicKey?: (

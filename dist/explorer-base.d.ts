@@ -13,6 +13,7 @@ import { TransactionStatusResult } from "./types/transaction_status.interface";
 import { ResolveAliasResult, ReverseResolveAliasResult } from "./types/alias_lookup.interface";
 import { PublicKeyLookupResult } from "./types/publickey_lookup.interface";
 import { BroadcastResult } from "./types/broadcast.interface";
+import { EstimateGasResult } from "./types/estimate_gas.interface";
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
     readonly protocol: string;
@@ -32,6 +33,7 @@ export declare class ExplorerBase implements ExplorerApi {
     transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string): Promise<ModuleResponse<TransactionStatusResult>>;
     resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string): Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string): Promise<ModuleResponse<ReverseResolveAliasResult>>;
+    estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string): Promise<ModuleResponse<EstimateGasResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
     /**
      * Custom endpoints.

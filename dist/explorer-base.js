@@ -126,6 +126,15 @@ var ExplorerBase = /** @class */ (function () {
             blockchain: blockchain, assetType: assetType, addrXpub: addrXpub
         });
     };
+    ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi) {
+        var estimateGas = this.provider.estimateGas;
+        if (!estimateGas) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return estimateGas(this.createContext('Estimate'), {
+            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub, value: value, abi: abi
+        });
+    };
     ExplorerBase.prototype.publicKey = function (blockchain, addrXpub) {
         var publicKeyLookup = this.provider.publicKeyLookup;
         if (!publicKeyLookup) {

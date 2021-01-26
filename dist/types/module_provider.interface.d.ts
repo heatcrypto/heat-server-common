@@ -11,6 +11,7 @@ import { TransactionStatusParam, TransactionStatusResult } from "./transaction_s
 import { UtxoLookupParam, UtxoLookupResult } from "./utxo_lookup.interface";
 import { BroadcastParam, BroadcastResult } from "./broadcast.interface";
 import { CustomHeatAccountParam, CustomHeatAccountResult } from "./custom_heat.interface";
+import { EstimateGasParam, EstimateGasResult } from "./estimate_gas.interface";
 export interface ModuleProvider {
     balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>>;
     broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
@@ -20,6 +21,7 @@ export interface ModuleProvider {
     publicKeyLookup?: (context: CallContext, param: PublicKeyLookupParam) => Promise<ModuleResponse<PublicKeyLookupResult>>;
     resolveAlias?: (context: CallContext, param: ResolveAliasParam) => Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias?: (context: CallContext, param: ReverseResolveAliasParam) => Promise<ModuleResponse<ReverseResolveAliasResult>>;
+    estimateGas?: (context: CallContext, param: EstimateGasParam) => Promise<ModuleResponse<EstimateGasResult>>;
     tokenDiscovery?: (context: CallContext, param: TokenDiscoveryParam) => Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
     transactionStatus?: (context: CallContext, param: TransactionStatusParam) => Promise<ModuleResponse<TransactionStatusResult>>;
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;

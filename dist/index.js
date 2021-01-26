@@ -33,4 +33,5 @@ __exportStar(require("./types/publickey_lookup.interface"), exports);
 __exportStar(require("./types/token_discovery.interface"), exports);
 __exportStar(require("./types/transaction_status.interface"), exports);
 __exportStar(require("./types/utxo_lookup.interface"), exports);
+__exportStar(require("./types/estimate_gas.interface"), exports);
 __exportStar(require("./utils"), exports);

@@ -18,6 +18,7 @@ import { MonitoredRequest } from "./monitored-request";
 import { BroadcastResult } from "./types/broadcast.interface";
 import { LoggerService } from "./types/logger.interface";
 import { createLogger } from "./logger-adapter";
+import { EstimateGasResult } from "./types/estimate_gas.interface";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -196,6 +197,23 @@ export class ExplorerBase implements ExplorerApi {
     }
     return reverseResolveAlias(this.createContext('Reverse'), {
       blockchain, assetType, addrXpub
+    })
+  }
+
+  estimateGas(
+    blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
+    addrXpub: string,
+    value: string,
+    abi: string,
+  ): Promise<ModuleResponse<EstimateGasResult>> {
+    const { estimateGas } = this.provider
+    if (!estimateGas) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return estimateGas(this.createContext('Estimate'), {
+      blockchain, assetType, assetId, addrXpub, value, abi
     })
   }
 

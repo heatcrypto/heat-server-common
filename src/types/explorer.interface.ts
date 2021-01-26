@@ -12,6 +12,7 @@ import { ModuleResponse } from '../module-response';
 import { BalanceLookupResult } from './balance_lookup.interface';
 import { CustomHeatAccountResult } from './custom_heat.interface'
 import { BroadcastResult } from './broadcast.interface'
+import { EstimateGasResult } from './estimate_gas.interface';
 
 export interface ExplorerMiddleware {
   getAddress?(address: string): string;
@@ -95,6 +96,15 @@ export interface ExplorerApi {
     assetType: AssetTypes,
     addrXpub: string,
   ) => Promise<ModuleResponse<ReverseResolveAliasResult>>;
+
+  estimateGas?: (
+    blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
+    addrXpub: string,
+    value: string,
+    abi: string,
+  ) => Promise<ModuleResponse<EstimateGasResult>>;
 
   publicKey?: (
     blockchain: Blockchains,

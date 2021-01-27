@@ -12,6 +12,7 @@ import { UtxoLookupParam, UtxoLookupResult } from "./utxo_lookup.interface";
 import { BroadcastParam, BroadcastResult } from "./broadcast.interface";
 import { CustomHeatAccountParam, CustomHeatAccountResult } from "./custom_heat.interface";
 import { EstimateGasParam, EstimateGasResult } from "./estimate_gas.interface";
+import { NonceLookupParam, NonceLookupResult } from "./nonce_lookup.interface";
 export interface ModuleProvider {
     balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>>;
     broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
@@ -25,5 +26,6 @@ export interface ModuleProvider {
     tokenDiscovery?: (context: CallContext, param: TokenDiscoveryParam) => Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
     transactionStatus?: (context: CallContext, param: TransactionStatusParam) => Promise<ModuleResponse<TransactionStatusResult>>;
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
+    nonceLookup?: (context: CallContext, param: NonceLookupParam) => Promise<ModuleResponse<NonceLookupResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

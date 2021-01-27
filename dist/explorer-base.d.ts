@@ -14,6 +14,7 @@ import { ResolveAliasResult, ReverseResolveAliasResult } from "./types/alias_loo
 import { PublicKeyLookupResult } from "./types/publickey_lookup.interface";
 import { BroadcastResult } from "./types/broadcast.interface";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
+import { NonceLookupResult } from "./types/nonce_lookup.interface";
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
     readonly protocol: string;
@@ -34,6 +35,7 @@ export declare class ExplorerBase implements ExplorerApi {
     resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string): Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string): Promise<ModuleResponse<ReverseResolveAliasResult>>;
     estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string): Promise<ModuleResponse<EstimateGasResult>>;
+    nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<NonceLookupResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
     /**
      * Custom endpoints.

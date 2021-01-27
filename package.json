@@ -1,6 +1,6 @@
 {
   "name": "heat-server-common",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "scripts": {
     "clean": "rimraf dist/*",

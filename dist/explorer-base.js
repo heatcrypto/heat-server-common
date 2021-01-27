@@ -135,6 +135,15 @@ var ExplorerBase = /** @class */ (function () {
             blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub, value: value, abi: abi, from: from, gasLimit: gasLimit
         });
     };
+    ExplorerBase.prototype.nonceLookup = function (blockchain, assetType, assetId, addrXpub) {
+        var nonceLookup = this.provider.nonceLookup;
+        if (!nonceLookup) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return nonceLookup(this.createContext('Nonce'), {
+            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub,
+        });
+    };
     ExplorerBase.prototype.publicKey = function (blockchain, addrXpub) {
         var publicKeyLookup = this.provider.publicKeyLookup;
         if (!publicKeyLookup) {

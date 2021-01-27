@@ -49,5 +49,9 @@ export interface EstimateGasParam {
  * Estimate gas
  */
 export interface EstimateGasResult {
+
+  /**
+   * gasAmount
+   */
   value: string;
 }

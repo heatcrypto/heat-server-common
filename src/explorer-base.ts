@@ -19,6 +19,7 @@ import { BroadcastResult } from "./types/broadcast.interface";
 import { LoggerService } from "./types/logger.interface";
 import { createLogger } from "./logger-adapter";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
+import { NonceLookupResult } from "./types/nonce_lookup.interface";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -216,6 +217,21 @@ export class ExplorerBase implements ExplorerApi {
     }
     return estimateGas(this.createContext('Estimate'), {
       blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit
+    })
+  }
+
+  nonceLookup(
+    blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
+    addrXpub: string,
+  ): Promise<ModuleResponse<NonceLookupResult>> {
+    const { nonceLookup } = this.provider
+    if (!nonceLookup) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return nonceLookup(this.createContext('Nonce'), {
+      blockchain, assetType, assetId, addrXpub,
     })
   }
 

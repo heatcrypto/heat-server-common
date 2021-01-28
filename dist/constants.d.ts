@@ -38,7 +38,9 @@ export declare enum ExplorerTypes {
     NETWORK_FEE = 9,
     PUBLICKEY = 10,
     CUSTOM_HEAT_ACCOUNT = 11,
-    NETWORK_STATUS = 12
+    NETWORK_STATUS = 12,
+    NONCE_LOOKUP = 13,
+    ESTIMATE_GAS = 14
 }
 export declare enum AssetTypes {
     NATIVE = 0,

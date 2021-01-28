@@ -53,6 +53,8 @@ var ExplorerTypes;
     ExplorerTypes[ExplorerTypes["PUBLICKEY"] = 10] = "PUBLICKEY";
     ExplorerTypes[ExplorerTypes["CUSTOM_HEAT_ACCOUNT"] = 11] = "CUSTOM_HEAT_ACCOUNT";
     ExplorerTypes[ExplorerTypes["NETWORK_STATUS"] = 12] = "NETWORK_STATUS";
+    ExplorerTypes[ExplorerTypes["NONCE_LOOKUP"] = 13] = "NONCE_LOOKUP";
+    ExplorerTypes[ExplorerTypes["ESTIMATE_GAS"] = 14] = "ESTIMATE_GAS";
 })(ExplorerTypes = exports.ExplorerTypes || (exports.ExplorerTypes = {}));
 var AssetTypes;
 (function (AssetTypes) {

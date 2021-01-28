@@ -48,6 +48,8 @@ export enum ExplorerTypes {
   PUBLICKEY = 10,
   CUSTOM_HEAT_ACCOUNT = 11,
   NETWORK_STATUS = 12,
+  NONCE_LOOKUP = 13,
+  ESTIMATE_GAS = 14,
 }
 
 export enum AssetTypes {

@@ -104,7 +104,7 @@ var MonitoredRequest = /** @class */ (function () {
                     case 0:
                         id = Date.now();
                         this.log("[" + id + "] GET " + uri);
-                        return [4 /*yield*/, getAsync(uri, options)];
+                        return [4 /*yield*/, getAsync(uri, lodash_1.assign({}, MonitoredRequest.defaultGetOptions, options))];
                     case 1:
                         response = _a.sent();
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
@@ -141,7 +141,7 @@ var MonitoredRequest = /** @class */ (function () {
                     case 0:
                         id = Date.now();
                         this.log("[" + id + "] POST " + uri + " options=" + json_1.prettyPrint(options));
-                        return [4 /*yield*/, postAsync(uri, options)];
+                        return [4 /*yield*/, postAsync(uri, lodash_1.assign({}, MonitoredRequest.defaultPostOptions, options))];
                     case 1:
                         response = _a.sent();
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
@@ -159,6 +159,8 @@ var MonitoredRequest = /** @class */ (function () {
             });
         });
     };
+    MonitoredRequest.defaultGetOptions = {};
+    MonitoredRequest.defaultPostOptions = {};
     return MonitoredRequest;
 }());
 exports.MonitoredRequest = MonitoredRequest;

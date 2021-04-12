@@ -1,4 +1,4 @@
-import { isUndefined, isFunction } from 'lodash';
+import { isUndefined, isFunction, assign } from 'lodash';
 import { PrefixLogger } from './prefix-logger';
 import { stringify, prettyPrint } from './json';
 import { get, post } from 'request';
@@ -19,6 +19,9 @@ export class MonitoredRequestException extends Error {
 
 export class MonitoredRequest {
   private logger: LoggerService;
+
+  public static defaultGetOptions: CoreOptions = {}
+  public static defaultPostOptions: CoreOptions = {}
 
   constructor(logger?: LoggerService, prefix?: string) {
     if (isUndefined(logger)) {
@@ -53,7 +56,7 @@ export class MonitoredRequest {
   ): Promise<string> {
     const id = Date.now();
     this.log(`[${id}] GET ${uri}`);
-    const response = await getAsync(uri, options);
+    const response = await getAsync(uri, assign({}, MonitoredRequest.defaultGetOptions, options));
     if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
       this.log(`[${id}] Invalid status ${response.statusCode}`);
       throw new MonitoredRequestException(
@@ -83,7 +86,7 @@ export class MonitoredRequest {
   ): Promise<string> {
     const id = Date.now();
     this.log(`[${id}] POST ${uri} options=${prettyPrint(options)}`);
-    const response = await postAsync(uri, options);
+    const response = await postAsync(uri, assign({}, MonitoredRequest.defaultPostOptions, options));
     if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
       this.log(`[${id}] Invalid status ${response.statusCode}`);
       throw new MonitoredRequestException(

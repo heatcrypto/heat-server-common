@@ -5,6 +5,8 @@ export declare class MonitoredRequestException extends Error {
 }
 export declare class MonitoredRequest {
     private logger;
+    static defaultGetOptions: CoreOptions;
+    static defaultPostOptions: CoreOptions;
     constructor(logger?: LoggerService, prefix?: string);
     log(message: string): void;
     /**

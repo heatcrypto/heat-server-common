@@ -33,5 +33,10 @@ export interface TransactionStatusResult {
    * In case of unconfirmed transactions this indicates if the transaction 
    * resides in the mem-pool or was rejected
    */
-  isAccepted: boolean;  
+  isAccepted: boolean;
+
+  /**
+   * Hexadecimal form raw transaction (optional)
+   */
+  txHex?: string;
 }

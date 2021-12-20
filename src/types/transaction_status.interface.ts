@@ -34,9 +34,4 @@ export interface TransactionStatusResult {
    * resides in the mem-pool or was rejected
    */
   isAccepted: boolean;
-
-  /**
-   * Hexadecimal form raw transaction (optional)
-   */
-  txHex?: string;
 }

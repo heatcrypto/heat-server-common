@@ -125,7 +125,7 @@ export interface ExplorerApi {
   txids?: (
     blockchain: Blockchains,
     addrXpubs: string[],
-  ) => Promise<ModuleResponse<TxidsLookupResult>>;
+  ) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
 
   /**
    * Custom endpoints.

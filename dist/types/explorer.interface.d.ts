@@ -43,7 +43,7 @@ export interface ExplorerApi {
     estimateGas?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string) => Promise<ModuleResponse<EstimateGasResult>>;
     nonceLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<ModuleResponse<NonceLookupResult>>;
     publicKey?: (blockchain: Blockchains, addrXpub: string) => Promise<ModuleResponse<PublicKeyLookupResult>>;
-    txids?: (blockchain: Blockchains, addrXpubs: string[]) => Promise<ModuleResponse<TxidsLookupResult>>;
+    txids?: (blockchain: Blockchains, addrXpubs: string[]) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
     /**
      * Custom endpoints.
      */

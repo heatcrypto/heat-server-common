@@ -253,9 +253,9 @@ export class ExplorerBase implements ExplorerApi {
     blockchain: Blockchains,
     assetType: AssetTypes,
     assetId: string,
-    addrXpub: string[],
+    addrXpubs: string[],
     to: number,
-  ): Promise<ModuleResponse<TxidsLookupParam>> {
+  ): Promise<ModuleResponse<Array<TxidsLookupParam>>> {
     const { txidsLookup } = this.provider
     if (!txidsLookup) {
       return Promise.resolve({ error: 'Not implemented' })
@@ -264,7 +264,7 @@ export class ExplorerBase implements ExplorerApi {
       blockchain,
       assetType,
       assetId,
-      addrXpub,
+      addrXpubs,
       to,
     })
   }

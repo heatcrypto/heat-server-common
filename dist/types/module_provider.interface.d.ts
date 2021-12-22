@@ -28,6 +28,6 @@ export interface ModuleProvider {
     transactionStatus?: (context: CallContext, param: TransactionStatusParam) => Promise<ModuleResponse<TransactionStatusResult>>;
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
     nonceLookup?: (context: CallContext, param: NonceLookupParam) => Promise<ModuleResponse<NonceLookupResult>>;
-    txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<TxidsLookupParam>>;
+    txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<Array<TxidsLookupParam>>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

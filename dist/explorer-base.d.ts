@@ -38,7 +38,7 @@ export declare class ExplorerBase implements ExplorerApi {
     estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string): Promise<ModuleResponse<EstimateGasResult>>;
     nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<NonceLookupResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
-    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string[], to: number): Promise<ModuleResponse<TxidsLookupParam>>;
+    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number): Promise<ModuleResponse<Array<TxidsLookupParam>>>;
     /**
      * Custom endpoints.
      */

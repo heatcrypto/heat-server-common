@@ -171,7 +171,7 @@ var ExplorerBase = /** @class */ (function () {
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpub, to) {
+    ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpubs, to) {
         var txidsLookup = this.provider.txidsLookup;
         if (!txidsLookup) {
             return Promise.resolve({ error: 'Not implemented' });
@@ -180,7 +180,7 @@ var ExplorerBase = /** @class */ (function () {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
-            addrXpub: addrXpub,
+            addrXpubs: addrXpubs,
             to: to,
         });
     };

@@ -19,7 +19,7 @@ export interface TxidsLookupParam {
   /**
    * List of address or public key
    */   
-  addrXpub: string[];
+  addrXpubs: string[];
 
   /**
    * Max number of transactions to return
@@ -30,8 +30,12 @@ export interface TxidsLookupParam {
 export interface TxidsLookupResult {
 
   /**
-   * Array of array of string, each array in the main array contains the first N 
-   * (upto max {to}) transaction ids.
+   * Amount/value in smallest unit on blockchain (satoshi, wei, etc)
+   */  
+  value: string;
+
+  /**
+   * Array of txid's
    */
-  txids: string[][];
+  txids: string[];
 }

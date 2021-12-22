@@ -153,6 +153,19 @@ var ExplorerBase = /** @class */ (function () {
             blockchain: blockchain, addrXpub: addrXpub
         });
     };
+    ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpub, to) {
+        var txidsLookup = this.provider.txidsLookup;
+        if (!txidsLookup) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return txidsLookup(this.createContext('Txids'), {
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            addrXpub: addrXpub,
+            to: to,
+        });
+    };
     /**
      * Custom endpoints.
      */

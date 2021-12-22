@@ -14,6 +14,7 @@ import { CustomHeatAccountResult } from './custom_heat.interface'
 import { BroadcastResult } from './broadcast.interface'
 import { EstimateGasResult } from './estimate_gas.interface';
 import { NonceLookupResult } from './nonce_lookup.interface';
+import { TxidsLookupResult } from './txids_lookup.interface';
 
 export interface ExplorerMiddleware {
   getAddress?(address: string): string;
@@ -120,6 +121,11 @@ export interface ExplorerApi {
     blockchain: Blockchains,
     addrXpub: string,
   ) => Promise<ModuleResponse<PublicKeyLookupResult>>;
+
+  txids?: (
+    blockchain: Blockchains,
+    addrXpubs: string[],
+  ) => Promise<ModuleResponse<TxidsLookupResult>>;
 
   /**
    * Custom endpoints.

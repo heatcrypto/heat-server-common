@@ -50,6 +50,7 @@ export enum ExplorerTypes {
   NETWORK_STATUS = 12,
   NONCE_LOOKUP = 13,
   ESTIMATE_GAS = 14,
+  TXIDS = 15,
 }
 
 export enum AssetTypes {

@@ -1,5 +1,4 @@
 import { isString } from 'lodash';
-import { format as _formatError } from 'format-error';
 
 /**
  * Compares two strings insensitive of case
@@ -28,14 +27,6 @@ export function containsCaseInsensitive(
     }
   }
   return false;
-}
-
-/**
- * https://www.npmjs.com/package/format-error
- * @param error
- */
-export function formatError(error: Error) {
-  return _formatError(error);
 }
 
 /**

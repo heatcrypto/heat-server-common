@@ -1,5 +1,4 @@
 import { isUndefined } from 'lodash';
-import { format as formatError } from 'format-error';
 import * as jsome from 'jsome';
 import { LoggerService } from './types/logger.interface';
 
@@ -22,7 +21,7 @@ export function tryParse(jsonStr: string, logger?: LoggerService) {
     return JSON.parse(jsonStr);
   } catch (e) {
     if (!isUndefined(logger)) {
-      logger.error(formatError(e));
+      logger.error(e);
       logger.log('Source data for previous error:');
       logger.log(jsonStr);
     }

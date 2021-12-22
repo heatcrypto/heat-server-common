@@ -11,7 +11,7 @@ var ExplorerBase = /** @class */ (function () {
         this.host = host;
         this.provider = provider;
         this.middleWare = middleWare;
-        var logger = logger_adapter_1.createLogger();
+        var logger = (0, logger_adapter_1.createLogger)();
         this.logger = new prefix_logger_1.PrefixLogger(logger, this.id);
     }
     ExplorerBase.prototype.createContext = function (label) {
@@ -19,7 +19,7 @@ var ExplorerBase = /** @class */ (function () {
             host: this.host,
             protocol: this.protocol,
             logger: this.logger,
-            req: new monitored_request_1.MonitoredRequest(logger_adapter_1.createLogger(), label),
+            req: new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label),
             middleWare: this.middleWare
         };
         return context;
@@ -44,7 +44,9 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return tokenDiscovery(this.createContext('Token'), {
-            blockchain: blockchain, assetType: assetType, addrXpub: addrXpub
+            blockchain: blockchain,
+            assetType: assetType,
+            addrXpub: addrXpub
         });
     };
     ExplorerBase.prototype.balanceLookup = function (blockchain, assetType, assetId, addrXpub) {
@@ -53,7 +55,10 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return balanceLookup(this.createContext('Balance'), {
-            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            addrXpub: addrXpub
         });
     };
     ExplorerBase.prototype.eventsLookup = function (blockchain, assetType, assetId, addrXpub, from, to, minimal) {
@@ -123,7 +128,9 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return reverseResolveAlias(this.createContext('Reverse'), {
-            blockchain: blockchain, assetType: assetType, addrXpub: addrXpub
+            blockchain: blockchain,
+            assetType: assetType,
+            addrXpub: addrXpub
         });
     };
     ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit) {
@@ -132,7 +139,14 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return estimateGas(this.createContext('Estimate'), {
-            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub, value: value, abi: abi, from: from, gasLimit: gasLimit
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            addrXpub: addrXpub,
+            value: value,
+            abi: abi,
+            from: from,
+            gasLimit: gasLimit
         });
     };
     ExplorerBase.prototype.nonceLookup = function (blockchain, assetType, assetId, addrXpub) {
@@ -141,7 +155,10 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return nonceLookup(this.createContext('Nonce'), {
-            blockchain: blockchain, assetType: assetType, assetId: assetId, addrXpub: addrXpub,
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            addrXpub: addrXpub,
         });
     };
     ExplorerBase.prototype.publicKey = function (blockchain, addrXpub) {
@@ -150,7 +167,8 @@ var ExplorerBase = /** @class */ (function () {
             return Promise.resolve({ error: 'Not implemented' });
         }
         return publicKeyLookup(this.createContext('PublicKey'), {
-            blockchain: blockchain, addrXpub: addrXpub
+            blockchain: blockchain,
+            addrXpub: addrXpub
         });
     };
     ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpub, to) {

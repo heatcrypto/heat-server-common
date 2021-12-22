@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -69,12 +71,12 @@ var MonitoredRequestException = /** @class */ (function (_super) {
 exports.MonitoredRequestException = MonitoredRequestException;
 var MonitoredRequest = /** @class */ (function () {
     function MonitoredRequest(logger, prefix) {
-        if (lodash_1.isUndefined(logger)) {
+        if ((0, lodash_1.isUndefined)(logger)) {
             if (DEBUG) {
-                this.logger = logger_adapter_1.createLogger(MonitoredRequest.name);
+                this.logger = (0, logger_adapter_1.createLogger)(MonitoredRequest.name);
             }
         }
-        else if (lodash_1.isUndefined(prefix)) {
+        else if ((0, lodash_1.isUndefined)(prefix)) {
             this.logger = logger;
         }
         else {
@@ -103,18 +105,18 @@ var MonitoredRequest = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         id = Date.now();
-                        this.log("[" + id + "] GET " + uri);
-                        return [4 /*yield*/, getAsync(uri, lodash_1.assign({}, MonitoredRequest.defaultGetOptions, options))];
+                        this.log("[".concat(id, "] GET ").concat(uri));
+                        return [4 /*yield*/, getAsync(uri, (0, lodash_1.assign)({}, MonitoredRequest.defaultGetOptions, options))];
                     case 1:
                         response = _a.sent();
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-                            this.log("[" + id + "] Invalid status " + response.statusCode);
-                            throw new MonitoredRequestException("Invalid status " + response.statusCode);
+                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
+                            throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
                         }
                         else {
-                            this.log("[" + id + "] OK " + response.body);
-                            if (lodash_1.isFunction(requestObserver))
-                                requestObserver(json_1.stringify(response));
+                            this.log("[".concat(id, "] OK ").concat(response.body));
+                            if ((0, lodash_1.isFunction)(requestObserver))
+                                requestObserver((0, json_1.stringify)(response));
                             return [2 /*return*/, response.body];
                         }
                         return [2 /*return*/];
@@ -140,17 +142,17 @@ var MonitoredRequest = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         id = Date.now();
-                        this.log("[" + id + "] POST " + uri + " options=" + json_1.prettyPrint(options));
-                        return [4 /*yield*/, postAsync(uri, lodash_1.assign({}, MonitoredRequest.defaultPostOptions, options))];
+                        this.log("[".concat(id, "] POST ").concat(uri, " options=").concat((0, json_1.prettyPrint)(options)));
+                        return [4 /*yield*/, postAsync(uri, (0, lodash_1.assign)({}, MonitoredRequest.defaultPostOptions, options))];
                     case 1:
                         response = _a.sent();
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-                            this.log("[" + id + "] Invalid status " + response.statusCode);
-                            throw new MonitoredRequestException("Invalid status " + response.statusCode);
+                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
+                            throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
                         }
                         else {
-                            this.log("[" + id + "] OK " + json_1.prettyPrint(response.body));
-                            if (lodash_1.isFunction(requestObserver))
+                            this.log("[".concat(id, "] OK ").concat((0, json_1.prettyPrint)(response.body)));
+                            if ((0, lodash_1.isFunction)(requestObserver))
                                 requestObserver(JSON.stringify(response));
                             return [2 /*return*/, response.body];
                         }

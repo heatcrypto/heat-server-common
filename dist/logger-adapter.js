@@ -20,33 +20,33 @@ var DefaultLogger = /** @class */ (function () {
         console.error(message, { trace: trace, context: context });
     };
     DefaultLogger.prototype.log = function (message, context) {
-        util_1.isUndefined(context) ? console.log(message) : console.log(message, context);
+        (0, util_1.isUndefined)(context) ? console.log(message) : console.log(message, context);
     };
     DefaultLogger.prototype.warn = function (message, context) {
-        util_1.isUndefined(context) ? console.warn(message) : console.warn(message, context);
+        (0, util_1.isUndefined)(context) ? console.warn(message) : console.warn(message, context);
     };
     DefaultLogger.prototype.debug = function (message, context) {
-        util_1.isUndefined(context) ? console.debug(message) : console.debug(message, context);
+        (0, util_1.isUndefined)(context) ? console.debug(message) : console.debug(message, context);
     };
     DefaultLogger.prototype.verbose = function (message, context) {
-        util_1.isUndefined(context) ? console.log(message) : console.log(message, context);
+        (0, util_1.isUndefined)(context) ? console.log(message) : console.log(message, context);
     };
     DefaultLogger.prototype.setContext = function (context) { };
     DefaultLogger.overrideLogger = function (logger) { };
     DefaultLogger.log = function (message, context, isTimeDiffEnabled) {
-        util_1.isUndefined(context) ? console.log(message) : console.log(message, context);
+        (0, util_1.isUndefined)(context) ? console.log(message) : console.log(message, context);
     };
     DefaultLogger.error = function (message, trace, context, isTimeDiffEnabled) {
-        util_1.isUndefined(context) ? console.error(message) : console.error(message, context);
+        (0, util_1.isUndefined)(context) ? console.error(message) : console.error(message, context);
     };
     DefaultLogger.warn = function (message, context, isTimeDiffEnabled) {
-        util_1.isUndefined(context) ? console.warn(message) : console.warn(message, context);
+        (0, util_1.isUndefined)(context) ? console.warn(message) : console.warn(message, context);
     };
     DefaultLogger.debug = function (message, context, isTimeDiffEnabled) {
-        util_1.isUndefined(context) ? console.debug(message) : console.debug(message, context);
+        (0, util_1.isUndefined)(context) ? console.debug(message) : console.debug(message, context);
     };
     DefaultLogger.verbose = function (message, context, isTimeDiffEnabled) {
-        util_1.isUndefined(context) ? console.log(message) : console.log(message, context);
+        (0, util_1.isUndefined)(context) ? console.log(message) : console.log(message, context);
     };
     return DefaultLogger;
 }());

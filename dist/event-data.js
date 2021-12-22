@@ -8,7 +8,7 @@ var logger_adapter_1 = require("./logger-adapter");
 var _logger;
 function getLogger() {
     if (!_logger) {
-        _logger = logger_adapter_1.createLogger(__filename);
+        _logger = (0, logger_adapter_1.createLogger)(__filename);
     }
     return _logger;
 }
@@ -42,7 +42,7 @@ function createEventData(event) {
         case constants_1.EventTypes.EVENT_MESSAGE_RECEIVE:
             return dataMessageType(event.data);
     }
-    getLogger().warn('Unknown Event Type', json_1.prettyPrint(event));
+    getLogger().warn('Unknown Event Type', (0, json_1.prettyPrint)(event));
     return [];
 }
 exports.createEventData = createEventData;
@@ -107,15 +107,15 @@ exports.unpackDataEventLeaseBalance = unpackDataEventLeaseBalance;
 function dataMessageType(data) {
     return [
         data.addrXpub,
-        lodash_1.isUndefined(data.publicKey) ? 0 : data.publicKey,
-        lodash_1.isUndefined(data.alias) ? 0 : data.alias,
+        (0, lodash_1.isUndefined)(data.publicKey) ? 0 : data.publicKey,
+        (0, lodash_1.isUndefined)(data.alias) ? 0 : data.alias,
         !!data.isText,
-        lodash_1.isString(data.message) ? data.message : 0,
-        lodash_1.isObjectLike(data.message) ?
+        (0, lodash_1.isString)(data.message) ? data.message : 0,
+        (0, lodash_1.isObjectLike)(data.message) ?
             // @ts-ignore
             data.message['data']
             : 0,
-        lodash_1.isObjectLike(data.message) ?
+        (0, lodash_1.isObjectLike)(data.message) ?
             // @ts-ignore
             data.message['nonce'] :
             0,
@@ -125,7 +125,7 @@ exports.dataMessageType = dataMessageType;
 function unpackDataMessageType(data) {
     var _message = data[4], _data = data[5], nonce = data[6];
     var message;
-    if (lodash_1.isString(_message)) {
+    if ((0, lodash_1.isString)(_message)) {
         message = _message;
     }
     else {

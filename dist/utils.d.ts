@@ -11,11 +11,6 @@ export declare function compareCaseInsensitive(valueA: any, valueB: any): boolea
  */
 export declare function containsCaseInsensitive(haystack: Array<string>, needle: string): boolean;
 /**
- * https://www.npmjs.com/package/format-error
- * @param error
- */
-export declare function formatError(error: Error): any;
-/**
  * Returns array of all enum values
  * @param _enum
  */

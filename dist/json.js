@@ -21,10 +21,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tryParse = exports.prettyPrint = exports.stringify = void 0;
 var lodash_1 = require("lodash");
-var format_error_1 = require("format-error");
 var jsome = __importStar(require("jsome"));
 function stringify(object, replacer, indent) {
-    if (!lodash_1.isUndefined(replacer) && !lodash_1.isUndefined(indent))
+    if (!(0, lodash_1.isUndefined)(replacer) && !(0, lodash_1.isUndefined)(indent))
         return JSON.stringify(object, replacer, indent);
     return JSON.stringify(object, null, 0);
 }
@@ -34,7 +33,7 @@ function prettyPrint(object) {
         return jsome.getColoredString(object);
     }
     catch (e) {
-        return "Unable to pretty print ( " + object + " )";
+        return "Unable to pretty print ( ".concat(object, " )");
     }
 }
 exports.prettyPrint = prettyPrint;
@@ -43,8 +42,8 @@ function tryParse(jsonStr, logger) {
         return JSON.parse(jsonStr);
     }
     catch (e) {
-        if (!lodash_1.isUndefined(logger)) {
-            logger.error(format_error_1.format(e));
+        if (!(0, lodash_1.isUndefined)(logger)) {
+            logger.error(e);
             logger.log('Source data for previous error:');
             logger.log(jsonStr);
         }

@@ -20,10 +20,10 @@ function buildEventStandardType(type, addrXpub, assetType, assetId, value, n, sp
         assetId: assetId,
         data: {
             value: value,
-            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
-            n: lodash_1.isUndefined(n) ? 0 : n,
+            addrXpub: (0, lodash_1.isString)(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.alias,
+            n: (0, lodash_1.isUndefined)(n) ? 0 : n,
             specific: specific,
         },
     };
@@ -120,9 +120,9 @@ function buildEventLeaseBalance(addrXpub, period, assetType, assetId) {
         assetId: assetId,
         data: {
             period: period,
-            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
+            addrXpub: (0, lodash_1.isString)(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.alias,
         },
     };
 }
@@ -139,11 +139,11 @@ function buildEventMessageType(type, addrXpub, message) {
         assetType: constants_1.AssetTypes.NATIVE,
         assetId: constants_1.NULL,
         data: {
-            addrXpub: lodash_1.isString(addrXpub) ? addrXpub : addrXpub.addrXpub,
-            publicKey: lodash_1.isString(addrXpub) ? undefined : addrXpub.publicKey,
-            alias: lodash_1.isString(addrXpub) ? undefined : addrXpub.alias,
+            addrXpub: (0, lodash_1.isString)(addrXpub) ? addrXpub : addrXpub.addrXpub,
+            publicKey: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.publicKey,
+            alias: (0, lodash_1.isString)(addrXpub) ? undefined : addrXpub.alias,
             isText: message.isText,
-            message: lodash_1.isObjectLike(message.encryptedMessage)
+            message: (0, lodash_1.isObjectLike)(message.encryptedMessage)
                 ? message.encryptedMessage
                 : message.message,
         },

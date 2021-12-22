@@ -55,6 +55,7 @@ var ExplorerTypes;
     ExplorerTypes[ExplorerTypes["NETWORK_STATUS"] = 12] = "NETWORK_STATUS";
     ExplorerTypes[ExplorerTypes["NONCE_LOOKUP"] = 13] = "NONCE_LOOKUP";
     ExplorerTypes[ExplorerTypes["ESTIMATE_GAS"] = 14] = "ESTIMATE_GAS";
+    ExplorerTypes[ExplorerTypes["TXIDS"] = 15] = "TXIDS";
 })(ExplorerTypes = exports.ExplorerTypes || (exports.ExplorerTypes = {}));
 var AssetTypes;
 (function (AssetTypes) {

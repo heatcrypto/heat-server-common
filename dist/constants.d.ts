@@ -40,7 +40,8 @@ export declare enum ExplorerTypes {
     CUSTOM_HEAT_ACCOUNT = 11,
     NETWORK_STATUS = 12,
     NONCE_LOOKUP = 13,
-    ESTIMATE_GAS = 14
+    ESTIMATE_GAS = 14,
+    TXIDS = 15
 }
 export declare enum AssetTypes {
     NATIVE = 0,

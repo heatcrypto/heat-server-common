@@ -52,13 +52,5 @@ export interface UtxoLookupResult {
   /**
    * For unconfirmed transactions this will return 0
    */
-  height: number;  
-
-  /**
-   * scriptPubKey as provided by blockbook api (v1)
-   */
-  scriptPubKey?: {
-    hex: string,
-    addresses: string[]
-  }
+  height: number;
 }

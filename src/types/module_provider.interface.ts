@@ -13,6 +13,7 @@ import { BroadcastParam, BroadcastResult } from "./broadcast.interface"
 import { CustomHeatAccountParam, CustomHeatAccountResult } from "./custom_heat.interface"
 import { EstimateGasParam, EstimateGasResult } from "./estimate_gas.interface"
 import { NonceLookupParam, NonceLookupResult } from "./nonce_lookup.interface"
+import { TxidsLookupParam } from "./txids_lookup.interface"
 
 export interface ModuleProvider {
   balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>> 
@@ -28,6 +29,7 @@ export interface ModuleProvider {
   transactionStatus?: (context: CallContext, param: TransactionStatusParam) => Promise<ModuleResponse<TransactionStatusResult>>
   utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>
   nonceLookup?: (context: CallContext, param: NonceLookupParam) => Promise<ModuleResponse<NonceLookupResult>>
+  txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<TxidsLookupParam>>
 
   /* Custom modules */
   customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>

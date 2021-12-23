@@ -15,7 +15,7 @@ import { PublicKeyLookupResult } from "./types/publickey_lookup.interface";
 import { BroadcastResult } from "./types/broadcast.interface";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
 import { NonceLookupResult } from "./types/nonce_lookup.interface";
-import { TxidsLookupParam } from "./types/txids_lookup.interface";
+import { TxidsLookupResult } from "./types/txids_lookup.interface";
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
     readonly protocol: string;
@@ -38,7 +38,7 @@ export declare class ExplorerBase implements ExplorerApi {
     estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string): Promise<ModuleResponse<EstimateGasResult>>;
     nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<NonceLookupResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
-    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number): Promise<ModuleResponse<Array<TxidsLookupParam>>>;
+    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number): Promise<ModuleResponse<Array<TxidsLookupResult>>>;
     /**
      * Custom endpoints.
      */

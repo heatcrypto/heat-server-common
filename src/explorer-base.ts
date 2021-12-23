@@ -20,7 +20,7 @@ import { LoggerService } from "./types/logger.interface";
 import { createLogger } from "./logger-adapter";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
 import { NonceLookupResult } from "./types/nonce_lookup.interface";
-import { TxidsLookupParam } from "./types/txids_lookup.interface";
+import { TxidsLookupResult } from "./types/txids_lookup.interface";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -255,7 +255,7 @@ export class ExplorerBase implements ExplorerApi {
     assetId: string,
     addrXpubs: string[],
     to: number,
-  ): Promise<ModuleResponse<Array<TxidsLookupParam>>> {
+  ): Promise<ModuleResponse<Array<TxidsLookupResult>>> {
     const { txidsLookup } = this.provider
     if (!txidsLookup) {
       return Promise.resolve({ error: 'Not implemented' })

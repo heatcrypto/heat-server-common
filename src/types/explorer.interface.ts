@@ -122,7 +122,7 @@ export interface ExplorerApi {
     addrXpub: string,
   ) => Promise<ModuleResponse<PublicKeyLookupResult>>;
 
-  txids?: (
+  txidsLookup?: (
     blockchain: Blockchains,
     assetType: AssetTypes,
     assetId: string,

@@ -124,7 +124,10 @@ export interface ExplorerApi {
 
   txids?: (
     blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
     addrXpubs: string[],
+    to: number,
   ) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
 
   /**

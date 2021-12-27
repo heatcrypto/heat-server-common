@@ -41,7 +41,7 @@ export declare class ExplorerBase implements ExplorerApi {
     nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<NonceLookupResult>>;
     publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
     txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number): Promise<ModuleResponse<Array<TxidsLookupResult>>>;
-    utxoXpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string, from: number, to: number): Promise<ModuleResponse<UtxoXpubLookupResult>>;
+    utxoXpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string): Promise<ModuleResponse<UtxoXpubLookupResult>>;
     xpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, tokens: XpubLookupRequestTokens, type: XpubLookupRequestType, xpub: string, from: number, to: number): Promise<ModuleResponse<XpubLookupResult>>;
     /**
      * Custom endpoints.

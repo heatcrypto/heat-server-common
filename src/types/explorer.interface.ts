@@ -138,8 +138,6 @@ export interface ExplorerApi {
     assetId: string,
     confirmed: boolean,
     xpub: string,
-    from: number,
-    to: number,
   ) => Promise<ModuleResponse<UtxoXpubLookupResult>>;
 
   xpubLookup?: (

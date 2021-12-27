@@ -17,14 +17,6 @@ export interface UtxoXpubLookupParam {
      */
     confirmed: boolean;
     /**
-     * Zero indexed the zero'd event is the newest
-     */
-    from: number;
-    /**
-     * Events in range [from, to] are returned
-     */
-    to: number;
-    /**
      * xpub
      */
     xpub: string;

@@ -277,8 +277,6 @@ export class ExplorerBase implements ExplorerApi {
     assetId: string,
     confirmed: boolean,
     xpub: string,
-    from: number,
-    to: number,
   ): Promise<ModuleResponse<UtxoXpubLookupResult>> {
     const { utxoXpubLookup } = this.provider
     if (!utxoXpubLookup) {
@@ -290,8 +288,6 @@ export class ExplorerBase implements ExplorerApi {
       assetId,
       confirmed,
       xpub,
-      from,
-      to,
     })
   }
 

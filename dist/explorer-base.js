@@ -184,7 +184,7 @@ var ExplorerBase = /** @class */ (function () {
             to: to,
         });
     };
-    ExplorerBase.prototype.utxoXpubLookup = function (blockchain, assetType, assetId, confirmed, xpub, from, to) {
+    ExplorerBase.prototype.utxoXpubLookup = function (blockchain, assetType, assetId, confirmed, xpub) {
         var utxoXpubLookup = this.provider.utxoXpubLookup;
         if (!utxoXpubLookup) {
             return Promise.resolve({ error: 'Not implemented' });
@@ -195,8 +195,6 @@ var ExplorerBase = /** @class */ (function () {
             assetId: assetId,
             confirmed: confirmed,
             xpub: xpub,
-            from: from,
-            to: to,
         });
     };
     ExplorerBase.prototype.xpubLookup = function (blockchain, assetType, assetId, tokens, type, xpub, from, to) {

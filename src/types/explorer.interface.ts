@@ -138,7 +138,7 @@ export interface ExplorerApi {
     assetId: string,
     confirmed: boolean,
     xpub: string,
-  ) => Promise<ModuleResponse<UtxoXpubLookupResult>>;
+  ) => Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
 
   xpubLookup?: (
     blockchain: Blockchains,

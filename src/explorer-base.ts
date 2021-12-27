@@ -277,7 +277,7 @@ export class ExplorerBase implements ExplorerApi {
     assetId: string,
     confirmed: boolean,
     xpub: string,
-  ): Promise<ModuleResponse<UtxoXpubLookupResult>> {
+  ): Promise<ModuleResponse<Array<UtxoXpubLookupResult>>> {
     const { utxoXpubLookup } = this.provider
     if (!utxoXpubLookup) {
       return Promise.resolve({ error: 'Not implemented' })

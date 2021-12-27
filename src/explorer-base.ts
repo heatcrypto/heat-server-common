@@ -21,6 +21,8 @@ import { createLogger } from "./logger-adapter";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
 import { NonceLookupResult } from "./types/nonce_lookup.interface";
 import { TxidsLookupResult } from "./types/txids_lookup.interface";
+import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from "./types/xpub_lookup.interface";
+import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -265,6 +267,56 @@ export class ExplorerBase implements ExplorerApi {
       assetType,
       assetId,
       addrXpubs,
+      to,
+    })
+  }
+
+  utxoXpubLookup(
+    blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
+    confirmed: boolean,
+    xpub: string,
+    from: number,
+    to: number,
+  ): Promise<ModuleResponse<UtxoXpubLookupResult>> {
+    const { utxoXpubLookup } = this.provider
+    if (!utxoXpubLookup) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return utxoXpubLookup(this.createContext('Utxo xpub'), {
+      blockchain,
+      assetType,
+      assetId,
+      confirmed,
+      xpub,
+      from,
+      to,
+    })
+  }
+
+  xpubLookup(
+    blockchain: Blockchains,
+    assetType: AssetTypes,
+    assetId: string,
+    tokens: XpubLookupRequestTokens,
+    type: XpubLookupRequestType,
+    xpub: string,
+    from: number,
+    to: number,
+  ): Promise<ModuleResponse<XpubLookupResult>> {
+    const { xpubLookup } = this.provider
+    if (!xpubLookup) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return xpubLookup(this.createContext('Xpub'), {
+      blockchain,
+      assetType,
+      assetId,
+      tokens,
+      type,
+      xpub,
+      from,
       to,
     })
   }

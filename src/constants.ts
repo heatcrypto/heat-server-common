@@ -51,6 +51,8 @@ export enum ExplorerTypes {
   NONCE_LOOKUP = 13,
   ESTIMATE_GAS = 14,
   TXIDS = 15,
+  UTXO_XPUB = 16,
+  XPUB = 17,
 }
 
 export enum AssetTypes {

@@ -56,6 +56,8 @@ var ExplorerTypes;
     ExplorerTypes[ExplorerTypes["NONCE_LOOKUP"] = 13] = "NONCE_LOOKUP";
     ExplorerTypes[ExplorerTypes["ESTIMATE_GAS"] = 14] = "ESTIMATE_GAS";
     ExplorerTypes[ExplorerTypes["TXIDS"] = 15] = "TXIDS";
+    ExplorerTypes[ExplorerTypes["UTXO_XPUB"] = 16] = "UTXO_XPUB";
+    ExplorerTypes[ExplorerTypes["XPUB"] = 17] = "XPUB";
 })(ExplorerTypes = exports.ExplorerTypes || (exports.ExplorerTypes = {}));
 var AssetTypes;
 (function (AssetTypes) {

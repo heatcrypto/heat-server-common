@@ -15,6 +15,8 @@ import { BroadcastResult } from './broadcast.interface';
 import { EstimateGasResult } from './estimate_gas.interface';
 import { NonceLookupResult } from './nonce_lookup.interface';
 import { TxidsLookupResult } from './txids_lookup.interface';
+import { UtxoXpubLookupResult } from './utxo_xpub_lookup.interface';
+import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from './xpub_lookup.interface';
 export interface ExplorerMiddleware {
     getAddress?(address: string): string;
     getNetworkFee?(input: string): {
@@ -44,6 +46,8 @@ export interface ExplorerApi {
     nonceLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<ModuleResponse<NonceLookupResult>>;
     publicKey?: (blockchain: Blockchains, addrXpub: string) => Promise<ModuleResponse<PublicKeyLookupResult>>;
     txidsLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
+    utxoXpubLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string, from: number, to: number) => Promise<ModuleResponse<UtxoXpubLookupResult>>;
+    xpubLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, tokens: XpubLookupRequestTokens, type: XpubLookupRequestType, xpub: string, from: number, to: number) => Promise<ModuleResponse<XpubLookupResult>>;
     /**
      * Custom endpoints.
      */

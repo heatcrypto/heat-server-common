@@ -36,4 +36,6 @@ __exportStar(require("./types/utxo_lookup.interface"), exports);
 __exportStar(require("./types/estimate_gas.interface"), exports);
 __exportStar(require("./types/txids_lookup.interface"), exports);
 __exportStar(require("./types/nonce_lookup.interface"), exports);
+__exportStar(require("./types/xpub_lookup.interface"), exports);
+__exportStar(require("./types/utxo_xpub_lookup.interface"), exports);
 __exportStar(require("./utils"), exports);

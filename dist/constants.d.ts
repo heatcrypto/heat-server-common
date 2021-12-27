@@ -41,7 +41,9 @@ export declare enum ExplorerTypes {
     NETWORK_STATUS = 12,
     NONCE_LOOKUP = 13,
     ESTIMATE_GAS = 14,
-    TXIDS = 15
+    TXIDS = 15,
+    UTXO_XPUB = 16,
+    XPUB = 17
 }
 export declare enum AssetTypes {
     NATIVE = 0,

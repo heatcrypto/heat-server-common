@@ -184,6 +184,37 @@ var ExplorerBase = /** @class */ (function () {
             to: to,
         });
     };
+    ExplorerBase.prototype.utxoXpubLookup = function (blockchain, assetType, assetId, confirmed, xpub, from, to) {
+        var utxoXpubLookup = this.provider.utxoXpubLookup;
+        if (!utxoXpubLookup) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return utxoXpubLookup(this.createContext('Utxo xpub'), {
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            confirmed: confirmed,
+            xpub: xpub,
+            from: from,
+            to: to,
+        });
+    };
+    ExplorerBase.prototype.xpubLookup = function (blockchain, assetType, assetId, tokens, type, xpub, from, to) {
+        var xpubLookup = this.provider.xpubLookup;
+        if (!xpubLookup) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return xpubLookup(this.createContext('Xpub'), {
+            blockchain: blockchain,
+            assetType: assetType,
+            assetId: assetId,
+            tokens: tokens,
+            type: type,
+            xpub: xpub,
+            from: from,
+            to: to,
+        });
+    };
     /**
      * Custom endpoints.
      */

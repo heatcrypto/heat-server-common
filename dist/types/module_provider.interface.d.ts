@@ -14,6 +14,8 @@ import { CustomHeatAccountParam, CustomHeatAccountResult } from "./custom_heat.i
 import { EstimateGasParam, EstimateGasResult } from "./estimate_gas.interface";
 import { NonceLookupParam, NonceLookupResult } from "./nonce_lookup.interface";
 import { TxidsLookupParam, TxidsLookupResult } from "./txids_lookup.interface";
+import { UtxoXpubLookupParam, UtxoXpubLookupResult } from "./utxo_xpub_lookup.interface";
+import { XpubLookupParam, XpubLookupResult } from "./xpub_lookup.interface";
 export interface ModuleProvider {
     balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>>;
     broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
@@ -29,5 +31,7 @@ export interface ModuleProvider {
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
     nonceLookup?: (context: CallContext, param: NonceLookupParam) => Promise<ModuleResponse<NonceLookupResult>>;
     txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
+    utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<UtxoXpubLookupResult>>;
+    xpubLookup?: (context: CallContext, param: XpubLookupParam) => Promise<ModuleResponse<XpubLookupResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

@@ -31,7 +31,7 @@ export interface ModuleProvider {
     utxoLookup?: (context: CallContext, param: UtxoLookupParam) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
     nonceLookup?: (context: CallContext, param: NonceLookupParam) => Promise<ModuleResponse<NonceLookupResult>>;
     txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
-    utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<UtxoXpubLookupResult>>;
+    utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
     xpubLookup?: (context: CallContext, param: XpubLookupParam) => Promise<ModuleResponse<XpubLookupResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
 }

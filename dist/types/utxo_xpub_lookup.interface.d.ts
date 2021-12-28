@@ -39,15 +39,15 @@ export interface UtxoXpubLookupResult {
      */
     confirmations: number;
     /**
-     * Utxo locktime (or 0 if none)
+     * Sender address
      */
-    address: number;
+    address: string;
     /**
      * For unconfirmed transactions this will return 0
      */
     height: number;
     /**
-     *
+     * Utxo locktime (or 0 if none)
      */
     lockTime: number;
 }

@@ -75,7 +75,7 @@ export interface XpubLookupResult {
   /**
    * List of transactions or null - XpubLookupRequestType.TXS
    */
-  txs?: XpubTransactionResult[];
+  transactions?: XpubTransactionResult[];
 
   /**
    * List of token individual balances

@@ -95,6 +95,33 @@ export interface EventMessageTypeData {
       };
 }
 
+export interface EventDgsStandardType {
+  type: EventTypes;
+  assetType: AssetTypes;
+  assetId: string;
+  data: EventDgsPurchaseTypeData | EventDgsDeliveryTypeData | EventDgsRefundTypeData;
+}
+
+export interface EventDgsPurchaseTypeData {
+  goods: string;
+  quantity: number;
+  priceNQT: string;
+  deliveryDeadlineTimestamp: number;
+}
+
+export interface EventDgsDeliveryTypeData {
+  purchase: string;
+  goodsData: string;
+  goodsNonce: string;
+  discountNQT: string;
+  goodsIsText: boolean;
+}
+
+export interface EventDgsRefundTypeData {
+  purchase: string;
+  refundNQT: string;
+}
+
 /**
  * Builds Standard Type
  * @param type
@@ -407,4 +434,65 @@ export function buildEventMessageReceive(
     addrXpub,
     message,
   );
+}
+
+export function buildEventDgsPurchase(
+  goods: string,
+  quantity: number,
+  priceNQT: string,
+  deliveryDeadlineTimestamp: number,
+  assetType: AssetTypes = AssetTypes.NATIVE,
+  assetId: string = NULL,    
+): EventDgsStandardType {
+  return {
+    type: EventTypes.EVENT_DGS_PURCHASE,
+    assetType,
+    assetId,
+    data: {
+      goods,
+      quantity,
+      priceNQT,
+      deliveryDeadlineTimestamp,
+    }
+  }
+}
+
+export function buildEventDgsDelivery(
+  purchase: string,
+  goodsData: string,
+  goodsNonce: string,
+  discountNQT: string,
+  goodsIsText: boolean,  
+  assetType: AssetTypes = AssetTypes.NATIVE,
+  assetId: string = NULL,      
+): EventDgsStandardType {
+  return {
+    type: EventTypes.EVENT_DGS_DELIVERY,
+    assetType,
+    assetId,
+    data: {
+      purchase,
+      goodsData,
+      goodsNonce,
+      discountNQT,
+      goodsIsText,
+    }
+  }
+}
+
+export function buildEventDgsRefund(
+  purchase: string,
+  refundNQT: string,  
+  assetType: AssetTypes = AssetTypes.NATIVE,
+  assetId: string = NULL,    
+): EventDgsStandardType {
+  return {
+    type: EventTypes.EVENT_DGS_PREFUND,
+    assetType,
+    assetId,
+    data: {
+      purchase,
+      refundNQT,
+    }
+  }
 }

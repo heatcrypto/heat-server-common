@@ -1,20 +1,23 @@
-import { EventTypes } from './constants';
+import { EventTypes } from "./constants";
 import {
   EventStandardTypeData,
   EventFeeTypeData,
   EventOrderTypeData,
   EventLeaseBalanceTypeData,
   EventMessageTypeData,
-} from './event-builders';
-import { prettyPrint } from './json';
-import { isString, isUndefined, isObjectLike } from 'lodash';
-import { LoggerService } from './types/logger.interface';
-import { createLogger } from './logger-adapter';
+  EventDgsPurchaseTypeData,
+  EventDgsDeliveryTypeData,
+  EventDgsRefundTypeData,
+} from "./event-builders";
+import { prettyPrint } from "./json";
+import { isString, isUndefined, isObjectLike } from "lodash";
+import { LoggerService } from "./types/logger.interface";
+import { createLogger } from "./logger-adapter";
 
 let _logger: LoggerService;
 function getLogger(): LoggerService {
   if (!_logger) {
-    _logger = createLogger(__filename)
+    _logger = createLogger(__filename);
   }
   return _logger;
 }
@@ -29,7 +32,7 @@ function getLogger(): LoggerService {
  * }} event
  * @returns {Array<any>}
  */
-export function createEventData(event: { type: number, data: any }) {
+export function createEventData(event: { type: number; data: any }) {
   switch (event.type) {
     case EventTypes.EVENT_SEND:
     case EventTypes.EVENT_RECEIVE:
@@ -48,8 +51,14 @@ export function createEventData(event: { type: number, data: any }) {
     case EventTypes.EVENT_MESSAGE_SEND:
     case EventTypes.EVENT_MESSAGE_RECEIVE:
       return dataMessageType(event.data);
+    case EventTypes.EVENT_DGS_PURCHASE:
+      return dataDgsPurchase(event.data);
+    case EventTypes.EVENT_DGS_DELIVERY:
+      return dataDgsDelivery(event.data);
+    case EventTypes.EVENT_DGS_PREFUND:
+      return dataDgsRefund(event.data);
   }
-  getLogger().warn('Unknown Event Type', prettyPrint(event));
+  getLogger().warn("Unknown Event Type", prettyPrint(event));
   return [];
 }
 
@@ -65,7 +74,7 @@ export function dataStandardType(data: EventStandardTypeData) {
 }
 
 export function unpackDataStandardType(
-  data: Array<any>,
+  data: Array<any>
 ): EventStandardTypeData {
   return {
     value: data[0],
@@ -105,7 +114,7 @@ export function dataEventLeaseBalance(data: EventLeaseBalanceTypeData) {
 }
 
 export function unpackDataEventLeaseBalance(
-  data: Array<any>,
+  data: Array<any>
 ): EventLeaseBalanceTypeData {
   return {
     period: data[0],
@@ -121,15 +130,15 @@ export function dataMessageType(data: EventMessageTypeData) {
     isUndefined(data.publicKey) ? 0 : data.publicKey,
     isUndefined(data.alias) ? 0 : data.alias,
     !!data.isText,
-    isString(data.message) ? data.message : 0,    
-    isObjectLike(data.message) ? 
-      // @ts-ignore
-      data.message['data'] 
+    isString(data.message) ? data.message : 0,
+    isObjectLike(data.message)
+      ? // @ts-ignore
+        data.message["data"]
       : 0,
-    isObjectLike(data.message) ? 
-      // @ts-ignore
-      data.message['nonce'] : 
-      0,
+    isObjectLike(data.message)
+      ? // @ts-ignore
+        data.message["nonce"]
+      : 0,
   ];
 }
 
@@ -152,5 +161,55 @@ export function unpackDataMessageType(data: Array<any>): EventMessageTypeData {
     alias: data[2],
     isText: data[3],
     message: message,
+  };
+}
+
+export function dataDgsPurchase(data: EventDgsPurchaseTypeData) {
+  return [
+    data.goods,
+    data.quantity,
+    data.priceNQT,
+    data.deliveryDeadlineTimestamp,
+  ];
+}
+export function unpackDataDgsPurchase(
+  data: Array<any>
+): EventDgsPurchaseTypeData {
+  return {
+    goods: data[0],
+    quantity: data[1],
+    priceNQT: data[2],
+    deliveryDeadlineTimestamp: data[3],
+  };
+}
+
+export function dataDgsDelivery(data: EventDgsDeliveryTypeData) {
+  return [
+    data.purchase,
+    data.goodsData,
+    data.goodsNonce,
+    data.discountNQT,
+    data.goodsIsText,
+  ];
+}
+export function unpackDataDgsDelivery(
+  data: Array<any>
+): EventDgsDeliveryTypeData {
+  return {
+    purchase: data[0],
+    goodsData: data[1],
+    goodsNonce: data[2],
+    discountNQT: data[3],
+    goodsIsText: data[4],
+  };
+}
+
+export function dataDgsRefund(data: EventDgsRefundTypeData) {
+  return [data.purchase, data.refundNQT];
+}
+export function unpackDataDgsRefund(data: Array<any>): EventDgsRefundTypeData {
+  return {
+    purchase: data[0],
+    refundNQT: data[1],
   };
 }

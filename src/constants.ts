@@ -33,6 +33,10 @@ export enum EventTypes {
   EVENT_LEASE_BALANCE = 10,
   EVENT_MESSAGE_SEND = 11,
   EVENT_MESSAGE_RECEIVE = 12,
+  // Digital Goods Store (FIMK)
+  EVENT_DGS_PURCHASE = 13,
+  EVENT_DGS_DELIVERY = 14,
+  EVENT_DGS_PREFUND = 15,
 }
 
 export enum ExplorerTypes {

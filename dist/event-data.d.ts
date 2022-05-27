@@ -1,4 +1,4 @@
-import { EventStandardTypeData, EventFeeTypeData, EventOrderTypeData, EventLeaseBalanceTypeData, EventMessageTypeData } from './event-builders';
+import { EventStandardTypeData, EventFeeTypeData, EventOrderTypeData, EventLeaseBalanceTypeData, EventMessageTypeData, EventDgsPurchaseTypeData, EventDgsDeliveryTypeData, EventDgsRefundTypeData } from "./event-builders";
 /**
  * Creates the {data} field (which is an array) based on an event created
  * with any one of the {event-builder.js} event builder methods.
@@ -23,3 +23,9 @@ export declare function dataEventLeaseBalance(data: EventLeaseBalanceTypeData): 
 export declare function unpackDataEventLeaseBalance(data: Array<any>): EventLeaseBalanceTypeData;
 export declare function dataMessageType(data: EventMessageTypeData): any[];
 export declare function unpackDataMessageType(data: Array<any>): EventMessageTypeData;
+export declare function dataDgsPurchase(data: EventDgsPurchaseTypeData): (string | number)[];
+export declare function unpackDataDgsPurchase(data: Array<any>): EventDgsPurchaseTypeData;
+export declare function dataDgsDelivery(data: EventDgsDeliveryTypeData): (string | boolean)[];
+export declare function unpackDataDgsDelivery(data: Array<any>): EventDgsDeliveryTypeData;
+export declare function dataDgsRefund(data: EventDgsRefundTypeData): string[];
+export declare function unpackDataDgsRefund(data: Array<any>): EventDgsRefundTypeData;

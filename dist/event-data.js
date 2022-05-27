@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpackDataMessageType = exports.dataMessageType = exports.unpackDataEventLeaseBalance = exports.dataEventLeaseBalance = exports.unpackDataOrderType = exports.dataOrderType = exports.unpackDataEventFee = exports.dataEventFee = exports.unpackDataStandardType = exports.dataStandardType = exports.createEventData = void 0;
+exports.unpackDataDgsRefund = exports.dataDgsRefund = exports.unpackDataDgsDelivery = exports.dataDgsDelivery = exports.unpackDataDgsPurchase = exports.dataDgsPurchase = exports.unpackDataMessageType = exports.dataMessageType = exports.unpackDataEventLeaseBalance = exports.dataEventLeaseBalance = exports.unpackDataOrderType = exports.dataOrderType = exports.unpackDataEventFee = exports.dataEventFee = exports.unpackDataStandardType = exports.dataStandardType = exports.createEventData = void 0;
 var constants_1 = require("./constants");
 var json_1 = require("./json");
 var lodash_1 = require("lodash");
@@ -41,8 +41,14 @@ function createEventData(event) {
         case constants_1.EventTypes.EVENT_MESSAGE_SEND:
         case constants_1.EventTypes.EVENT_MESSAGE_RECEIVE:
             return dataMessageType(event.data);
+        case constants_1.EventTypes.EVENT_DGS_PURCHASE:
+            return dataDgsPurchase(event.data);
+        case constants_1.EventTypes.EVENT_DGS_DELIVERY:
+            return dataDgsDelivery(event.data);
+        case constants_1.EventTypes.EVENT_DGS_PREFUND:
+            return dataDgsRefund(event.data);
     }
-    getLogger().warn('Unknown Event Type', (0, json_1.prettyPrint)(event));
+    getLogger().warn("Unknown Event Type", (0, json_1.prettyPrint)(event));
     return [];
 }
 exports.createEventData = createEventData;
@@ -111,14 +117,14 @@ function dataMessageType(data) {
         (0, lodash_1.isUndefined)(data.alias) ? 0 : data.alias,
         !!data.isText,
         (0, lodash_1.isString)(data.message) ? data.message : 0,
-        (0, lodash_1.isObjectLike)(data.message) ?
-            // @ts-ignore
-            data.message['data']
+        (0, lodash_1.isObjectLike)(data.message)
+            ? // @ts-ignore
+                data.message["data"]
             : 0,
-        (0, lodash_1.isObjectLike)(data.message) ?
-            // @ts-ignore
-            data.message['nonce'] :
-            0,
+        (0, lodash_1.isObjectLike)(data.message)
+            ? // @ts-ignore
+                data.message["nonce"]
+            : 0,
     ];
 }
 exports.dataMessageType = dataMessageType;
@@ -143,3 +149,52 @@ function unpackDataMessageType(data) {
     };
 }
 exports.unpackDataMessageType = unpackDataMessageType;
+function dataDgsPurchase(data) {
+    return [
+        data.goods,
+        data.quantity,
+        data.priceNQT,
+        data.deliveryDeadlineTimestamp,
+    ];
+}
+exports.dataDgsPurchase = dataDgsPurchase;
+function unpackDataDgsPurchase(data) {
+    return {
+        goods: data[0],
+        quantity: data[1],
+        priceNQT: data[2],
+        deliveryDeadlineTimestamp: data[3],
+    };
+}
+exports.unpackDataDgsPurchase = unpackDataDgsPurchase;
+function dataDgsDelivery(data) {
+    return [
+        data.purchase,
+        data.goodsData,
+        data.goodsNonce,
+        data.discountNQT,
+        data.goodsIsText,
+    ];
+}
+exports.dataDgsDelivery = dataDgsDelivery;
+function unpackDataDgsDelivery(data) {
+    return {
+        purchase: data[0],
+        goodsData: data[1],
+        goodsNonce: data[2],
+        discountNQT: data[3],
+        goodsIsText: data[4],
+    };
+}
+exports.unpackDataDgsDelivery = unpackDataDgsDelivery;
+function dataDgsRefund(data) {
+    return [data.purchase, data.refundNQT];
+}
+exports.dataDgsRefund = dataDgsRefund;
+function unpackDataDgsRefund(data) {
+    return {
+        purchase: data[0],
+        refundNQT: data[1],
+    };
+}
+exports.unpackDataDgsRefund = unpackDataDgsRefund;

@@ -78,6 +78,29 @@ export interface EventMessageTypeData {
         nonce: string;
     };
 }
+export interface EventDgsStandardType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventDgsPurchaseTypeData | EventDgsDeliveryTypeData | EventDgsRefundTypeData;
+}
+export interface EventDgsPurchaseTypeData {
+    goods: string;
+    quantity: number;
+    priceNQT: string;
+    deliveryDeadlineTimestamp: number;
+}
+export interface EventDgsDeliveryTypeData {
+    purchase: string;
+    goodsData: string;
+    goodsNonce: string;
+    discountNQT: string;
+    goodsIsText: boolean;
+}
+export interface EventDgsRefundTypeData {
+    purchase: string;
+    refundNQT: string;
+}
 /**
  * Builds Standard Type
  * @param type
@@ -132,3 +155,6 @@ export declare function buildEventLeaseBalance(addrXpub: ExtendedAddrXpub | stri
 export declare function buildEventMessageType(type: EventTypes, addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;
 export declare function buildEventMessageSend(addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;
 export declare function buildEventMessageReceive(addrXpub: ExtendedAddrXpub | string, message: EncryptedMessage | PlainMessage): EventMessageType;
+export declare function buildEventDgsPurchase(goods: string, quantity: number, priceNQT: string, deliveryDeadlineTimestamp: number, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;
+export declare function buildEventDgsDelivery(purchase: string, goodsData: string, goodsNonce: string, discountNQT: string, goodsIsText: boolean, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;
+export declare function buildEventDgsRefund(purchase: string, refundNQT: string, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;

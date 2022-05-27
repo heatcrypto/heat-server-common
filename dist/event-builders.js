@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildEventMessageReceive = exports.buildEventMessageSend = exports.buildEventMessageType = exports.buildEventLeaseBalance = exports.buildEventCancelSell = exports.buildEventCancelBuy = exports.buildEventSellOrder = exports.buildEventBuyOrder = exports.buildEventOrderType = exports.buildEventFee = exports.buildEventInput = exports.buildEventOutput = exports.buildEventReceive = exports.buildEventSend = exports.buildEventStandardType = void 0;
+exports.buildEventDgsRefund = exports.buildEventDgsDelivery = exports.buildEventDgsPurchase = exports.buildEventMessageReceive = exports.buildEventMessageSend = exports.buildEventMessageType = exports.buildEventLeaseBalance = exports.buildEventCancelSell = exports.buildEventCancelBuy = exports.buildEventSellOrder = exports.buildEventBuyOrder = exports.buildEventOrderType = exports.buildEventFee = exports.buildEventInput = exports.buildEventOutput = exports.buildEventReceive = exports.buildEventSend = exports.buildEventStandardType = void 0;
 var lodash_1 = require("lodash");
 var constants_1 = require("./constants");
 /**
@@ -158,3 +158,50 @@ function buildEventMessageReceive(addrXpub, message) {
     return buildEventMessageType(constants_1.EventTypes.EVENT_MESSAGE_RECEIVE, addrXpub, message);
 }
 exports.buildEventMessageReceive = buildEventMessageReceive;
+function buildEventDgsPurchase(goods, quantity, priceNQT, deliveryDeadlineTimestamp, assetType, assetId) {
+    if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
+    if (assetId === void 0) { assetId = constants_1.NULL; }
+    return {
+        type: constants_1.EventTypes.EVENT_DGS_PURCHASE,
+        assetType: assetType,
+        assetId: assetId,
+        data: {
+            goods: goods,
+            quantity: quantity,
+            priceNQT: priceNQT,
+            deliveryDeadlineTimestamp: deliveryDeadlineTimestamp,
+        }
+    };
+}
+exports.buildEventDgsPurchase = buildEventDgsPurchase;
+function buildEventDgsDelivery(purchase, goodsData, goodsNonce, discountNQT, goodsIsText, assetType, assetId) {
+    if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
+    if (assetId === void 0) { assetId = constants_1.NULL; }
+    return {
+        type: constants_1.EventTypes.EVENT_DGS_DELIVERY,
+        assetType: assetType,
+        assetId: assetId,
+        data: {
+            purchase: purchase,
+            goodsData: goodsData,
+            goodsNonce: goodsNonce,
+            discountNQT: discountNQT,
+            goodsIsText: goodsIsText,
+        }
+    };
+}
+exports.buildEventDgsDelivery = buildEventDgsDelivery;
+function buildEventDgsRefund(purchase, refundNQT, assetType, assetId) {
+    if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
+    if (assetId === void 0) { assetId = constants_1.NULL; }
+    return {
+        type: constants_1.EventTypes.EVENT_DGS_PREFUND,
+        assetType: assetType,
+        assetId: assetId,
+        data: {
+            purchase: purchase,
+            refundNQT: refundNQT,
+        }
+    };
+}
+exports.buildEventDgsRefund = buildEventDgsRefund;

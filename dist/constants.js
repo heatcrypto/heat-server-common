@@ -38,6 +38,10 @@ var EventTypes;
     EventTypes[EventTypes["EVENT_LEASE_BALANCE"] = 10] = "EVENT_LEASE_BALANCE";
     EventTypes[EventTypes["EVENT_MESSAGE_SEND"] = 11] = "EVENT_MESSAGE_SEND";
     EventTypes[EventTypes["EVENT_MESSAGE_RECEIVE"] = 12] = "EVENT_MESSAGE_RECEIVE";
+    // Digital Goods Store (FIMK)
+    EventTypes[EventTypes["EVENT_DGS_PURCHASE"] = 13] = "EVENT_DGS_PURCHASE";
+    EventTypes[EventTypes["EVENT_DGS_DELIVERY"] = 14] = "EVENT_DGS_DELIVERY";
+    EventTypes[EventTypes["EVENT_DGS_PREFUND"] = 15] = "EVENT_DGS_PREFUND";
 })(EventTypes = exports.EventTypes || (exports.EventTypes = {}));
 var ExplorerTypes;
 (function (ExplorerTypes) {

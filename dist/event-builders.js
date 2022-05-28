@@ -158,7 +158,7 @@ function buildEventMessageReceive(addrXpub, message) {
     return buildEventMessageType(constants_1.EventTypes.EVENT_MESSAGE_RECEIVE, addrXpub, message);
 }
 exports.buildEventMessageReceive = buildEventMessageReceive;
-function buildEventDgsPurchase(goods, quantity, priceNQT, seller, deliveryDeadlineTimestamp, assetType, assetId) {
+function buildEventDgsPurchase(goods, quantity, priceNQT, sender, deliveryDeadlineTimestamp, assetType, assetId) {
     if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
     if (assetId === void 0) { assetId = constants_1.NULL; }
     return {
@@ -170,12 +170,12 @@ function buildEventDgsPurchase(goods, quantity, priceNQT, seller, deliveryDeadli
             quantity: quantity,
             priceNQT: priceNQT,
             deliveryDeadlineTimestamp: deliveryDeadlineTimestamp,
-            seller: seller,
+            sender: sender,
         }
     };
 }
 exports.buildEventDgsPurchase = buildEventDgsPurchase;
-function buildEventDgsDelivery(purchase, goodsData, goodsNonce, discountNQT, goodsIsText, seller, assetType, assetId) {
+function buildEventDgsDelivery(purchase, goodsData, goodsNonce, discountNQT, goodsIsText, sender, assetType, assetId) {
     if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
     if (assetId === void 0) { assetId = constants_1.NULL; }
     return {
@@ -188,12 +188,12 @@ function buildEventDgsDelivery(purchase, goodsData, goodsNonce, discountNQT, goo
             goodsNonce: goodsNonce,
             discountNQT: discountNQT,
             goodsIsText: goodsIsText,
-            seller: seller,
+            sender: sender,
         }
     };
 }
 exports.buildEventDgsDelivery = buildEventDgsDelivery;
-function buildEventDgsRefund(purchase, refundNQT, seller, assetType, assetId) {
+function buildEventDgsRefund(purchase, refundNQT, sender, assetType, assetId) {
     if (assetType === void 0) { assetType = constants_1.AssetTypes.NATIVE; }
     if (assetId === void 0) { assetId = constants_1.NULL; }
     return {
@@ -203,7 +203,7 @@ function buildEventDgsRefund(purchase, refundNQT, seller, assetType, assetId) {
         data: {
             purchase: purchase,
             refundNQT: refundNQT,
-            seller: seller,
+            sender: sender,
         }
     };
 }

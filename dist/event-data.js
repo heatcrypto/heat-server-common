@@ -155,7 +155,7 @@ function dataDgsPurchase(data) {
         data.quantity,
         data.priceNQT,
         data.deliveryDeadlineTimestamp,
-        data.seller,
+        data.sender,
     ];
 }
 exports.dataDgsPurchase = dataDgsPurchase;
@@ -165,7 +165,7 @@ function unpackDataDgsPurchase(data) {
         quantity: data[1],
         priceNQT: data[2],
         deliveryDeadlineTimestamp: data[3],
-        seller: data[4],
+        sender: data[4],
     };
 }
 exports.unpackDataDgsPurchase = unpackDataDgsPurchase;
@@ -176,7 +176,7 @@ function dataDgsDelivery(data) {
         data.goodsNonce,
         data.discountNQT,
         data.goodsIsText,
-        data.seller,
+        data.sender,
     ];
 }
 exports.dataDgsDelivery = dataDgsDelivery;
@@ -187,19 +187,19 @@ function unpackDataDgsDelivery(data) {
         goodsNonce: data[2],
         discountNQT: data[3],
         goodsIsText: data[4],
-        seller: data[5],
+        sender: data[5],
     };
 }
 exports.unpackDataDgsDelivery = unpackDataDgsDelivery;
 function dataDgsRefund(data) {
-    return [data.purchase, data.refundNQT, data.seller,];
+    return [data.purchase, data.refundNQT, data.sender,];
 }
 exports.dataDgsRefund = dataDgsRefund;
 function unpackDataDgsRefund(data) {
     return {
         purchase: data[0],
         refundNQT: data[1],
-        seller: data[2],
+        sender: data[2],
     };
 }
 exports.unpackDataDgsRefund = unpackDataDgsRefund;

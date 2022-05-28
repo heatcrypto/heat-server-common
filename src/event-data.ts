@@ -170,7 +170,7 @@ export function dataDgsPurchase(data: EventDgsPurchaseTypeData) {
     data.quantity,
     data.priceNQT,
     data.deliveryDeadlineTimestamp,
-    data.seller,
+    data.sender,
   ];
 }
 export function unpackDataDgsPurchase(
@@ -181,7 +181,7 @@ export function unpackDataDgsPurchase(
     quantity: data[1],
     priceNQT: data[2],
     deliveryDeadlineTimestamp: data[3],
-    seller: data[4],
+    sender: data[4],
   };
 }
 
@@ -192,7 +192,7 @@ export function dataDgsDelivery(data: EventDgsDeliveryTypeData) {
     data.goodsNonce,
     data.discountNQT,
     data.goodsIsText,
-    data.seller,
+    data.sender,
   ];
 }
 export function unpackDataDgsDelivery(
@@ -204,17 +204,17 @@ export function unpackDataDgsDelivery(
     goodsNonce: data[2],
     discountNQT: data[3],
     goodsIsText: data[4],
-    seller: data[5],
+    sender: data[5],
   };
 }
 
 export function dataDgsRefund(data: EventDgsRefundTypeData) {
-  return [data.purchase, data.refundNQT, data.seller,];
+  return [data.purchase, data.refundNQT, data.sender,];
 }
 export function unpackDataDgsRefund(data: Array<any>): EventDgsRefundTypeData {
   return {
     purchase: data[0],
     refundNQT: data[1],
-    seller: data[2],
+    sender: data[2],
   };
 }

@@ -107,6 +107,7 @@ export interface EventDgsPurchaseTypeData {
   quantity: number;
   priceNQT: string;
   deliveryDeadlineTimestamp: number;
+  seller: string;
 }
 
 export interface EventDgsDeliveryTypeData {
@@ -115,11 +116,13 @@ export interface EventDgsDeliveryTypeData {
   goodsNonce: string;
   discountNQT: string;
   goodsIsText: boolean;
+  seller: string;
 }
 
 export interface EventDgsRefundTypeData {
   purchase: string;
   refundNQT: string;
+  seller: string;
 }
 
 /**
@@ -440,6 +443,7 @@ export function buildEventDgsPurchase(
   goods: string,
   quantity: number,
   priceNQT: string,
+  seller: string,
   deliveryDeadlineTimestamp: number,
   assetType: AssetTypes = AssetTypes.NATIVE,
   assetId: string = NULL,    
@@ -453,6 +457,7 @@ export function buildEventDgsPurchase(
       quantity,
       priceNQT,
       deliveryDeadlineTimestamp,
+      seller,
     }
   }
 }
@@ -463,6 +468,7 @@ export function buildEventDgsDelivery(
   goodsNonce: string,
   discountNQT: string,
   goodsIsText: boolean,  
+  seller: string,
   assetType: AssetTypes = AssetTypes.NATIVE,
   assetId: string = NULL,      
 ): EventDgsStandardType {
@@ -476,6 +482,7 @@ export function buildEventDgsDelivery(
       goodsNonce,
       discountNQT,
       goodsIsText,
+      seller,
     }
   }
 }
@@ -483,6 +490,7 @@ export function buildEventDgsDelivery(
 export function buildEventDgsRefund(
   purchase: string,
   refundNQT: string,  
+  seller: string,
   assetType: AssetTypes = AssetTypes.NATIVE,
   assetId: string = NULL,    
 ): EventDgsStandardType {
@@ -493,6 +501,7 @@ export function buildEventDgsRefund(
     data: {
       purchase,
       refundNQT,
+      seller,
     }
   }
 }

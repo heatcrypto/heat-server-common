@@ -11,9 +11,12 @@ export interface CustomFimkDgsGoodResult {
     quantity: number;
     priceNQT: string;
     seller: string;
+    sellerRS: string;
+    sellerEmail: string;
     tags: string;
     delisted: boolean;
     timestamp: number;
     numberOfPurchases: number;
     numberOfPublicFeedbacks: number;
+    expiry: number;
 }

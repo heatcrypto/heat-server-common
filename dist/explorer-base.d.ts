@@ -18,6 +18,7 @@ import { NonceLookupResult } from "./types/nonce_lookup.interface";
 import { TxidsLookupResult } from "./types/txids_lookup.interface";
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from "./types/xpub_lookup.interface";
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
+import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
     readonly protocol: string;
@@ -47,4 +48,5 @@ export declare class ExplorerBase implements ExplorerApi {
      * Custom endpoints.
      */
     customHeatAccount(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<CustomHeatAccountResult>>;
+    customFimkDgsGood(blockchain: Blockchains, goods: string, includeCounts?: boolean | undefined): Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
 }

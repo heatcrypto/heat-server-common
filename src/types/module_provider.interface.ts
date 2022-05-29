@@ -16,6 +16,7 @@ import { NonceLookupParam, NonceLookupResult } from "./nonce_lookup.interface"
 import { TxidsLookupParam, TxidsLookupResult } from "./txids_lookup.interface"
 import { UtxoXpubLookupParam, UtxoXpubLookupResult } from "./utxo_xpub_lookup.interface"
 import { XpubLookupParam, XpubLookupResult } from "./xpub_lookup.interface"
+import { CustomFimkDgsGoodParam, CustomFimkDgsGoodResult } from "./custom_fimk.interface"
 
 export interface ModuleProvider {
   balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>> 
@@ -37,4 +38,5 @@ export interface ModuleProvider {
 
   /* Custom modules */
   customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>
+  customFimkDgsGood?: (context: CallContext, param: CustomFimkDgsGoodParam) => Promise<ModuleResponse<CustomFimkDgsGoodResult>>
 }

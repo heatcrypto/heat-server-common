@@ -46,7 +46,8 @@ export declare enum ExplorerTypes {
     ESTIMATE_GAS = 14,
     TXIDS = 15,
     UTXO_XPUB = 16,
-    XPUB = 17
+    XPUB = 17,
+    CUSTOM_FIMK_DGS_GOOD = 18
 }
 export declare enum AssetTypes {
     NATIVE = 0,

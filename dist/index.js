@@ -38,4 +38,5 @@ __exportStar(require("./types/txids_lookup.interface"), exports);
 __exportStar(require("./types/nonce_lookup.interface"), exports);
 __exportStar(require("./types/xpub_lookup.interface"), exports);
 __exportStar(require("./types/utxo_xpub_lookup.interface"), exports);
+__exportStar(require("./types/custom_fimk.interface"), exports);
 __exportStar(require("./utils"), exports);

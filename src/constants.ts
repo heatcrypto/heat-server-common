@@ -57,6 +57,7 @@ export enum ExplorerTypes {
   TXIDS = 15,
   UTXO_XPUB = 16,
   XPUB = 17,
+  CUSTOM_FIMK_DGS_GOOD = 18,
 }
 
 export enum AssetTypes {

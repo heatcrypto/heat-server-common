@@ -226,6 +226,17 @@ var ExplorerBase = /** @class */ (function () {
             addrXpub: addrXpub
         });
     };
+    ExplorerBase.prototype.customFimkDgsGood = function (blockchain, goods, includeCounts) {
+        var customFimkDgsGood = this.provider.customFimkDgsGood;
+        if (!customFimkDgsGood) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return customFimkDgsGood(this.createContext('FimkDgsGood'), {
+            blockchain: blockchain,
+            goods: goods,
+            includeCounts: includeCounts == true,
+        });
+    };
     return ExplorerBase;
 }());
 exports.ExplorerBase = ExplorerBase;

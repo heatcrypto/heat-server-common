@@ -17,6 +17,7 @@ import { NonceLookupResult } from './nonce_lookup.interface';
 import { TxidsLookupResult } from './txids_lookup.interface';
 import { UtxoXpubLookupResult } from './utxo_xpub_lookup.interface';
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from './xpub_lookup.interface';
+import { CustomFimkDgsGoodResult } from './custom_fimk.interface';
 
 export interface ExplorerMiddleware {
   getAddress?(address: string): string;
@@ -159,4 +160,10 @@ export interface ExplorerApi {
     blockchain: Blockchains,
     _addrXpub: string,
   ) => Promise<ModuleResponse<CustomHeatAccountResult>>;
+
+  customFimkDgsGood?: (
+    blockchain: Blockchains,
+    goods: string,
+    includeCounts?: boolean,
+  ) => Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
 }

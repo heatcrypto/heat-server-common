@@ -62,6 +62,7 @@ var ExplorerTypes;
     ExplorerTypes[ExplorerTypes["TXIDS"] = 15] = "TXIDS";
     ExplorerTypes[ExplorerTypes["UTXO_XPUB"] = 16] = "UTXO_XPUB";
     ExplorerTypes[ExplorerTypes["XPUB"] = 17] = "XPUB";
+    ExplorerTypes[ExplorerTypes["CUSTOM_FIMK_DGS_GOOD"] = 18] = "CUSTOM_FIMK_DGS_GOOD";
 })(ExplorerTypes = exports.ExplorerTypes || (exports.ExplorerTypes = {}));
 var AssetTypes;
 (function (AssetTypes) {

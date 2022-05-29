@@ -23,6 +23,7 @@ import { NonceLookupResult } from "./types/nonce_lookup.interface";
 import { TxidsLookupResult } from "./types/txids_lookup.interface";
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from "./types/xpub_lookup.interface";
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
+import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -332,6 +333,22 @@ export class ExplorerBase implements ExplorerApi {
     return customHeatAccount(this.createContext('HeatAccount'), {
       blockchain,
       addrXpub
+    })
+  }
+
+  customFimkDgsGood(
+    blockchain: Blockchains, 
+    goods: string, 
+    includeCounts?: boolean | undefined,
+  ) : Promise<ModuleResponse<CustomFimkDgsGoodResult>> {
+    const { customFimkDgsGood } = this.provider
+    if (!customFimkDgsGood) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return customFimkDgsGood(this.createContext('FimkDgsGood'), {
+      blockchain,
+      goods,
+      includeCounts: includeCounts == true,
     })
   }
 }

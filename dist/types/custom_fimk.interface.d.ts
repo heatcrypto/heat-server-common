@@ -13,6 +13,7 @@ export interface CustomFimkDgsGoodResult {
     seller: string;
     sellerRS: string;
     sellerEmail: string;
+    sellerPublicKey: string;
     tags: string;
     delisted: boolean;
     timestamp: number;

@@ -38,5 +38,5 @@ export interface TransactionStatusResult {
   /**
    * Certain blockchains return the transaction in hexadecimal form
    */
-  hex: string | null;
+  hex?: string | null;
 }

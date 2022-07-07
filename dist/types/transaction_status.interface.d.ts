@@ -27,4 +27,8 @@ export interface TransactionStatusResult {
      * resides in the mem-pool or was rejected
      */
     isAccepted: boolean;
+    /**
+     * Certain blockchains return the transaction in hexadecimal form
+     */
+    hex: string | null;
 }

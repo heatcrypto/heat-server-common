@@ -1,5 +1,4 @@
 import { isUndefined } from 'lodash';
-import * as jsome from 'jsome';
 import { LoggerService } from './types/logger.interface';
 
 export function stringify(object: any, replacer?: any, indent?: any) {
@@ -10,7 +9,8 @@ export function stringify(object: any, replacer?: any, indent?: any) {
 
 export function prettyPrint(object: any) {
   try {
-    return jsome.getColoredString(object);
+    /// We disabled colors
+    return JSON.stringify(object, null, 2)
   } catch (e) {
     return `Unable to pretty print ( ${object} )`;
   }

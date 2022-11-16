@@ -1,27 +1,7 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tryParse = exports.prettyPrint = exports.stringify = void 0;
 var lodash_1 = require("lodash");
-var jsome = __importStar(require("jsome"));
 function stringify(object, replacer, indent) {
     if (!(0, lodash_1.isUndefined)(replacer) && !(0, lodash_1.isUndefined)(indent))
         return JSON.stringify(object, replacer, indent);
@@ -30,7 +10,8 @@ function stringify(object, replacer, indent) {
 exports.stringify = stringify;
 function prettyPrint(object) {
     try {
-        return jsome.getColoredString(object);
+        /// We disabled colors
+        return JSON.stringify(object, null, 2);
     }
     catch (e) {
         return "Unable to pretty print ( ".concat(object, " )");

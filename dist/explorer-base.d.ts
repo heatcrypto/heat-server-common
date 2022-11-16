@@ -19,14 +19,17 @@ import { TxidsLookupResult } from "./types/txids_lookup.interface";
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from "./types/xpub_lookup.interface";
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
+import { CoreOptions } from "request";
+export declare type CreateCoreOptions = (label: string) => CoreOptions;
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
     readonly protocol: string;
     readonly host: string;
     private readonly provider;
     readonly middleWare?: ExplorerMiddleware | undefined;
+    private readonly createCoreOptions?;
     private logger;
-    constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined);
+    constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined, createCoreOptions?: CreateCoreOptions | undefined);
     private createContext;
     status(blockchain?: Blockchains): Promise<ModuleResponse<NetworkStatusResult>>;
     networkFee(blockchain: Blockchains): Promise<ModuleResponse<NetworkFeeResult>>;

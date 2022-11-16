@@ -19,10 +19,9 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "jsome": "^2.5.0",
-    "limiter": "^1.1.5",
-    "lodash": "^4.17.20",
-    "request": "^2.88.2",
-    "util": "^0.12.3"
+    "limiter": "1.1.5",
+    "lodash": "4.17.21",
+    "request": "2.88.2",
+    "util": "0.12.5"
   }
 }

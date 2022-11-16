@@ -24,6 +24,9 @@ import { TxidsLookupResult } from "./types/txids_lookup.interface";
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from "./types/xpub_lookup.interface";
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
+import { CoreOptions } from "request";
+
+export type CreateCoreOptions = (label: string) => CoreOptions;
 
 export class ExplorerBase implements ExplorerApi {
   private logger: LoggerService;
@@ -34,6 +37,7 @@ export class ExplorerBase implements ExplorerApi {
     public readonly host: string,
     private readonly provider: ModuleProvider,
     public readonly middleWare?: ExplorerMiddleware,
+    private readonly createCoreOptions?: CreateCoreOptions,
   ) {
     const logger = createLogger()
     this.logger = new PrefixLogger(logger, this.id)
@@ -45,7 +49,8 @@ export class ExplorerBase implements ExplorerApi {
       protocol: this.protocol,
       logger: this.logger,
       req: new MonitoredRequest(createLogger(), label),
-      middleWare: this.middleWare
+      middleWare: this.middleWare,
+      createCoreOptions: this.createCoreOptions,
     }
     return context
   }

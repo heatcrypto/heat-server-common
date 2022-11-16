@@ -5,12 +5,13 @@ var prefix_logger_1 = require("./prefix-logger");
 var monitored_request_1 = require("./monitored-request");
 var logger_adapter_1 = require("./logger-adapter");
 var ExplorerBase = /** @class */ (function () {
-    function ExplorerBase(id, protocol, host, provider, middleWare) {
+    function ExplorerBase(id, protocol, host, provider, middleWare, createCoreOptions) {
         this.id = id;
         this.protocol = protocol;
         this.host = host;
         this.provider = provider;
         this.middleWare = middleWare;
+        this.createCoreOptions = createCoreOptions;
         var logger = (0, logger_adapter_1.createLogger)();
         this.logger = new prefix_logger_1.PrefixLogger(logger, this.id);
     }
@@ -20,7 +21,8 @@ var ExplorerBase = /** @class */ (function () {
             protocol: this.protocol,
             logger: this.logger,
             req: new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label),
-            middleWare: this.middleWare
+            middleWare: this.middleWare,
+            createCoreOptions: this.createCoreOptions,
         };
         return context;
     };

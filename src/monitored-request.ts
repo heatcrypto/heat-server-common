@@ -6,7 +6,8 @@ import { promisify } from 'util';
 import { CoreOptions } from 'request';
 import { LoggerService } from './types/logger.interface';
 import { createLogger } from './logger-adapter';
-const [getAsync, postAsync] = [get, post].map(promisify);
+const getAsync = promisify(get);
+const postAsync = promisify(post);
 
 const DEBUG = true;
 const COMPRESS = true;

@@ -4,6 +4,8 @@ exports.ExplorerBase = void 0;
 var prefix_logger_1 = require("./prefix-logger");
 var monitored_request_1 = require("./monitored-request");
 var logger_adapter_1 = require("./logger-adapter");
+var json_rpc_1 = require("./json-rpc");
+var lodash_1 = require("lodash");
 var ExplorerBase = /** @class */ (function () {
     function ExplorerBase(id, protocol, host, provider, middleWare, createCoreOptions) {
         this.id = id;
@@ -16,11 +18,16 @@ var ExplorerBase = /** @class */ (function () {
         this.logger = new prefix_logger_1.PrefixLogger(logger, this.id);
     }
     ExplorerBase.prototype.createContext = function (label) {
+        var req = new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label);
+        var endpoint = "".concat(this.protocol, "://").concat(this.host);
+        var options = (0, lodash_1.isFunction)(this.createCoreOptions) ? this.createCoreOptions(label) : {};
+        var jsonRpc = new json_rpc_1.JsonRpc(req, endpoint, options);
         var context = {
             host: this.host,
             protocol: this.protocol,
             logger: this.logger,
-            req: new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label),
+            req: req,
+            jsonRpc: jsonRpc,
             middleWare: this.middleWare,
             createCoreOptions: this.createCoreOptions,
         };

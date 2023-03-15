@@ -25,6 +25,8 @@ import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 import { CoreOptions } from "request";
+import { JsonRpc } from "./json-rpc";
+import { isFunction } from "lodash";
 
 export type CreateCoreOptions = (label: string) => CoreOptions;
 
@@ -44,11 +46,16 @@ export class ExplorerBase implements ExplorerApi {
   }
 
   private createContext(label: string): CallContext {
+    const req = new MonitoredRequest(createLogger(), label);
+    const endpoint = `${this.protocol}://${this.host}`;
+    const options = isFunction(this.createCoreOptions) ? this.createCoreOptions(label) : {}
+    const jsonRpc = new JsonRpc(req, endpoint, options)
     let context: CallContext = {
       host: this.host,
       protocol: this.protocol,
       logger: this.logger,
-      req: new MonitoredRequest(createLogger(), label),
+      req: req,
+      jsonRpc: jsonRpc,
       middleWare: this.middleWare,
       createCoreOptions: this.createCoreOptions,
     }

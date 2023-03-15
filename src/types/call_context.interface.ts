@@ -2,6 +2,7 @@ import { ExplorerMiddleware } from './explorer.interface'
 import { MonitoredRequest } from '../monitored-request'
 import { LoggerService } from './logger.interface'
 import { CreateCoreOptions } from '../explorer-base';
+import { JsonRpc } from '../json-rpc';
 
 export interface CallContext {
   /**
@@ -33,4 +34,9 @@ export interface CallContext {
    * Optional function to create [CoreOptions] (headers and stuff for HTTP requests)
    */
   createCoreOptions?: CreateCoreOptions;
+
+  /**
+   * A lazy constructed JsonRPc client which uses the MonitoredRequest for transport
+   */
+  jsonRpc?: JsonRpc;
 }

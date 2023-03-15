@@ -58,7 +58,8 @@ var json_1 = require("./json");
 var request_1 = require("request");
 var util_1 = require("util");
 var logger_adapter_1 = require("./logger-adapter");
-var _a = [request_1.get, request_1.post].map(util_1.promisify), getAsync = _a[0], postAsync = _a[1];
+var getAsync = (0, util_1.promisify)(request_1.get);
+var postAsync = (0, util_1.promisify)(request_1.post);
 var DEBUG = true;
 var COMPRESS = true;
 var MonitoredRequestException = /** @class */ (function (_super) {

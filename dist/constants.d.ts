@@ -6,7 +6,24 @@ export declare enum Blockchains {
     BITCOIN_CASH = 4,
     FIMK = 5,
     HEAT_TEST = 6,
-    BITCOIN_TEST = 7
+    BITCOIN_TEST = 7,
+    POLYGON = 8,
+    FANTOM = 9,
+    BNC = 10,
+    AVALANCHE = 11,
+    ARBITRUM = 12,
+    OPTIMISM = 13,
+    SOLANA = 14,
+    GNOSIS = 15,
+    CELO = 16,
+    APTOS = 17,
+    MOONBEAM = 18,
+    HARMONY = 19,
+    TRON = 20,
+    SYSCOIN = 21,
+    FILECOIN = 22,
+    POLKADOT = 23,
+    KUSAME = 24
 }
 export declare function txnIsConfirmed(blockchain: Blockchains, confirmations: number): boolean;
 export declare enum SourceTypes {

@@ -14,6 +14,23 @@ var Blockchains;
     Blockchains[Blockchains["FIMK"] = 5] = "FIMK";
     Blockchains[Blockchains["HEAT_TEST"] = 6] = "HEAT_TEST";
     Blockchains[Blockchains["BITCOIN_TEST"] = 7] = "BITCOIN_TEST";
+    Blockchains[Blockchains["POLYGON"] = 8] = "POLYGON";
+    Blockchains[Blockchains["FANTOM"] = 9] = "FANTOM";
+    Blockchains[Blockchains["BNC"] = 10] = "BNC";
+    Blockchains[Blockchains["AVALANCHE"] = 11] = "AVALANCHE";
+    Blockchains[Blockchains["ARBITRUM"] = 12] = "ARBITRUM";
+    Blockchains[Blockchains["OPTIMISM"] = 13] = "OPTIMISM";
+    Blockchains[Blockchains["SOLANA"] = 14] = "SOLANA";
+    Blockchains[Blockchains["GNOSIS"] = 15] = "GNOSIS";
+    Blockchains[Blockchains["CELO"] = 16] = "CELO";
+    Blockchains[Blockchains["APTOS"] = 17] = "APTOS";
+    Blockchains[Blockchains["MOONBEAM"] = 18] = "MOONBEAM";
+    Blockchains[Blockchains["HARMONY"] = 19] = "HARMONY";
+    Blockchains[Blockchains["TRON"] = 20] = "TRON";
+    Blockchains[Blockchains["SYSCOIN"] = 21] = "SYSCOIN";
+    Blockchains[Blockchains["FILECOIN"] = 22] = "FILECOIN";
+    Blockchains[Blockchains["POLKADOT"] = 23] = "POLKADOT";
+    Blockchains[Blockchains["KUSAME"] = 24] = "KUSAME";
 })(Blockchains = exports.Blockchains || (exports.Blockchains = {}));
 function txnIsConfirmed(blockchain, confirmations) {
     var config = exports.BlockchainConfig[blockchain];
@@ -132,5 +149,124 @@ exports.BlockchainConfig = (_a = {},
         confirmed: 10,
         blockTime: 45,
         feeBlocks: 1,
+    },
+    _a[Blockchains.POLYGON] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.FANTOM] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.BNC] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.AVALANCHE] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.ARBITRUM] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.OPTIMISM] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.SOLANA] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.GNOSIS] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.CELO] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.APTOS] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.MOONBEAM] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.HARMONY] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.TRON] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.SYSCOIN] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.FILECOIN] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.POLKADOT] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
+    },
+    _a[Blockchains.KUSAME] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 60,
+        blockTime: 20,
+        feeBlocks: 3,
     },
     _a);

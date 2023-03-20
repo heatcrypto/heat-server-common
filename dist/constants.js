@@ -16,7 +16,7 @@ var Blockchains;
     Blockchains[Blockchains["BITCOIN_TEST"] = 7] = "BITCOIN_TEST";
     Blockchains[Blockchains["POLYGON"] = 8] = "POLYGON";
     Blockchains[Blockchains["FANTOM"] = 9] = "FANTOM";
-    Blockchains[Blockchains["BNC"] = 10] = "BNC";
+    Blockchains[Blockchains["BINANCE_SMART_CHAIN"] = 10] = "BINANCE_SMART_CHAIN";
     Blockchains[Blockchains["AVALANCHE"] = 11] = "AVALANCHE";
     Blockchains[Blockchains["ARBITRUM"] = 12] = "ARBITRUM";
     Blockchains[Blockchains["OPTIMISM"] = 13] = "OPTIMISM";
@@ -164,7 +164,7 @@ exports.BlockchainConfig = (_a = {},
         blockTime: 20,
         feeBlocks: 3,
     },
-    _a[Blockchains.BNC] = {
+    _a[Blockchains.BINANCE_SMART_CHAIN] = {
         broadcastRetry: 10,
         statusRetry: 10,
         confirmed: 60,

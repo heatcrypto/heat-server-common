@@ -9,7 +9,7 @@ export declare enum Blockchains {
     BITCOIN_TEST = 7,
     POLYGON = 8,
     FANTOM = 9,
-    BNC = 10,
+    BINANCE_SMART_CHAIN = 10,
     AVALANCHE = 11,
     ARBITRUM = 12,
     OPTIMISM = 13,

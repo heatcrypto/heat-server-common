@@ -20,6 +20,7 @@ import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from
 import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 import { CoreOptions } from "request";
+import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 export declare type CreateCoreOptions = (label: string) => CoreOptions;
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
@@ -31,25 +32,25 @@ export declare class ExplorerBase implements ExplorerApi {
     private logger;
     constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined, createCoreOptions?: CreateCoreOptions | undefined);
     private createContext;
-    status(blockchain?: Blockchains): Promise<ModuleResponse<NetworkStatusResult>>;
-    networkFee(blockchain: Blockchains): Promise<ModuleResponse<NetworkFeeResult>>;
-    tokenDiscovery(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string): Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
-    balanceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<BalanceLookupResult>>;
-    eventsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean): Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>>;
-    utxoLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<Array<UtxoLookupResult>>>;
-    broadcast(blockchain: Blockchains, assetType: AssetTypes, transactionHex: string): Promise<ModuleResponse<BroadcastResult>>;
-    transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string): Promise<ModuleResponse<TransactionStatusResult>>;
-    resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string): Promise<ModuleResponse<ResolveAliasResult>>;
-    reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string): Promise<ModuleResponse<ReverseResolveAliasResult>>;
-    estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string): Promise<ModuleResponse<EstimateGasResult>>;
-    nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string): Promise<ModuleResponse<NonceLookupResult>>;
-    publicKey(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<PublicKeyLookupResult>>;
-    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number): Promise<ModuleResponse<Array<TxidsLookupResult>>>;
-    utxoXpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string): Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
-    xpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, tokens: XpubLookupRequestTokens, type: XpubLookupRequestType, xpub: string, from: number, to: number): Promise<ModuleResponse<XpubLookupResult>>;
+    status(blockchain?: Blockchains, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NetworkStatusResult>>;
+    networkFee(blockchain: Blockchains, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NetworkFeeResult>>;
+    tokenDiscovery(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;
+    balanceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<BalanceLookupResult>>;
+    eventsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>>;
+    utxoLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<UtxoLookupResult>>>;
+    broadcast(blockchain: Blockchains, assetType: AssetTypes, transactionHex: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<BroadcastResult>>;
+    transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<TransactionStatusResult>>;
+    resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<ResolveAliasResult>>;
+    reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<ReverseResolveAliasResult>>;
+    estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<EstimateGasResult>>;
+    nonceLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NonceLookupResult>>;
+    publicKey(blockchain: Blockchains, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<PublicKeyLookupResult>>;
+    txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<TxidsLookupResult>>>;
+    utxoXpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
+    xpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, tokens: XpubLookupRequestTokens, type: XpubLookupRequestType, xpub: string, from: number, to: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<XpubLookupResult>>;
     /**
      * Custom endpoints.
      */
-    customHeatAccount(blockchain: Blockchains, addrXpub: string): Promise<ModuleResponse<CustomHeatAccountResult>>;
-    customFimkDgsGood(blockchain: Blockchains, goods: string, includeCounts?: boolean | undefined): Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
+    customHeatAccount(blockchain: Blockchains, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<CustomHeatAccountResult>>;
+    customFimkDgsGood(blockchain: Blockchains, goods: string, includeCounts?: boolean | undefined, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
 }

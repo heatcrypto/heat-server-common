@@ -71,7 +71,8 @@ var MonitoredRequestException = /** @class */ (function (_super) {
 }(Error));
 exports.MonitoredRequestException = MonitoredRequestException;
 var MonitoredRequest = /** @class */ (function () {
-    function MonitoredRequest(logger, prefix) {
+    function MonitoredRequest(logger, prefix, monitor) {
+        this.monitor = monitor;
         if ((0, lodash_1.isUndefined)(logger)) {
             if (DEBUG) {
                 this.logger = (0, logger_adapter_1.createLogger)(MonitoredRequest.name);
@@ -98,18 +99,23 @@ var MonitoredRequest = /** @class */ (function () {
      * @param requestObserver
      */
     MonitoredRequest.prototype.get = function (uri, options, allowedStatusCodes, requestObserver) {
+        var _a, _b;
         if (options === void 0) { options = {}; }
         if (allowedStatusCodes === void 0) { allowedStatusCodes = [200]; }
         return __awaiter(this, void 0, void 0, function () {
-            var id, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var id, requestId, getOptions, response;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         id = Date.now();
                         this.log("[".concat(id, "] GET ").concat(uri));
-                        return [4 /*yield*/, getAsync(uri, (0, lodash_1.assign)({}, MonitoredRequest.defaultGetOptions, options))];
+                        requestId = MonitoredRequest.requestId++;
+                        getOptions = (0, lodash_1.assign)({}, MonitoredRequest.defaultGetOptions, options);
+                        (_a = this.monitor) === null || _a === void 0 ? void 0 : _a.requestStart(uri, { get: getOptions }, requestId);
+                        return [4 /*yield*/, getAsync(uri, getOptions)];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
+                        (_b = this.monitor) === null || _b === void 0 ? void 0 : _b.requestEnd(uri, response.statusCode, requestId);
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
                             this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
                             throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
@@ -135,18 +141,23 @@ var MonitoredRequest = /** @class */ (function () {
      * @param requestObserver
      */
     MonitoredRequest.prototype.post = function (uri, options, allowedStatusCodes, requestObserver) {
+        var _a, _b;
         if (options === void 0) { options = {}; }
         if (allowedStatusCodes === void 0) { allowedStatusCodes = [200, 201, 202]; }
         return __awaiter(this, void 0, void 0, function () {
-            var id, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var id, requestId, postOptions, response;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         id = Date.now();
                         this.log("[".concat(id, "] POST ").concat(uri, " options=").concat((0, json_1.prettyPrint)(options)));
-                        return [4 /*yield*/, postAsync(uri, (0, lodash_1.assign)({}, MonitoredRequest.defaultPostOptions, options))];
+                        requestId = MonitoredRequest.requestId++;
+                        postOptions = (0, lodash_1.assign)({}, MonitoredRequest.defaultPostOptions, options);
+                        (_a = this.monitor) === null || _a === void 0 ? void 0 : _a.requestStart(uri, { post: postOptions }, requestId);
+                        return [4 /*yield*/, postAsync(uri, postOptions)];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
+                        (_b = this.monitor) === null || _b === void 0 ? void 0 : _b.requestEnd(uri, response.statusCode, requestId);
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
                             this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
                             throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
@@ -162,6 +173,7 @@ var MonitoredRequest = /** @class */ (function () {
             });
         });
     };
+    MonitoredRequest.requestId = 0;
     MonitoredRequest.defaultGetOptions = {};
     MonitoredRequest.defaultPostOptions = {};
     return MonitoredRequest;

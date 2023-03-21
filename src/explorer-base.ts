@@ -27,6 +27,7 @@ import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 import { CoreOptions } from "request";
 import { JsonRpc } from "./json-rpc";
 import { isFunction } from "lodash";
+import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 
 export type CreateCoreOptions = (label: string) => CoreOptions;
 
@@ -45,8 +46,8 @@ export class ExplorerBase implements ExplorerApi {
     this.logger = new PrefixLogger(logger, this.id)
   }
 
-  private createContext(label: string): CallContext {
-    const req = new MonitoredRequest(createLogger(), label);
+  private createContext(label: string, monitor?: MonitoredRequestMonitor): CallContext {
+    const req = new MonitoredRequest(createLogger(), label, monitor);
     const endpoint = `${this.protocol}://${this.host}`;
     const options = isFunction(this.createCoreOptions) ? this.createCoreOptions(label) : {}
     const jsonRpc = new JsonRpc(req, endpoint, options)
@@ -64,34 +65,37 @@ export class ExplorerBase implements ExplorerApi {
 
   status(
     blockchain?: Blockchains,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<NetworkStatusResult>> {
     const { networkStatus } = this.provider
     if (!networkStatus) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return networkStatus(this.createContext('Status'), { blockchain })
+    return networkStatus(this.createContext('Status', monitor), { blockchain })
   }
 
   networkFee(
     blockchain: Blockchains,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<NetworkFeeResult>> {
     const { networkFee } = this.provider
     if (!networkFee) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return networkFee(this.createContext('Fee'), { blockchain })
+    return networkFee(this.createContext('Fee', monitor), { blockchain })
   }
 
   tokenDiscovery(
     blockchain: Blockchains,
     assetType: AssetTypes,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<Array<TokenDiscoveryResult>>> {
     const { tokenDiscovery } = this.provider
     if (!tokenDiscovery) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return tokenDiscovery(this.createContext('Token'), {
+    return tokenDiscovery(this.createContext('Token', monitor), {
       blockchain, assetType, addrXpub
     })
   }
@@ -101,12 +105,13 @@ export class ExplorerBase implements ExplorerApi {
     assetType: AssetTypes,
     assetId: string,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<BalanceLookupResult>> {
     const { balanceLookup } = this.provider
     if (!balanceLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return balanceLookup(this.createContext('Balance'), {
+    return balanceLookup(this.createContext('Balance', monitor), {
       blockchain, assetType, assetId, addrXpub
     })
   }
@@ -119,12 +124,13 @@ export class ExplorerBase implements ExplorerApi {
     from: number,
     to: number,
     minimal?: boolean,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>> {
     const { eventLookup } = this.provider
     if (!eventLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return eventLookup(this.createContext('Event'), {
+    return eventLookup(this.createContext('Event', monitor), {
       blockchain,
       assetType,
       assetId,
@@ -140,12 +146,13 @@ export class ExplorerBase implements ExplorerApi {
     assetType: AssetTypes,
     assetId: string,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<Array<UtxoLookupResult>>> {
     const { utxoLookup } = this.provider
     if (!utxoLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return utxoLookup(this.createContext('Utxo'), {
+    return utxoLookup(this.createContext('Utxo', monitor), {
       blockchain,
       assetType,
       assetId,
@@ -157,12 +164,13 @@ export class ExplorerBase implements ExplorerApi {
     blockchain: Blockchains,
     assetType: AssetTypes,
     transactionHex: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<BroadcastResult>> {
     const { broadcast } = this.provider
     if (!broadcast) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return broadcast(this.createContext('Broadcast'), {
+    return broadcast(this.createContext('Broadcast', monitor), {
       blockchain,
       assetType,
       transactionHex
@@ -174,12 +182,13 @@ export class ExplorerBase implements ExplorerApi {
     assetType: AssetTypes,
     addrXpub: string,
     transactionId: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<TransactionStatusResult>> {
     const { transactionStatus } = this.provider
     if (!transactionStatus) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return transactionStatus(this.createContext('TxStatus'), {
+    return transactionStatus(this.createContext('TxStatus', monitor), {
       blockchain,
       assetType,
       addrXpub,
@@ -191,12 +200,13 @@ export class ExplorerBase implements ExplorerApi {
     blockchain: Blockchains,
     assetType: AssetTypes,
     alias: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<ResolveAliasResult>> {
     const { resolveAlias } = this.provider
     if (!resolveAlias) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return resolveAlias(this.createContext('Resolve'), {
+    return resolveAlias(this.createContext('Resolve', monitor), {
       blockchain,
       assetType,
       alias
@@ -207,12 +217,13 @@ export class ExplorerBase implements ExplorerApi {
     blockchain: Blockchains,
     assetType: AssetTypes,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<ReverseResolveAliasResult>> {
     const { reverseResolveAlias } = this.provider
     if (!reverseResolveAlias) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return reverseResolveAlias(this.createContext('Reverse'), {
+    return reverseResolveAlias(this.createContext('Reverse', monitor), {
       blockchain, assetType, addrXpub
     })
   }
@@ -226,12 +237,13 @@ export class ExplorerBase implements ExplorerApi {
     abi: string,
     from: string,
     gasLimit: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<EstimateGasResult>> {
     const { estimateGas } = this.provider
     if (!estimateGas) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return estimateGas(this.createContext('Estimate'), {
+    return estimateGas(this.createContext('Estimate', monitor), {
       blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit
     })
   }
@@ -241,12 +253,13 @@ export class ExplorerBase implements ExplorerApi {
     assetType: AssetTypes,
     assetId: string,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<NonceLookupResult>> {
     const { nonceLookup } = this.provider
     if (!nonceLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return nonceLookup(this.createContext('Nonce'), {
+    return nonceLookup(this.createContext('Nonce', monitor), {
       blockchain, assetType, assetId, addrXpub,
     })
   }
@@ -254,12 +267,13 @@ export class ExplorerBase implements ExplorerApi {
   publicKey(
     blockchain: Blockchains,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<PublicKeyLookupResult>> {
     const { publicKeyLookup } = this.provider
     if (!publicKeyLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return publicKeyLookup(this.createContext('PublicKey'), {
+    return publicKeyLookup(this.createContext('PublicKey', monitor), {
       blockchain, addrXpub
     })
   }
@@ -270,12 +284,13 @@ export class ExplorerBase implements ExplorerApi {
     assetId: string,
     addrXpubs: string[],
     to: number,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<Array<TxidsLookupResult>>> {
     const { txidsLookup } = this.provider
     if (!txidsLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return txidsLookup(this.createContext('Txids'), {
+    return txidsLookup(this.createContext('Txids', monitor), {
       blockchain,
       assetType,
       assetId,
@@ -290,12 +305,13 @@ export class ExplorerBase implements ExplorerApi {
     assetId: string,
     confirmed: boolean,
     xpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<Array<UtxoXpubLookupResult>>> {
     const { utxoXpubLookup } = this.provider
     if (!utxoXpubLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return utxoXpubLookup(this.createContext('Utxo xpub'), {
+    return utxoXpubLookup(this.createContext('Utxo xpub', monitor), {
       blockchain,
       assetType,
       assetId,
@@ -313,12 +329,13 @@ export class ExplorerBase implements ExplorerApi {
     xpub: string,
     from: number,
     to: number,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<XpubLookupResult>> {
     const { xpubLookup } = this.provider
     if (!xpubLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return xpubLookup(this.createContext('Xpub'), {
+    return xpubLookup(this.createContext('Xpub', monitor), {
       blockchain,
       assetType,
       assetId,
@@ -337,12 +354,13 @@ export class ExplorerBase implements ExplorerApi {
   customHeatAccount(
     blockchain: Blockchains,
     addrXpub: string,
+    monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<CustomHeatAccountResult>> {
     const { customHeatAccount } = this.provider
     if (!customHeatAccount) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return customHeatAccount(this.createContext('HeatAccount'), {
+    return customHeatAccount(this.createContext('HeatAccount', monitor), {
       blockchain,
       addrXpub
     })
@@ -352,12 +370,13 @@ export class ExplorerBase implements ExplorerApi {
     blockchain: Blockchains, 
     goods: string, 
     includeCounts?: boolean | undefined,
+    monitor?: MonitoredRequestMonitor
   ) : Promise<ModuleResponse<CustomFimkDgsGoodResult>> {
     const { customFimkDgsGood } = this.provider
     if (!customFimkDgsGood) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return customFimkDgsGood(this.createContext('FimkDgsGood'), {
+    return customFimkDgsGood(this.createContext('FimkDgsGood', monitor), {
       blockchain,
       goods,
       includeCounts: includeCounts == true,

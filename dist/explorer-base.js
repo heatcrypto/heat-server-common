@@ -17,8 +17,8 @@ var ExplorerBase = /** @class */ (function () {
         var logger = (0, logger_adapter_1.createLogger)();
         this.logger = new prefix_logger_1.PrefixLogger(logger, this.id);
     }
-    ExplorerBase.prototype.createContext = function (label) {
-        var req = new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label);
+    ExplorerBase.prototype.createContext = function (label, monitor) {
+        var req = new monitored_request_1.MonitoredRequest((0, logger_adapter_1.createLogger)(), label, monitor);
         var endpoint = "".concat(this.protocol, "://").concat(this.host);
         var options = (0, lodash_1.isFunction)(this.createCoreOptions) ? this.createCoreOptions(label) : {};
         var jsonRpc = new json_rpc_1.JsonRpc(req, endpoint, options);
@@ -33,49 +33,49 @@ var ExplorerBase = /** @class */ (function () {
         };
         return context;
     };
-    ExplorerBase.prototype.status = function (blockchain) {
+    ExplorerBase.prototype.status = function (blockchain, monitor) {
         var networkStatus = this.provider.networkStatus;
         if (!networkStatus) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return networkStatus(this.createContext('Status'), { blockchain: blockchain });
+        return networkStatus(this.createContext('Status', monitor), { blockchain: blockchain });
     };
-    ExplorerBase.prototype.networkFee = function (blockchain) {
+    ExplorerBase.prototype.networkFee = function (blockchain, monitor) {
         var networkFee = this.provider.networkFee;
         if (!networkFee) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return networkFee(this.createContext('Fee'), { blockchain: blockchain });
+        return networkFee(this.createContext('Fee', monitor), { blockchain: blockchain });
     };
-    ExplorerBase.prototype.tokenDiscovery = function (blockchain, assetType, addrXpub) {
+    ExplorerBase.prototype.tokenDiscovery = function (blockchain, assetType, addrXpub, monitor) {
         var tokenDiscovery = this.provider.tokenDiscovery;
         if (!tokenDiscovery) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return tokenDiscovery(this.createContext('Token'), {
+        return tokenDiscovery(this.createContext('Token', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.balanceLookup = function (blockchain, assetType, assetId, addrXpub) {
+    ExplorerBase.prototype.balanceLookup = function (blockchain, assetType, assetId, addrXpub, monitor) {
         var balanceLookup = this.provider.balanceLookup;
         if (!balanceLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return balanceLookup(this.createContext('Balance'), {
+        return balanceLookup(this.createContext('Balance', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.eventsLookup = function (blockchain, assetType, assetId, addrXpub, from, to, minimal) {
+    ExplorerBase.prototype.eventsLookup = function (blockchain, assetType, assetId, addrXpub, from, to, minimal, monitor) {
         var eventLookup = this.provider.eventLookup;
         if (!eventLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return eventLookup(this.createContext('Event'), {
+        return eventLookup(this.createContext('Event', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
@@ -85,69 +85,69 @@ var ExplorerBase = /** @class */ (function () {
             minimal: minimal,
         });
     };
-    ExplorerBase.prototype.utxoLookup = function (blockchain, assetType, assetId, addrXpub) {
+    ExplorerBase.prototype.utxoLookup = function (blockchain, assetType, assetId, addrXpub, monitor) {
         var utxoLookup = this.provider.utxoLookup;
         if (!utxoLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return utxoLookup(this.createContext('Utxo'), {
+        return utxoLookup(this.createContext('Utxo', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.broadcast = function (blockchain, assetType, transactionHex) {
+    ExplorerBase.prototype.broadcast = function (blockchain, assetType, transactionHex, monitor) {
         var broadcast = this.provider.broadcast;
         if (!broadcast) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return broadcast(this.createContext('Broadcast'), {
+        return broadcast(this.createContext('Broadcast', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             transactionHex: transactionHex
         });
     };
-    ExplorerBase.prototype.transactionStatus = function (blockchain, assetType, addrXpub, transactionId) {
+    ExplorerBase.prototype.transactionStatus = function (blockchain, assetType, addrXpub, transactionId, monitor) {
         var transactionStatus = this.provider.transactionStatus;
         if (!transactionStatus) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return transactionStatus(this.createContext('TxStatus'), {
+        return transactionStatus(this.createContext('TxStatus', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             addrXpub: addrXpub,
             transactionId: transactionId,
         });
     };
-    ExplorerBase.prototype.resolveAlias = function (blockchain, assetType, alias) {
+    ExplorerBase.prototype.resolveAlias = function (blockchain, assetType, alias, monitor) {
         var resolveAlias = this.provider.resolveAlias;
         if (!resolveAlias) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return resolveAlias(this.createContext('Resolve'), {
+        return resolveAlias(this.createContext('Resolve', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             alias: alias
         });
     };
-    ExplorerBase.prototype.reverseResolveAlias = function (blockchain, assetType, addrXpub) {
+    ExplorerBase.prototype.reverseResolveAlias = function (blockchain, assetType, addrXpub, monitor) {
         var reverseResolveAlias = this.provider.reverseResolveAlias;
         if (!reverseResolveAlias) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return reverseResolveAlias(this.createContext('Reverse'), {
+        return reverseResolveAlias(this.createContext('Reverse', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit) {
+    ExplorerBase.prototype.estimateGas = function (blockchain, assetType, assetId, addrXpub, value, abi, from, gasLimit, monitor) {
         var estimateGas = this.provider.estimateGas;
         if (!estimateGas) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return estimateGas(this.createContext('Estimate'), {
+        return estimateGas(this.createContext('Estimate', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
@@ -158,34 +158,34 @@ var ExplorerBase = /** @class */ (function () {
             gasLimit: gasLimit
         });
     };
-    ExplorerBase.prototype.nonceLookup = function (blockchain, assetType, assetId, addrXpub) {
+    ExplorerBase.prototype.nonceLookup = function (blockchain, assetType, assetId, addrXpub, monitor) {
         var nonceLookup = this.provider.nonceLookup;
         if (!nonceLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return nonceLookup(this.createContext('Nonce'), {
+        return nonceLookup(this.createContext('Nonce', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
             addrXpub: addrXpub,
         });
     };
-    ExplorerBase.prototype.publicKey = function (blockchain, addrXpub) {
+    ExplorerBase.prototype.publicKey = function (blockchain, addrXpub, monitor) {
         var publicKeyLookup = this.provider.publicKeyLookup;
         if (!publicKeyLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return publicKeyLookup(this.createContext('PublicKey'), {
+        return publicKeyLookup(this.createContext('PublicKey', monitor), {
             blockchain: blockchain,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpubs, to) {
+    ExplorerBase.prototype.txidsLookup = function (blockchain, assetType, assetId, addrXpubs, to, monitor) {
         var txidsLookup = this.provider.txidsLookup;
         if (!txidsLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return txidsLookup(this.createContext('Txids'), {
+        return txidsLookup(this.createContext('Txids', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
@@ -193,12 +193,12 @@ var ExplorerBase = /** @class */ (function () {
             to: to,
         });
     };
-    ExplorerBase.prototype.utxoXpubLookup = function (blockchain, assetType, assetId, confirmed, xpub) {
+    ExplorerBase.prototype.utxoXpubLookup = function (blockchain, assetType, assetId, confirmed, xpub, monitor) {
         var utxoXpubLookup = this.provider.utxoXpubLookup;
         if (!utxoXpubLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return utxoXpubLookup(this.createContext('Utxo xpub'), {
+        return utxoXpubLookup(this.createContext('Utxo xpub', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
@@ -206,12 +206,12 @@ var ExplorerBase = /** @class */ (function () {
             xpub: xpub,
         });
     };
-    ExplorerBase.prototype.xpubLookup = function (blockchain, assetType, assetId, tokens, type, xpub, from, to) {
+    ExplorerBase.prototype.xpubLookup = function (blockchain, assetType, assetId, tokens, type, xpub, from, to, monitor) {
         var xpubLookup = this.provider.xpubLookup;
         if (!xpubLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return xpubLookup(this.createContext('Xpub'), {
+        return xpubLookup(this.createContext('Xpub', monitor), {
             blockchain: blockchain,
             assetType: assetType,
             assetId: assetId,
@@ -225,22 +225,22 @@ var ExplorerBase = /** @class */ (function () {
     /**
      * Custom endpoints.
      */
-    ExplorerBase.prototype.customHeatAccount = function (blockchain, addrXpub) {
+    ExplorerBase.prototype.customHeatAccount = function (blockchain, addrXpub, monitor) {
         var customHeatAccount = this.provider.customHeatAccount;
         if (!customHeatAccount) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return customHeatAccount(this.createContext('HeatAccount'), {
+        return customHeatAccount(this.createContext('HeatAccount', monitor), {
             blockchain: blockchain,
             addrXpub: addrXpub
         });
     };
-    ExplorerBase.prototype.customFimkDgsGood = function (blockchain, goods, includeCounts) {
+    ExplorerBase.prototype.customFimkDgsGood = function (blockchain, goods, includeCounts, monitor) {
         var customFimkDgsGood = this.provider.customFimkDgsGood;
         if (!customFimkDgsGood) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return customFimkDgsGood(this.createContext('FimkDgsGood'), {
+        return customFimkDgsGood(this.createContext('FimkDgsGood', monitor), {
             blockchain: blockchain,
             goods: goods,
             includeCounts: includeCounts == true,

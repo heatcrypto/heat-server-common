@@ -1,13 +1,16 @@
-import { CoreOptions } from 'request';
-import { LoggerService } from './types/logger.interface';
+import { CoreOptions } from "request";
+import { LoggerService } from "./types/logger.interface";
+import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 export declare class MonitoredRequestException extends Error {
     constructor(reason: string);
 }
 export declare class MonitoredRequest {
+    private monitor?;
     private logger;
+    private static requestId;
     static defaultGetOptions: CoreOptions;
     static defaultPostOptions: CoreOptions;
-    constructor(logger?: LoggerService, prefix?: string);
+    constructor(logger?: LoggerService, prefix?: string, monitor?: MonitoredRequestMonitor | undefined);
     log(message: string): void;
     /**
      * Performs an HTTP GET request.

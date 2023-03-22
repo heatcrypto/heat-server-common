@@ -18,6 +18,7 @@ __exportStar(require("./explorer-base"), exports);
 __exportStar(require("./json"), exports);
 __exportStar(require("./module-response"), exports);
 __exportStar(require("./monitored-request"), exports);
+__exportStar(require("./monitored-request-monitor"), exports);
 __exportStar(require("./prefix-logger"), exports);
 __exportStar(require("./rate_limiter.class"), exports);
 __exportStar(require("./types/alias_lookup.interface"), exports);

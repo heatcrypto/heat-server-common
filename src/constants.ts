@@ -26,6 +26,9 @@ export enum Blockchains {
   FILECOIN = 22,
   POLKADOT = 23,
   KUSAME = 24,
+  ETHEREUM_GOERLI = 25,
+  POLYGON_MUMBAI = 26,
+  AVALANCHE_FUJI = 27,
 }
 
 export function txnIsConfirmed(blockchain: Blockchains, confirmations: number) {
@@ -98,14 +101,16 @@ export interface BlockchainInfo {
   feeBlocks: number;
 }
 
+const evmInfo: BlockchainInfo = {
+  broadcastRetry: 10,
+  statusRetry: 10,
+  confirmed: 60,
+  blockTime: 20,
+  feeBlocks: 3,
+}
+
 export const BlockchainConfig: { [key: number]: BlockchainInfo } = {
-  [Blockchains.ETHEREUM]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
+  [Blockchains.ETHEREUM]:evmInfo,
   [Blockchains.BITCOIN]: {
     broadcastRetry: 10,
     statusRetry: 10,
@@ -155,48 +160,12 @@ export const BlockchainConfig: { [key: number]: BlockchainInfo } = {
     blockTime: 45,
     feeBlocks: 1,
   },
-  [Blockchains.POLYGON]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.FANTOM]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.BINANCE_SMART_CHAIN]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.AVALANCHE]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.ARBITRUM]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.OPTIMISM]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
+  [Blockchains.POLYGON]: evmInfo,
+  [Blockchains.FANTOM]: evmInfo,
+  [Blockchains.BINANCE_SMART_CHAIN]: evmInfo,
+  [Blockchains.AVALANCHE]: evmInfo,
+  [Blockchains.ARBITRUM]: evmInfo,
+  [Blockchains.OPTIMISM]: evmInfo,
   [Blockchains.SOLANA]: {
     broadcastRetry: 10,
     statusRetry: 10,
@@ -204,41 +173,11 @@ export const BlockchainConfig: { [key: number]: BlockchainInfo } = {
     blockTime: 20,
     feeBlocks: 3,
   },
-  [Blockchains.GNOSIS]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.CELO]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.APTOS]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.MOONBEAM]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
-  [Blockchains.HARMONY]: {
-    broadcastRetry: 10,
-    statusRetry: 10,
-    confirmed: 60,
-    blockTime: 20,
-    feeBlocks: 3,
-  },
+  [Blockchains.GNOSIS]: evmInfo,
+  [Blockchains.CELO]: evmInfo,
+  [Blockchains.APTOS]: evmInfo,
+  [Blockchains.MOONBEAM]: evmInfo,
+  [Blockchains.HARMONY]: evmInfo,
   [Blockchains.TRON]: {
     broadcastRetry: 10,
     statusRetry: 10,

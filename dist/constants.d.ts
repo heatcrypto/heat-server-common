@@ -23,7 +23,10 @@ export declare enum Blockchains {
     SYSCOIN = 21,
     FILECOIN = 22,
     POLKADOT = 23,
-    KUSAME = 24
+    KUSAME = 24,
+    ETHEREUM_GOERLI = 25,
+    POLYGON_MUMBAI = 26,
+    AVALANCHE_FUJI = 27
 }
 export declare function txnIsConfirmed(blockchain: Blockchains, confirmations: number): boolean;
 export declare enum SourceTypes {

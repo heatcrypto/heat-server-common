@@ -31,6 +31,9 @@ var Blockchains;
     Blockchains[Blockchains["FILECOIN"] = 22] = "FILECOIN";
     Blockchains[Blockchains["POLKADOT"] = 23] = "POLKADOT";
     Blockchains[Blockchains["KUSAME"] = 24] = "KUSAME";
+    Blockchains[Blockchains["ETHEREUM_GOERLI"] = 25] = "ETHEREUM_GOERLI";
+    Blockchains[Blockchains["POLYGON_MUMBAI"] = 26] = "POLYGON_MUMBAI";
+    Blockchains[Blockchains["AVALANCHE_FUJI"] = 27] = "AVALANCHE_FUJI";
 })(Blockchains = exports.Blockchains || (exports.Blockchains = {}));
 function txnIsConfirmed(blockchain, confirmations) {
     var config = exports.BlockchainConfig[blockchain];
@@ -93,14 +96,15 @@ var QuoteCurrencies;
     QuoteCurrencies[QuoteCurrencies["QUOTE_BTC"] = 3] = "QUOTE_BTC";
 })(QuoteCurrencies = exports.QuoteCurrencies || (exports.QuoteCurrencies = {}));
 exports.NULL = '0';
+var evmInfo = {
+    broadcastRetry: 10,
+    statusRetry: 10,
+    confirmed: 60,
+    blockTime: 20,
+    feeBlocks: 3,
+};
 exports.BlockchainConfig = (_a = {},
-    _a[Blockchains.ETHEREUM] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
+    _a[Blockchains.ETHEREUM] = evmInfo,
     _a[Blockchains.BITCOIN] = {
         broadcastRetry: 10,
         statusRetry: 10,
@@ -150,48 +154,12 @@ exports.BlockchainConfig = (_a = {},
         blockTime: 45,
         feeBlocks: 1,
     },
-    _a[Blockchains.POLYGON] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.FANTOM] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.BINANCE_SMART_CHAIN] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.AVALANCHE] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.ARBITRUM] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.OPTIMISM] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
+    _a[Blockchains.POLYGON] = evmInfo,
+    _a[Blockchains.FANTOM] = evmInfo,
+    _a[Blockchains.BINANCE_SMART_CHAIN] = evmInfo,
+    _a[Blockchains.AVALANCHE] = evmInfo,
+    _a[Blockchains.ARBITRUM] = evmInfo,
+    _a[Blockchains.OPTIMISM] = evmInfo,
     _a[Blockchains.SOLANA] = {
         broadcastRetry: 10,
         statusRetry: 10,
@@ -199,41 +167,11 @@ exports.BlockchainConfig = (_a = {},
         blockTime: 20,
         feeBlocks: 3,
     },
-    _a[Blockchains.GNOSIS] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.CELO] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.APTOS] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.MOONBEAM] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
-    _a[Blockchains.HARMONY] = {
-        broadcastRetry: 10,
-        statusRetry: 10,
-        confirmed: 60,
-        blockTime: 20,
-        feeBlocks: 3,
-    },
+    _a[Blockchains.GNOSIS] = evmInfo,
+    _a[Blockchains.CELO] = evmInfo,
+    _a[Blockchains.APTOS] = evmInfo,
+    _a[Blockchains.MOONBEAM] = evmInfo,
+    _a[Blockchains.HARMONY] = evmInfo,
     _a[Blockchains.TRON] = {
         broadcastRetry: 10,
         statusRetry: 10,

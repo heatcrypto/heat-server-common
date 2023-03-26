@@ -29,6 +29,7 @@ export enum Blockchains {
   ETHEREUM_GOERLI = 25,
   POLYGON_MUMBAI = 26,
   AVALANCHE_FUJI = 27,
+  DOGECOIN = 28,
 }
 
 export function txnIsConfirmed(blockchain: Blockchains, confirmations: number) {

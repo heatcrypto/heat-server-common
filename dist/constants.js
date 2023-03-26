@@ -34,6 +34,7 @@ var Blockchains;
     Blockchains[Blockchains["ETHEREUM_GOERLI"] = 25] = "ETHEREUM_GOERLI";
     Blockchains[Blockchains["POLYGON_MUMBAI"] = 26] = "POLYGON_MUMBAI";
     Blockchains[Blockchains["AVALANCHE_FUJI"] = 27] = "AVALANCHE_FUJI";
+    Blockchains[Blockchains["DOGECOIN"] = 28] = "DOGECOIN";
 })(Blockchains = exports.Blockchains || (exports.Blockchains = {}));
 function txnIsConfirmed(blockchain, confirmations) {
     var config = exports.BlockchainConfig[blockchain];

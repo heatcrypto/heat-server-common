@@ -86,7 +86,7 @@ export enum AssetTypes {
   TOKEN_TYPE_1 = 1,
 }
 
-export declare enum QuoteCurrencies {
+export enum QuoteCurrencies {
   QUOTE_USD = 1,
   QUOTE_EUR = 2,
   QUOTE_BTC = 3,

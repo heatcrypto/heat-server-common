@@ -1,7 +1,7 @@
 "use strict";
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlockchainConfig = exports.NULL = exports.QuoteCurrencies = exports.AssetTypes = exports.ExplorerTypes = exports.EventTypes = exports.SourceTypes = exports.txnIsConfirmed = exports.Blockchains = void 0;
+exports.BlockchainConfig = exports.NULL = exports.AssetTypes = exports.ExplorerTypes = exports.EventTypes = exports.SourceTypes = exports.txnIsConfirmed = exports.Blockchains = void 0;
 // Must be in sync with
 // https://github.com/heatcrypto/coin-registry/blob/master/registry/chains.json
 var Blockchains;
@@ -90,12 +90,6 @@ var AssetTypes;
     AssetTypes[AssetTypes["NATIVE"] = 0] = "NATIVE";
     AssetTypes[AssetTypes["TOKEN_TYPE_1"] = 1] = "TOKEN_TYPE_1";
 })(AssetTypes = exports.AssetTypes || (exports.AssetTypes = {}));
-var QuoteCurrencies;
-(function (QuoteCurrencies) {
-    QuoteCurrencies[QuoteCurrencies["QUOTE_USD"] = 1] = "QUOTE_USD";
-    QuoteCurrencies[QuoteCurrencies["QUOTE_EUR"] = 2] = "QUOTE_EUR";
-    QuoteCurrencies[QuoteCurrencies["QUOTE_BTC"] = 3] = "QUOTE_BTC";
-})(QuoteCurrencies = exports.QuoteCurrencies || (exports.QuoteCurrencies = {}));
 exports.NULL = '0';
 var evmInfo = {
     broadcastRetry: 10,

@@ -208,4 +208,11 @@ exports.BlockchainConfig = (_a = {},
         blockTime: 20,
         feeBlocks: 3,
     },
+    _a[Blockchains.DOGECOIN] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 5,
+        blockTime: 60,
+        feeBlocks: 2,
+    },
     _a);

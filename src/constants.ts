@@ -214,5 +214,12 @@ export const BlockchainConfig: { [key: number]: BlockchainInfo } = {
     blockTime: 20,
     feeBlocks: 3,
   },
+  [Blockchains.DOGECOIN]: {
+    broadcastRetry: 10,
+    statusRetry: 10,
+    confirmed: 5,
+    blockTime: 60,
+    feeBlocks: 2,
+  },
 };
 

@@ -20,6 +20,11 @@ export interface TransactionStatusParam {
    * Unique transaction identifier
    */
   transactionId: string;
+
+  /**
+   * If true this also returns the transaction as a HEX string
+   */
+  includeHex?: boolean  
 }
 
 export interface TransactionStatusResult {
@@ -36,7 +41,7 @@ export interface TransactionStatusResult {
   isAccepted: boolean;
 
   /**
-   * Certain blockchains return the transaction in hexadecimal form
+   * Certain blockchains return the transaction in hexadecimal form, on request
    */
   hex?: string | null;
 }

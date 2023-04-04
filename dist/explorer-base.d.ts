@@ -39,7 +39,7 @@ export declare class ExplorerBase implements ExplorerApi {
     eventsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>>;
     utxoLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<UtxoLookupResult>>>;
     broadcast(blockchain: Blockchains, assetType: AssetTypes, transactionHex: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<BroadcastResult>>;
-    transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<TransactionStatusResult>>;
+    transactionStatus(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string, includeHex: boolean, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<TransactionStatusResult>>;
     resolveAlias(blockchain: Blockchains, assetType: AssetTypes, alias: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<ReverseResolveAliasResult>>;
     estimateGas(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<EstimateGasResult>>;

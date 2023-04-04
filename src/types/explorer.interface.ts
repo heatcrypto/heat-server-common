@@ -88,6 +88,7 @@ export interface ExplorerApi {
     assetType: AssetTypes,
     addrXpub: string,
     transactionId: string,
+    includeHex: boolean,
   ) => Promise<ModuleResponse<TransactionStatusResult>>;
 
   resolveAlias?: (

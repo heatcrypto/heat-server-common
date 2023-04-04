@@ -108,7 +108,7 @@ var ExplorerBase = /** @class */ (function () {
             transactionHex: transactionHex
         });
     };
-    ExplorerBase.prototype.transactionStatus = function (blockchain, assetType, addrXpub, transactionId, monitor) {
+    ExplorerBase.prototype.transactionStatus = function (blockchain, assetType, addrXpub, transactionId, includeHex, monitor) {
         var transactionStatus = this.provider.transactionStatus;
         if (!transactionStatus) {
             return Promise.resolve({ error: 'Not implemented' });
@@ -118,6 +118,7 @@ var ExplorerBase = /** @class */ (function () {
             assetType: assetType,
             addrXpub: addrXpub,
             transactionId: transactionId,
+            includeHex: includeHex,
         });
     };
     ExplorerBase.prototype.resolveAlias = function (blockchain, assetType, alias, monitor) {

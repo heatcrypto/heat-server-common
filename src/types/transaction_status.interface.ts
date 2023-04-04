@@ -24,7 +24,7 @@ export interface TransactionStatusParam {
   /**
    * If true this also returns the transaction as a HEX string
    */
-  includeHex?: boolean  
+  includeHex?: boolean;
 }
 
 export interface TransactionStatusResult {

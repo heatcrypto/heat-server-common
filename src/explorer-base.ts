@@ -182,6 +182,7 @@ export class ExplorerBase implements ExplorerApi {
     assetType: AssetTypes,
     addrXpub: string,
     transactionId: string,
+    includeHex: boolean,
     monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<TransactionStatusResult>> {
     const { transactionStatus } = this.provider
@@ -193,6 +194,7 @@ export class ExplorerBase implements ExplorerApi {
       assetType,
       addrXpub,
       transactionId,
+      includeHex,
     })
   }
 

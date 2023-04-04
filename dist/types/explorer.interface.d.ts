@@ -40,7 +40,7 @@ export interface ExplorerApi {
     eventsLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, from: number, to: number, minimal?: boolean) => Promise<ModuleResponse<Array<EventLookupResult> | Array<string>>>;
     utxoLookup?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string) => Promise<ModuleResponse<Array<UtxoLookupResult>>>;
     broadcast?: (blockchain: Blockchains, assetType: AssetTypes, transactionHex: string) => Promise<ModuleResponse<BroadcastResult>>;
-    transactionStatus?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string) => Promise<ModuleResponse<TransactionStatusResult>>;
+    transactionStatus?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, transactionId: string, includeHex: boolean) => Promise<ModuleResponse<TransactionStatusResult>>;
     resolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, alias: string) => Promise<ModuleResponse<ResolveAliasResult>>;
     reverseResolveAlias?: (blockchain: Blockchains, assetType: AssetTypes, addrXpub: string) => Promise<ModuleResponse<ReverseResolveAliasResult>>;
     estimateGas?: (blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpub: string, value: string, abi: string, from: string, gasLimit: string) => Promise<ModuleResponse<EstimateGasResult>>;

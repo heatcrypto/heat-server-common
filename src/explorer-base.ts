@@ -355,11 +355,11 @@ export class ExplorerBase implements ExplorerApi {
     addrXpub: string,
     monitor?: MonitoredRequestMonitor
   ): Promise<ModuleResponse<AddressExistsLookupResult>> {
-    const { addressExists } = this.provider
-    if (!addressExists) {
+    const { addressExistsLookup } = this.provider
+    if (!addressExistsLookup) {
       return Promise.resolve({ error: 'Not implemented' })
     }
-    return addressExists(this.createContext('Address exists', monitor), {
+    return addressExistsLookup(this.createContext('Address exists', monitor), {
       blockchain,
       addrXpub,
     })

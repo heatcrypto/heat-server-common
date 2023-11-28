@@ -224,11 +224,11 @@ var ExplorerBase = /** @class */ (function () {
         });
     };
     ExplorerBase.prototype.addressExistsLookup = function (blockchain, addrXpub, monitor) {
-        var addressExists = this.provider.addressExists;
-        if (!addressExists) {
+        var addressExistsLookup = this.provider.addressExistsLookup;
+        if (!addressExistsLookup) {
             return Promise.resolve({ error: 'Not implemented' });
         }
-        return addressExists(this.createContext('Address exists', monitor), {
+        return addressExistsLookup(this.createContext('Address exists', monitor), {
             blockchain: blockchain,
             addrXpub: addrXpub,
         });

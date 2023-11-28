@@ -35,7 +35,7 @@ export interface ModuleProvider {
     txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
     utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
     xpubLookup?: (context: CallContext, param: XpubLookupParam) => Promise<ModuleResponse<XpubLookupResult>>;
-    addressExists?: (context: CallContext, param: AddressExistsLookupParam) => Promise<ModuleResponse<AddressExistsLookupResult>>;
+    addressExistsLookup?: (context: CallContext, param: AddressExistsLookupParam) => Promise<ModuleResponse<AddressExistsLookupResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
     customFimkDgsGood?: (context: CallContext, param: CustomFimkDgsGoodParam) => Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
 }

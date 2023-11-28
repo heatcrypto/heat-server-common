@@ -28,6 +28,7 @@ import { CoreOptions } from "request";
 import { JsonRpc } from "./json-rpc";
 import { isFunction } from "lodash";
 import { MonitoredRequestMonitor } from "./monitored-request-monitor";
+import { AddressExistsLookupResult } from "./types/address_exists_lookup.interface";
 
 export type CreateCoreOptions = (label: string) => CoreOptions;
 
@@ -346,6 +347,21 @@ export class ExplorerBase implements ExplorerApi {
       xpub,
       from,
       to,
+    })
+  }
+
+  addressExistsLookup(
+    blockchain: Blockchains,
+    addrXpub: string,
+    monitor?: MonitoredRequestMonitor
+  ): Promise<ModuleResponse<AddressExistsLookupResult>> {
+    const { addressExists } = this.provider
+    if (!addressExists) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }
+    return addressExists(this.createContext('Address exists', monitor), {
+      blockchain,
+      addrXpub,
     })
   }
 

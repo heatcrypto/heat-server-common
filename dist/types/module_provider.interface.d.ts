@@ -17,6 +17,7 @@ import { TxidsLookupParam, TxidsLookupResult } from "./txids_lookup.interface";
 import { UtxoXpubLookupParam, UtxoXpubLookupResult } from "./utxo_xpub_lookup.interface";
 import { XpubLookupParam, XpubLookupResult } from "./xpub_lookup.interface";
 import { CustomFimkDgsGoodParam, CustomFimkDgsGoodResult } from "./custom_fimk.interface";
+import { AddressExistsLookupParam, AddressExistsLookupResult } from "./address_exists_lookup.interface";
 export interface ModuleProvider {
     balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>>;
     broadcast?: (context: CallContext, param: BroadcastParam) => Promise<ModuleResponse<BroadcastResult>>;
@@ -34,6 +35,7 @@ export interface ModuleProvider {
     txidsLookup?: (context: CallContext, param: TxidsLookupParam) => Promise<ModuleResponse<Array<TxidsLookupResult>>>;
     utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
     xpubLookup?: (context: CallContext, param: XpubLookupParam) => Promise<ModuleResponse<XpubLookupResult>>;
+    addressExists?: (context: CallContext, param: AddressExistsLookupParam) => Promise<ModuleResponse<AddressExistsLookupResult>>;
     customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>;
     customFimkDgsGood?: (context: CallContext, param: CustomFimkDgsGoodParam) => Promise<ModuleResponse<CustomFimkDgsGoodResult>>;
 }

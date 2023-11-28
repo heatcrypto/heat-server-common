@@ -223,6 +223,16 @@ var ExplorerBase = /** @class */ (function () {
             to: to,
         });
     };
+    ExplorerBase.prototype.addressExistsLookup = function (blockchain, addrXpub, monitor) {
+        var addressExists = this.provider.addressExists;
+        if (!addressExists) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return addressExists(this.createContext('Address exists', monitor), {
+            blockchain: blockchain,
+            addrXpub: addrXpub,
+        });
+    };
     /**
      * Custom endpoints.
      */

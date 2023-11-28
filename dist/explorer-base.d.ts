@@ -21,6 +21,7 @@ import { UtxoXpubLookupResult } from "./types/utxo_xpub_lookup.interface";
 import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 import { CoreOptions } from "request";
 import { MonitoredRequestMonitor } from "./monitored-request-monitor";
+import { AddressExistsLookupResult } from "./types/address_exists_lookup.interface";
 export declare type CreateCoreOptions = (label: string) => CoreOptions;
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
@@ -48,6 +49,7 @@ export declare class ExplorerBase implements ExplorerApi {
     txidsLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, addrXpubs: string[], to: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<TxidsLookupResult>>>;
     utxoXpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, confirmed: boolean, xpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>;
     xpubLookup(blockchain: Blockchains, assetType: AssetTypes, assetId: string, tokens: XpubLookupRequestTokens, type: XpubLookupRequestType, xpub: string, from: number, to: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<XpubLookupResult>>;
+    addressExistsLookup(blockchain: Blockchains, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<AddressExistsLookupResult>>;
     /**
      * Custom endpoints.
      */

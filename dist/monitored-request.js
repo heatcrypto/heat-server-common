@@ -60,7 +60,7 @@ var util_1 = require("util");
 var logger_adapter_1 = require("./logger-adapter");
 var getAsync = (0, util_1.promisify)(request_1.get);
 var postAsync = (0, util_1.promisify)(request_1.post);
-var DEBUG = true;
+var DEBUG = false;
 var COMPRESS = true;
 var MonitoredRequestException = /** @class */ (function (_super) {
     __extends(MonitoredRequestException, _super);

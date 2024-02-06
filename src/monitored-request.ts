@@ -10,7 +10,7 @@ import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 const getAsync = promisify(get);
 const postAsync = promisify(post);
 
-const DEBUG = true;
+const DEBUG = false;
 const COMPRESS = true;
 
 export class MonitoredRequestException extends Error {

@@ -35,6 +35,7 @@ var Blockchains;
     Blockchains[Blockchains["POLYGON_MUMBAI"] = 26] = "POLYGON_MUMBAI";
     Blockchains[Blockchains["AVALANCHE_FUJI"] = 27] = "AVALANCHE_FUJI";
     Blockchains[Blockchains["DOGECOIN"] = 28] = "DOGECOIN";
+    Blockchains[Blockchains["QUBIC"] = 29] = "QUBIC";
 })(Blockchains = exports.Blockchains || (exports.Blockchains = {}));
 function txnIsConfirmed(blockchain, confirmations) {
     var config = exports.BlockchainConfig[blockchain];
@@ -274,5 +275,12 @@ exports.BlockchainConfig = (_a = {},
         confirmed: 5,
         blockTime: 60,
         feeBlocks: 2,
+    },
+    _a[Blockchains.QUBIC] = {
+        broadcastRetry: 10,
+        statusRetry: 10,
+        confirmed: 5,
+        blockTime: 5,
+        feeBlocks: 1,
     },
     _a);

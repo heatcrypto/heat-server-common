@@ -27,7 +27,8 @@ export declare enum Blockchains {
     ETHEREUM_GOERLI = 25,
     POLYGON_MUMBAI = 26,
     AVALANCHE_FUJI = 27,
-    DOGECOIN = 28
+    DOGECOIN = 28,
+    QUBIC = 29
 }
 export declare function txnIsConfirmed(blockchain: Blockchains, confirmations: number): boolean;
 export declare enum SourceTypes {

@@ -30,6 +30,7 @@ export enum Blockchains {
   POLYGON_MUMBAI = 26,
   AVALANCHE_FUJI = 27,
   DOGECOIN = 28,
+  QUBIC = 29,
 }
 
 export function txnIsConfirmed(blockchain: Blockchains, confirmations: number) {
@@ -281,5 +282,12 @@ export const BlockchainConfig: { [key: number]: BlockchainInfo } = {
     blockTime: 60,
     feeBlocks: 2,
   },
+  [Blockchains.QUBIC]: {
+    broadcastRetry: 10,
+    statusRetry: 10,
+    confirmed: 5,
+    blockTime: 5,
+    feeBlocks: 1,
+  },  
 };
 

@@ -34,4 +34,8 @@ export interface BroadcastResult {
    */
   transactionId?: string;
 
+  /**
+   * A free form data structure which allows custom broadcast results.
+   */
+  coinSpecificResult?: any;
 }

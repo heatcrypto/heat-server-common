@@ -26,4 +26,8 @@ export interface BroadcastResult {
      * errorMessage and transactionId are mutually exclusive
      */
     transactionId?: string;
+    /**
+     * A free form data structure which allows custom broadcast results.
+     */
+    coinSpecificResult?: any;
 }

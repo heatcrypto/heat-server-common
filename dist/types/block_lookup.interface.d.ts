@@ -23,6 +23,11 @@ export interface BlockLookupResult {
      */
     timestamp?: number;
     /**
+     * Only applies to Qubic, this indicates the block is SKIPPED and will never contain any transfers.
+     * Proceed with the next block.
+     */
+    skipped?: boolean;
+    /**
      * List of transfers in this block, can be empty.
      * A transfer is about sending some value from sender to recipient
      * A transaction can embed multiple transfers (HEAT send many, Qubic send many, etc)

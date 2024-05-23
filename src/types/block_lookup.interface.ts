@@ -29,12 +29,15 @@ export interface BlockLookupResult {
   timestamp: number;
 
   /**
-   * List of transactions in this block, can be empty
+   * List of transfers in this block, can be empty.
+   * A transfer is about sending some value from sender to recipient
+   * A transaction can embed multiple transfers (HEAT send many, Qubic send many, etc)
    */
-  txns: Array<BlockLookupTransaction>;
+  transfers: Array<BlockLookupTransfer>;
 }
 
-export interface BlockLookupTransaction {
+export interface BlockLookupTransfer {
+  
   /**
    * Transaction identifier
    */

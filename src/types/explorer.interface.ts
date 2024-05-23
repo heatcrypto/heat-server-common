@@ -18,6 +18,7 @@ import { TxidsLookupResult } from './txids_lookup.interface';
 import { UtxoXpubLookupResult } from './utxo_xpub_lookup.interface';
 import { XpubLookupRequestTokens, XpubLookupRequestType, XpubLookupResult } from './xpub_lookup.interface';
 import { CustomFimkDgsGoodResult } from './custom_fimk.interface';
+import { BlockLookupResult } from './block_lookup.interface';
 
 export interface ExplorerMiddleware {
   getAddress?(address: string): string;
@@ -38,6 +39,11 @@ export interface ExplorerApi {
    * Standard module endpoints. 
    * Custom - chain specific - endpoints have to be listed below in the custom section.
    */
+
+  blockLookup?: (
+    blockchain: Blockchains,
+    height: number,
+  ) => Promise<ModuleResponse<BlockLookupResult>>
 
   status?: (
     blockchain?: Blockchains,

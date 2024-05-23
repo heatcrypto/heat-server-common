@@ -22,6 +22,7 @@ import { CustomFimkDgsGoodResult } from "./types/custom_fimk.interface";
 import { CoreOptions } from "request";
 import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 import { AddressExistsLookupResult } from "./types/address_exists_lookup.interface";
+import { BlockLookupResult } from "./types/block_lookup.interface";
 export declare type CreateCoreOptions = (label: string) => CoreOptions;
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
@@ -33,6 +34,7 @@ export declare class ExplorerBase implements ExplorerApi {
     private logger;
     constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined, createCoreOptions?: CreateCoreOptions | undefined);
     private createContext;
+    blockLookup(blockchain: Blockchains, height: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<BlockLookupResult>>;
     status(blockchain?: Blockchains, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NetworkStatusResult>>;
     networkFee(blockchain: Blockchains, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NetworkFeeResult>>;
     tokenDiscovery(blockchain: Blockchains, assetType: AssetTypes, addrXpub: string, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<Array<TokenDiscoveryResult>>>;

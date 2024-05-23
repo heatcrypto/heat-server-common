@@ -29,6 +29,7 @@ import { JsonRpc } from "./json-rpc";
 import { isFunction } from "lodash";
 import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 import { AddressExistsLookupResult } from "./types/address_exists_lookup.interface";
+import { BlockLookupResult } from "./types/block_lookup.interface";
 
 export type CreateCoreOptions = (label: string) => CoreOptions;
 
@@ -62,6 +63,18 @@ export class ExplorerBase implements ExplorerApi {
       createCoreOptions: this.createCoreOptions,
     }
     return context
+  }
+
+  blockLookup(
+    blockchain: Blockchains,
+    height: number,
+    monitor?: MonitoredRequestMonitor    
+  ): Promise<ModuleResponse<BlockLookupResult>> {
+    const { blockLookup } = this.provider
+    if (!blockLookup) {
+      return Promise.resolve({ error: 'Not implemented' })
+    }    
+    return blockLookup(this.createContext('Block', monitor), { blockchain, height })
   }
 
   status(

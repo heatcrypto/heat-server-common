@@ -18,6 +18,7 @@ import { UtxoXpubLookupParam, UtxoXpubLookupResult } from "./utxo_xpub_lookup.in
 import { XpubLookupParam, XpubLookupResult } from "./xpub_lookup.interface"
 import { CustomFimkDgsGoodParam, CustomFimkDgsGoodResult } from "./custom_fimk.interface"
 import { AddressExistsLookupParam, AddressExistsLookupResult } from "./address_exists_lookup.interface"
+import { BlockLookupParam, BlockLookupResult } from "./block_lookup.interface"
 
 export interface ModuleProvider {
   balanceLookup?: (context: CallContext, param: BalanceLookupParam) => Promise<ModuleResponse<BalanceLookupResult>> 
@@ -37,6 +38,7 @@ export interface ModuleProvider {
   utxoXpubLookup?: (context: CallContext, param: UtxoXpubLookupParam) => Promise<ModuleResponse<Array<UtxoXpubLookupResult>>>
   xpubLookup?: (context: CallContext, param: XpubLookupParam) => Promise<ModuleResponse<XpubLookupResult>>
   addressExistsLookup?: (context: CallContext, param: AddressExistsLookupParam) => Promise<ModuleResponse<AddressExistsLookupResult>>
+  blockLookup?: (context: CallContext, param: BlockLookupParam) => Promise<ModuleResponse<BlockLookupResult>>
 
   /* Custom modules */
   customHeatAccount?: (context: CallContext, param: CustomHeatAccountParam) => Promise<ModuleResponse<CustomHeatAccountResult>>

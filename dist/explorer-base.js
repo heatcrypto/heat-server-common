@@ -33,6 +33,13 @@ var ExplorerBase = /** @class */ (function () {
         };
         return context;
     };
+    ExplorerBase.prototype.blockLookup = function (blockchain, height, monitor) {
+        var blockLookup = this.provider.blockLookup;
+        if (!blockLookup) {
+            return Promise.resolve({ error: 'Not implemented' });
+        }
+        return blockLookup(this.createContext('Block', monitor), { blockchain: blockchain, height: height });
+    };
     ExplorerBase.prototype.status = function (blockchain, monitor) {
         var networkStatus = this.provider.networkStatus;
         if (!networkStatus) {

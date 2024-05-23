@@ -80,6 +80,7 @@ export enum ExplorerTypes {
   UTXO_XPUB = 16,
   XPUB = 17,
   CUSTOM_FIMK_DGS_GOOD = 18,
+  BLOCK_LOOKUP = 19,
 }
 
 export enum AssetTypes {

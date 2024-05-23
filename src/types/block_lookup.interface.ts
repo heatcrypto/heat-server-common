@@ -24,9 +24,9 @@ export interface BlockLookupResult {
   height: number;
 
   /**
-   * Time of the block (timestamp)
+   * Time of the block (timestamp) can be null
    */
-  timestamp: number;
+  timestamp?: number;
 
   /**
    * List of transfers in this block, can be empty.

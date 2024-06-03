@@ -42,5 +42,6 @@ __exportStar(require("./types/utxo_xpub_lookup.interface"), exports);
 __exportStar(require("./types/custom_fimk.interface"), exports);
 __exportStar(require("./types/address_exists_lookup.interface"), exports);
 __exportStar(require("./types/block_lookup.interface"), exports);
+__exportStar(require("./types/monitored_request_factory.interface"), exports);
 __exportStar(require("./utils"), exports);
 __exportStar(require("./json-rpc"), exports);

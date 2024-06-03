@@ -12,6 +12,7 @@ import { UtxoLookupResult } from "./types/utxo_lookup.interface";
 import { TransactionStatusResult } from "./types/transaction_status.interface";
 import { ResolveAliasResult, ReverseResolveAliasResult } from "./types/alias_lookup.interface";
 import { PublicKeyLookupResult } from "./types/publickey_lookup.interface";
+import { MonitoredRequest } from "./monitored-request";
 import { BroadcastResult } from "./types/broadcast.interface";
 import { EstimateGasResult } from "./types/estimate_gas.interface";
 import { NonceLookupResult } from "./types/nonce_lookup.interface";
@@ -23,6 +24,7 @@ import { CoreOptions } from "request";
 import { MonitoredRequestMonitor } from "./monitored-request-monitor";
 import { AddressExistsLookupResult } from "./types/address_exists_lookup.interface";
 import { BlockLookupResult } from "./types/block_lookup.interface";
+import { MonitoredRequestFactory } from "./types/monitored_request_factory.interface";
 export declare type CreateCoreOptions = (label: string) => CoreOptions;
 export declare class ExplorerBase implements ExplorerApi {
     readonly id: string;
@@ -31,8 +33,17 @@ export declare class ExplorerBase implements ExplorerApi {
     private readonly provider;
     readonly middleWare?: ExplorerMiddleware | undefined;
     private readonly createCoreOptions?;
+    private readonly monitoredRequestFactory?;
     private logger;
-    constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined, createCoreOptions?: CreateCoreOptions | undefined);
+    private factoryManagedMonitoredRequest;
+    constructor(id: string, protocol: string, host: string, provider: ModuleProvider, middleWare?: ExplorerMiddleware | undefined, createCoreOptions?: CreateCoreOptions | undefined, monitoredRequestFactory?: MonitoredRequestFactory | undefined);
+    /**
+     * Only if the MonitoredRequestFactory created this explorers MonitoredRequest
+     * it will be returned from this method. This allows external apps to access
+     * the MonitoredRequest and inspect its current job-queue.
+     */
+    getFactoryManagedMonitoredRequest(): MonitoredRequest | undefined;
+    private getOrCreateMonitoredRequest;
     private createContext;
     blockLookup(blockchain: Blockchains, height: number, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<BlockLookupResult>>;
     status(blockchain?: Blockchains, monitor?: MonitoredRequestMonitor): Promise<ModuleResponse<NetworkStatusResult>>;

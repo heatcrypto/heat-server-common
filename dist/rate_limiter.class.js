@@ -4,6 +4,7 @@ exports.RateLimiterClass = void 0;
 var limiter_1 = require("limiter");
 var RateLimiterClass = /** @class */ (function () {
     function RateLimiterClass(tokensPerSecond) {
+        this.tokensPerSecond = tokensPerSecond;
         this.limiter = new limiter_1.RateLimiter(tokensPerSecond, 'second', true);
     }
     RateLimiterClass.prototype.canRun = function () {

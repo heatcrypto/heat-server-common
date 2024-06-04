@@ -3,7 +3,7 @@ import { RateLimiter } from 'limiter';
 export class RateLimiterClass {
   protected limiter: RateLimiter;
 
-  constructor(tokensPerSecond: number) {
+  constructor(public readonly tokensPerSecond: number) {
     this.limiter = new RateLimiter(tokensPerSecond, 'second', true);
   }
 

@@ -69,9 +69,10 @@ export class MonitoredRequest {
     const response = await getAsync(uri, getOptions);
     this.monitor?.requestEnd(uri, response.statusCode, requestId);
     if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-      this.log(`[${id}] Invalid status ${response.statusCode}`);
+      this.log(`[${id}] Invalid status ${response.statusCode}, ${response.body}`);
+      const errorMessage = response.body || `Invalid status ${response.statusCode}`
       throw new MonitoredRequestException(
-        `Invalid status ${response.statusCode}`
+        errorMessage,
       );
     } else {
       this.log(`[${id}] OK ${response.body}`);
@@ -107,9 +108,10 @@ export class MonitoredRequest {
     const response = await postAsync(uri, postOptions);
     this.monitor?.requestEnd(uri, response.statusCode, requestId);
     if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-      this.log(`[${id}] Invalid status ${response.statusCode}`);
+      this.log(`[${id}] Invalid status ${response.statusCode}, ${response.body}`);
+      const errorMessage = response.body || `Invalid status ${response.statusCode}`
       throw new MonitoredRequestException(
-        `Invalid status ${response.statusCode}`
+        errorMessage,
       );
     } else {
       this.log(`[${id}] OK ${prettyPrint(response.body)}`);

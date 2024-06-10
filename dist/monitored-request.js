@@ -103,7 +103,7 @@ var MonitoredRequest = /** @class */ (function () {
         if (options === void 0) { options = {}; }
         if (allowedStatusCodes === void 0) { allowedStatusCodes = [200]; }
         return __awaiter(this, void 0, void 0, function () {
-            var id, requestId, getOptions, response;
+            var id, requestId, getOptions, response, errorMessage;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -117,8 +117,9 @@ var MonitoredRequest = /** @class */ (function () {
                         response = _c.sent();
                         (_b = this.monitor) === null || _b === void 0 ? void 0 : _b.requestEnd(uri, response.statusCode, requestId);
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
-                            throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
+                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode, ", ").concat(response.body));
+                            errorMessage = response.body || "Invalid status ".concat(response.statusCode);
+                            throw new MonitoredRequestException(errorMessage);
                         }
                         else {
                             this.log("[".concat(id, "] OK ").concat(response.body));
@@ -145,7 +146,7 @@ var MonitoredRequest = /** @class */ (function () {
         if (options === void 0) { options = {}; }
         if (allowedStatusCodes === void 0) { allowedStatusCodes = [200, 201, 202]; }
         return __awaiter(this, void 0, void 0, function () {
-            var id, requestId, postOptions, response;
+            var id, requestId, postOptions, response, errorMessage;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -159,8 +160,9 @@ var MonitoredRequest = /** @class */ (function () {
                         response = _c.sent();
                         (_b = this.monitor) === null || _b === void 0 ? void 0 : _b.requestEnd(uri, response.statusCode, requestId);
                         if (allowedStatusCodes.indexOf(response.statusCode) == -1) {
-                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode));
-                            throw new MonitoredRequestException("Invalid status ".concat(response.statusCode));
+                            this.log("[".concat(id, "] Invalid status ").concat(response.statusCode, ", ").concat(response.body));
+                            errorMessage = response.body || "Invalid status ".concat(response.statusCode);
+                            throw new MonitoredRequestException(errorMessage);
                         }
                         else {
                             this.log("[".concat(id, "] OK ").concat((0, json_1.prettyPrint)(response.body)));

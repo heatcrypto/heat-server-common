@@ -1,7 +1,7 @@
 import { Blockchains, AssetTypes, SourceTypes, EventTypes } from '../constants'
 import {
   EventStandardTypeData, EventFeeTypeData, EventOrderTypeData,
-  EventLeaseBalanceTypeData, EventMessageTypeData
+  EventLeaseBalanceTypeData, EventMessageTypeData, EventInternalTransferTypeData
 } from '../event-builders'
 
 export interface EventLookupParam {
@@ -98,5 +98,5 @@ export interface EventLookupEvent {
    * Event data payload which differs based on the event type (see Event Types)
    */
   data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData |
-  EventLeaseBalanceTypeData | EventMessageTypeData;
+  EventLeaseBalanceTypeData | EventMessageTypeData | EventInternalTransferTypeData;
 }

@@ -125,6 +125,24 @@ export interface EventDgsRefundTypeData {
   sender: string;
 }
 
+// Ethereum Internal Transfer between other contracts
+export interface EventInternalTransferType {
+  type: EventTypes;
+  assetType: AssetTypes;
+  assetId: string;
+  data: EventInternalTransferTypeData;
+}
+
+export interface EventInternalTransferTypeData {
+  from: string;
+  to: string;
+  value: string;
+  tokenName?: string;
+  tokenSymbol?: string;
+  tokenDecimals?: number;
+  standard?: string; // e.g., "ERC20"
+}
+
 /**
  * Builds Standard Type
  * @param type
@@ -504,4 +522,43 @@ export function buildEventDgsRefund(
       sender,
     }
   }
+}
+
+/**
+ * Builds EVENT_INTERNAL_TRANSFER
+ * @param from Source contract address
+ * @param to Destination contract address
+ * @param value Transfer amount
+ * @param assetId Token contract address (ERC20 contract address)
+ * @param assetType Asset type (defaults to TOKEN_TYPE_1 for ERC20)
+ * @param tokenName Optional token name
+ * @param tokenSymbol Optional token symbol
+ * @param tokenDecimals Optional token decimals
+ * @param standard Optional token standard (e.g., "ERC20")
+ */
+export function buildEventInternalTransfer(
+  from: string,
+  to: string,
+  value: string,
+  assetId: string,
+  assetType: AssetTypes = AssetTypes.TOKEN_TYPE_1,
+  tokenName?: string,
+  tokenSymbol?: string,
+  tokenDecimals?: number,
+  standard?: string,
+): EventInternalTransferType {
+  return {
+    type: EventTypes.EVENT_INTERNAL_TRANSFER,
+    assetType,
+    assetId,
+    data: {
+      from,
+      to,
+      value,
+      tokenName,
+      tokenSymbol,
+      tokenDecimals,
+      standard,
+    },
+  };
 }

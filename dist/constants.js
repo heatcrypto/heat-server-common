@@ -64,6 +64,8 @@ var EventTypes;
     EventTypes[EventTypes["EVENT_DGS_PURCHASE"] = 13] = "EVENT_DGS_PURCHASE";
     EventTypes[EventTypes["EVENT_DGS_DELIVERY"] = 14] = "EVENT_DGS_DELIVERY";
     EventTypes[EventTypes["EVENT_DGS_PREFUND"] = 15] = "EVENT_DGS_PREFUND";
+    // Ethereum Internal Transfer between other contracts
+    EventTypes[EventTypes["EVENT_INTERNAL_TRANSFER"] = 16] = "EVENT_INTERNAL_TRANSFER";
 })(EventTypes = exports.EventTypes || (exports.EventTypes = {}));
 var ExplorerTypes;
 (function (ExplorerTypes) {

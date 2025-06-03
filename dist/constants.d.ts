@@ -49,7 +49,8 @@ export declare enum EventTypes {
     EVENT_MESSAGE_RECEIVE = 12,
     EVENT_DGS_PURCHASE = 13,
     EVENT_DGS_DELIVERY = 14,
-    EVENT_DGS_PREFUND = 15
+    EVENT_DGS_PREFUND = 15,
+    EVENT_INTERNAL_TRANSFER = 16
 }
 export declare enum ExplorerTypes {
     TOKEN_DISCOVERY = 1,

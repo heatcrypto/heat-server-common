@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unpackDataDgsRefund = exports.dataDgsRefund = exports.unpackDataDgsDelivery = exports.dataDgsDelivery = exports.unpackDataDgsPurchase = exports.dataDgsPurchase = exports.unpackDataMessageType = exports.dataMessageType = exports.unpackDataEventLeaseBalance = exports.dataEventLeaseBalance = exports.unpackDataOrderType = exports.dataOrderType = exports.unpackDataEventFee = exports.dataEventFee = exports.unpackDataStandardType = exports.dataStandardType = exports.createEventData = void 0;
+exports.unpackDataInternalTransfer = exports.dataInternalTransfer = exports.unpackDataDgsRefund = exports.dataDgsRefund = exports.unpackDataDgsDelivery = exports.dataDgsDelivery = exports.unpackDataDgsPurchase = exports.dataDgsPurchase = exports.unpackDataMessageType = exports.dataMessageType = exports.unpackDataEventLeaseBalance = exports.dataEventLeaseBalance = exports.unpackDataOrderType = exports.dataOrderType = exports.unpackDataEventFee = exports.dataEventFee = exports.unpackDataStandardType = exports.dataStandardType = exports.createEventData = void 0;
 var constants_1 = require("./constants");
 var json_1 = require("./json");
 var lodash_1 = require("lodash");
@@ -47,6 +47,8 @@ function createEventData(event) {
             return dataDgsDelivery(event.data);
         case constants_1.EventTypes.EVENT_DGS_PREFUND:
             return dataDgsRefund(event.data);
+        case constants_1.EventTypes.EVENT_INTERNAL_TRANSFER:
+            return dataInternalTransfer(event.data);
     }
     getLogger().warn("Unknown Event Type", (0, json_1.prettyPrint)(event));
     return [];
@@ -203,3 +205,27 @@ function unpackDataDgsRefund(data) {
     };
 }
 exports.unpackDataDgsRefund = unpackDataDgsRefund;
+function dataInternalTransfer(data) {
+    return [
+        data.from,
+        data.to,
+        data.value,
+        data.tokenName || 0,
+        data.tokenSymbol || 0,
+        data.tokenDecimals || 0,
+        data.standard || 0,
+    ];
+}
+exports.dataInternalTransfer = dataInternalTransfer;
+function unpackDataInternalTransfer(data) {
+    return {
+        from: data[0],
+        to: data[1],
+        value: data[2],
+        tokenName: data[3] === 0 ? undefined : data[3],
+        tokenSymbol: data[4] === 0 ? undefined : data[4],
+        tokenDecimals: data[5] === 0 ? undefined : data[5],
+        standard: data[6] === 0 ? undefined : data[6],
+    };
+}
+exports.unpackDataInternalTransfer = unpackDataInternalTransfer;

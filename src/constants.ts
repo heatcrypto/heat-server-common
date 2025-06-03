@@ -59,6 +59,8 @@ export enum EventTypes {
   EVENT_DGS_PURCHASE = 13,
   EVENT_DGS_DELIVERY = 14,
   EVENT_DGS_PREFUND = 15,
+  // Ethereum Internal Transfer between other contracts
+  EVENT_INTERNAL_TRANSFER = 16,
 }
 
 export enum ExplorerTypes {

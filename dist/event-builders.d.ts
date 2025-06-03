@@ -104,6 +104,21 @@ export interface EventDgsRefundTypeData {
     refundNQT: string;
     sender: string;
 }
+export interface EventInternalTransferType {
+    type: EventTypes;
+    assetType: AssetTypes;
+    assetId: string;
+    data: EventInternalTransferTypeData;
+}
+export interface EventInternalTransferTypeData {
+    from: string;
+    to: string;
+    value: string;
+    tokenName?: string;
+    tokenSymbol?: string;
+    tokenDecimals?: number;
+    standard?: string;
+}
 /**
  * Builds Standard Type
  * @param type
@@ -161,3 +176,16 @@ export declare function buildEventMessageReceive(addrXpub: ExtendedAddrXpub | st
 export declare function buildEventDgsPurchase(goods: string, quantity: number, priceNQT: string, sender: string, deliveryDeadlineTimestamp: number, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;
 export declare function buildEventDgsDelivery(purchase: string, goodsData: string, goodsNonce: string, discountNQT: string, goodsIsText: boolean, sender: string, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;
 export declare function buildEventDgsRefund(purchase: string, refundNQT: string, sender: string, assetType?: AssetTypes, assetId?: string): EventDgsStandardType;
+/**
+ * Builds EVENT_INTERNAL_TRANSFER
+ * @param from Source contract address
+ * @param to Destination contract address
+ * @param value Transfer amount
+ * @param assetId Token contract address (ERC20 contract address)
+ * @param assetType Asset type (defaults to TOKEN_TYPE_1 for ERC20)
+ * @param tokenName Optional token name
+ * @param tokenSymbol Optional token symbol
+ * @param tokenDecimals Optional token decimals
+ * @param standard Optional token standard (e.g., "ERC20")
+ */
+export declare function buildEventInternalTransfer(from: string, to: string, value: string, assetId: string, assetType?: AssetTypes, tokenName?: string, tokenSymbol?: string, tokenDecimals?: number, standard?: string): EventInternalTransferType;

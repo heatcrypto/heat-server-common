@@ -1,5 +1,5 @@
 import { Blockchains, AssetTypes, SourceTypes, EventTypes } from '../constants';
-import { EventStandardTypeData, EventFeeTypeData, EventOrderTypeData, EventLeaseBalanceTypeData, EventMessageTypeData } from '../event-builders';
+import { EventStandardTypeData, EventFeeTypeData, EventOrderTypeData, EventLeaseBalanceTypeData, EventMessageTypeData, EventInternalTransferTypeData } from '../event-builders';
 export interface EventLookupParam {
     /**
      * Enum of blockchain identifiers
@@ -76,5 +76,5 @@ export interface EventLookupEvent {
     /**
      * Event data payload which differs based on the event type (see Event Types)
      */
-    data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData;
+    data: EventStandardTypeData | EventFeeTypeData | EventOrderTypeData | EventLeaseBalanceTypeData | EventMessageTypeData | EventInternalTransferTypeData;
 }

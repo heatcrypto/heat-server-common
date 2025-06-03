@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildEventDgsRefund = exports.buildEventDgsDelivery = exports.buildEventDgsPurchase = exports.buildEventMessageReceive = exports.buildEventMessageSend = exports.buildEventMessageType = exports.buildEventLeaseBalance = exports.buildEventCancelSell = exports.buildEventCancelBuy = exports.buildEventSellOrder = exports.buildEventBuyOrder = exports.buildEventOrderType = exports.buildEventFee = exports.buildEventInput = exports.buildEventOutput = exports.buildEventReceive = exports.buildEventSend = exports.buildEventStandardType = void 0;
+exports.buildEventInternalTransfer = exports.buildEventDgsRefund = exports.buildEventDgsDelivery = exports.buildEventDgsPurchase = exports.buildEventMessageReceive = exports.buildEventMessageSend = exports.buildEventMessageType = exports.buildEventLeaseBalance = exports.buildEventCancelSell = exports.buildEventCancelBuy = exports.buildEventSellOrder = exports.buildEventBuyOrder = exports.buildEventOrderType = exports.buildEventFee = exports.buildEventInput = exports.buildEventOutput = exports.buildEventReceive = exports.buildEventSend = exports.buildEventStandardType = void 0;
 var lodash_1 = require("lodash");
 var constants_1 = require("./constants");
 /**
@@ -208,3 +208,33 @@ function buildEventDgsRefund(purchase, refundNQT, sender, assetType, assetId) {
     };
 }
 exports.buildEventDgsRefund = buildEventDgsRefund;
+/**
+ * Builds EVENT_INTERNAL_TRANSFER
+ * @param from Source contract address
+ * @param to Destination contract address
+ * @param value Transfer amount
+ * @param assetId Token contract address (ERC20 contract address)
+ * @param assetType Asset type (defaults to TOKEN_TYPE_1 for ERC20)
+ * @param tokenName Optional token name
+ * @param tokenSymbol Optional token symbol
+ * @param tokenDecimals Optional token decimals
+ * @param standard Optional token standard (e.g., "ERC20")
+ */
+function buildEventInternalTransfer(from, to, value, assetId, assetType, tokenName, tokenSymbol, tokenDecimals, standard) {
+    if (assetType === void 0) { assetType = constants_1.AssetTypes.TOKEN_TYPE_1; }
+    return {
+        type: constants_1.EventTypes.EVENT_INTERNAL_TRANSFER,
+        assetType: assetType,
+        assetId: assetId,
+        data: {
+            from: from,
+            to: to,
+            value: value,
+            tokenName: tokenName,
+            tokenSymbol: tokenSymbol,
+            tokenDecimals: tokenDecimals,
+            standard: standard,
+        },
+    };
+}
+exports.buildEventInternalTransfer = buildEventInternalTransfer;

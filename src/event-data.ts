@@ -8,6 +8,7 @@ import {
   EventDgsPurchaseTypeData,
   EventDgsDeliveryTypeData,
   EventDgsRefundTypeData,
+  EventInternalTransferTypeData,
 } from "./event-builders";
 import { prettyPrint } from "./json";
 import { isString, isUndefined, isObjectLike } from "lodash";
@@ -57,6 +58,8 @@ export function createEventData(event: { type: number; data: any }) {
       return dataDgsDelivery(event.data);
     case EventTypes.EVENT_DGS_PREFUND:
       return dataDgsRefund(event.data);
+    case EventTypes.EVENT_INTERNAL_TRANSFER:
+      return dataInternalTransfer(event.data);
   }
   getLogger().warn("Unknown Event Type", prettyPrint(event));
   return [];
@@ -216,5 +219,31 @@ export function unpackDataDgsRefund(data: Array<any>): EventDgsRefundTypeData {
     purchase: data[0],
     refundNQT: data[1],
     sender: data[2],
+  };
+}
+
+export function dataInternalTransfer(data: EventInternalTransferTypeData) {
+  return [
+    data.from,
+    data.to,
+    data.value,
+    data.tokenName || 0,
+    data.tokenSymbol || 0,
+    data.tokenDecimals || 0,
+    data.standard || 0,
+  ];
+}
+
+export function unpackDataInternalTransfer(
+  data: Array<any>
+): EventInternalTransferTypeData {
+  return {
+    from: data[0],
+    to: data[1],
+    value: data[2],
+    tokenName: data[3] === 0 ? undefined : data[3],
+    tokenSymbol: data[4] === 0 ? undefined : data[4],
+    tokenDecimals: data[5] === 0 ? undefined : data[5],
+    standard: data[6] === 0 ? undefined : data[6],
   };
 }

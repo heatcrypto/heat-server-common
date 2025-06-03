@@ -3,6 +3,7 @@ import {
   EventStandardTypeData, EventFeeTypeData, EventOrderTypeData,
   EventLeaseBalanceTypeData, EventMessageTypeData, EventInternalTransferTypeData
 } from '../event-builders'
+import { TransactionSpecificData } from './specific-data'
 
 export interface EventLookupParam {
   /**
@@ -75,6 +76,11 @@ export interface EventLookupResult {
    * recipient and vice versa.
    */
   events: Array<EventLookupEvent>;
+
+  /**
+   * Optional blockchain-specific transaction data with type discriminator
+   */
+  specific?: TransactionSpecificData;
 }
 
 export interface EventLookupEvent {

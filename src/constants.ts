@@ -63,6 +63,12 @@ export enum EventTypes {
   EVENT_INTERNAL_TRANSFER = 16,
 }
 
+export enum TransactionDataTypes {
+  NONE = 0,           // No specific transaction data or not yet implemented
+  BITCOIN_TYPE = 1,   // UTXO-based coins (Bitcoin, Litecoin, Bitcoin Cash, Dogecoin, etc.)
+  ETHEREUM_TYPE = 2,  // Account-based coins (Ethereum, Polygon, Fantom, BSC, Avalanche, etc.)
+}
+
 export enum ExplorerTypes {
   TOKEN_DISCOVERY = 1,
   BALANCE_LOOKUP = 2,

@@ -1,7 +1,7 @@
 "use strict";
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BlockchainConfig = exports.NULL = exports.QuoteCurrencies = exports.AssetTypes = exports.ExplorerTypes = exports.EventTypes = exports.SourceTypes = exports.txnIsConfirmed = exports.Blockchains = void 0;
+exports.BlockchainConfig = exports.NULL = exports.QuoteCurrencies = exports.AssetTypes = exports.ExplorerTypes = exports.TransactionDataTypes = exports.EventTypes = exports.SourceTypes = exports.txnIsConfirmed = exports.Blockchains = void 0;
 // Must be in sync with
 // https://github.com/heatcrypto/coin-registry/blob/master/registry/chains.json
 var Blockchains;
@@ -67,6 +67,12 @@ var EventTypes;
     // Ethereum Internal Transfer between other contracts
     EventTypes[EventTypes["EVENT_INTERNAL_TRANSFER"] = 16] = "EVENT_INTERNAL_TRANSFER";
 })(EventTypes = exports.EventTypes || (exports.EventTypes = {}));
+var TransactionDataTypes;
+(function (TransactionDataTypes) {
+    TransactionDataTypes[TransactionDataTypes["NONE"] = 0] = "NONE";
+    TransactionDataTypes[TransactionDataTypes["BITCOIN_TYPE"] = 1] = "BITCOIN_TYPE";
+    TransactionDataTypes[TransactionDataTypes["ETHEREUM_TYPE"] = 2] = "ETHEREUM_TYPE";
+})(TransactionDataTypes = exports.TransactionDataTypes || (exports.TransactionDataTypes = {}));
 var ExplorerTypes;
 (function (ExplorerTypes) {
     ExplorerTypes[ExplorerTypes["TOKEN_DISCOVERY"] = 1] = "TOKEN_DISCOVERY";

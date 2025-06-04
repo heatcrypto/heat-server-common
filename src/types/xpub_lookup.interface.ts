@@ -144,54 +144,76 @@ export interface XpubTransactionResult {
 }
 
 export interface XpubTransactionVin {
+  /** ID/hash of the originating transaction (where the UTXO comes from). */
+  txid?: string;
 
-  /**
-   * Input address (sender)
-   */
-  addresses: string[];
+  /** Index of the output in the referenced transaction. */
+  vout?: number;
 
-  /**
-   * scriptPub
-   */
-  hex: string;
+  /** Sequence number for this input (e.g. 4294967293). */
+  sequence?: number;
 
-  /**
-   * Transaction id
-   */
-  txid: string;
-
-  /**
-   * Value in satoshi
-   */
-  value: string;
-
-  /**
-   * Index in transaction
-   */
+  /** Relative index of this input within the transaction. */
   n: number;
+
+  /** List of addresses associated with this input. */
+  addresses?: string[];
+
+  /** Indicates if this input is from a known address. */
+  isAddress: boolean;
+
+  /** Indicates if this input belongs to the wallet in context. */
+  isOwn?: boolean;
+
+  /** Amount (in satoshi or base units) of the input. */
+  value?: string;
+
+  /** Raw script hex data for this input. */
+  hex?: string;
+
+  /** Disassembled script for this input. */
+  asm?: string;
+
+  /** Data for coinbase inputs (when mining). */
+  coinbase?: string;
 }
 
 export interface XpubTransactionVout {
+  /** Amount (in satoshi or base units) of the output. */
+  value?: string;
 
-  /**
-   * Output address (recipient)
-   */
+  /** Relative index of this output within the transaction. */
+  n: number;
+
+  /** Indicates whether this output has been spent. */
+  spent?: boolean;
+
+  /** Transaction ID in which this output was spent. */
+  spentTxId?: string;
+
+  /** Index of the input that spent this output. */
+  spentIndex?: number;
+
+  /** Block height at which this output was spent. */
+  spentHeight?: number;
+
+  /** Raw script hex data for this output - aka ScriptPubKey. */
+  hex?: string;
+
+  /** Disassembled script for this output. */
+  asm?: string;
+
+  /** List of addresses associated with this output. */
   addresses: string[];
 
-  /**
-   * scriptPub
-   */
-  hex: string;
+  /** Indicates whether this output is owned by valid address. */
+  isAddress: boolean;
 
-  /**
-   * Value in satoshi
-   */
-  value: string;
+  /** Indicates if this output belongs to the wallet in context. */
+  isOwn?: boolean;
 
-  /**
-   * Index in transaction
-   */
-  n: number;
+  /** Output script type (e.g., 'P2PKH', 'P2SH'). */
+  type?: string;
 }
 
 export interface XpubTokenResult {

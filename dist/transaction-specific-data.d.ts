@@ -15,7 +15,7 @@ export declare function createTransactionSpecificData(specific: TransactionSpeci
 /**
  * Unpacks transaction-specific data array based on blockchain type
  * @param type - The blockchain architecture type
- * @param data - The serialized data array
+ * @param data - The serialized data array (first element should be the type)
  * @returns {TransactionSpecificData | undefined}
  */
 export declare function unpackTransactionSpecificData(type: TransactionDataTypes, data: Array<any>): TransactionSpecificData | undefined;

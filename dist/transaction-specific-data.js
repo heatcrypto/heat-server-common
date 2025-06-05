@@ -1,4 +1,13 @@
 "use strict";
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unpackDataBitcoinSpecific = exports.dataBitcoinSpecific = exports.unpackDataEthereumSpecific = exports.dataEthereumSpecific = exports.unpackTransactionSpecificData = exports.createTransactionSpecificData = exports.getTransactionDataType = void 0;
 var constants_1 = require("./constants");
@@ -46,29 +55,31 @@ exports.getTransactionDataType = getTransactionDataType;
 function createTransactionSpecificData(specific) {
     switch (specific.type) {
         case constants_1.TransactionDataTypes.ETHEREUM_TYPE:
-            return dataEthereumSpecific(specific.data);
+            return __spreadArray([specific.type], dataEthereumSpecific(specific.data), true);
         case constants_1.TransactionDataTypes.BITCOIN_TYPE:
-            return dataBitcoinSpecific(specific.data);
+            return __spreadArray([specific.type], dataBitcoinSpecific(specific.data), true);
         case constants_1.TransactionDataTypes.NONE:
         default:
-            return [];
+            return [constants_1.TransactionDataTypes.NONE];
     }
 }
 exports.createTransactionSpecificData = createTransactionSpecificData;
 /**
  * Unpacks transaction-specific data array based on blockchain type
  * @param type - The blockchain architecture type
- * @param data - The serialized data array
+ * @param data - The serialized data array (first element should be the type)
  * @returns {TransactionSpecificData | undefined}
  */
 function unpackTransactionSpecificData(type, data) {
+    // Skip the first element (type) when passing to unpack functions
+    var dataWithoutType = data.length > 1 ? data.slice(1) : [];
     switch (type) {
         case constants_1.TransactionDataTypes.ETHEREUM_TYPE: {
-            var ethereumData = unpackDataEthereumSpecific(data);
+            var ethereumData = unpackDataEthereumSpecific(dataWithoutType);
             return ethereumData ? { type: constants_1.TransactionDataTypes.ETHEREUM_TYPE, data: ethereumData } : undefined;
         }
         case constants_1.TransactionDataTypes.BITCOIN_TYPE: {
-            var bitcoinData = unpackDataBitcoinSpecific(data);
+            var bitcoinData = unpackDataBitcoinSpecific(dataWithoutType);
             return bitcoinData ? { type: constants_1.TransactionDataTypes.BITCOIN_TYPE, data: bitcoinData } : undefined;
         }
         case constants_1.TransactionDataTypes.NONE:

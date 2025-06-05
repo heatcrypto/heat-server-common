@@ -51,29 +51,32 @@ export function getTransactionDataType(blockchain: Blockchains): TransactionData
 export function createTransactionSpecificData(specific: TransactionSpecificData): Array<any> {
   switch (specific.type) {
     case TransactionDataTypes.ETHEREUM_TYPE:
-      return dataEthereumSpecific(specific.data);
+      return [specific.type, ...dataEthereumSpecific(specific.data)];
     case TransactionDataTypes.BITCOIN_TYPE:
-      return dataBitcoinSpecific(specific.data);
+      return [specific.type, ...dataBitcoinSpecific(specific.data)];
     case TransactionDataTypes.NONE:
     default:
-      return [];
+      return [TransactionDataTypes.NONE];
   }
 }
 
 /**
  * Unpacks transaction-specific data array based on blockchain type
  * @param type - The blockchain architecture type
- * @param data - The serialized data array
+ * @param data - The serialized data array (first element should be the type)
  * @returns {TransactionSpecificData | undefined}
  */
 export function unpackTransactionSpecificData(type: TransactionDataTypes, data: Array<any>): TransactionSpecificData | undefined {
+  // Skip the first element (type) when passing to unpack functions
+  const dataWithoutType = data.length > 1 ? data.slice(1) : [];
+  
   switch (type) {
     case TransactionDataTypes.ETHEREUM_TYPE: {
-      const ethereumData = unpackDataEthereumSpecific(data);
+      const ethereumData = unpackDataEthereumSpecific(dataWithoutType);
       return ethereumData ? { type: TransactionDataTypes.ETHEREUM_TYPE, data: ethereumData } : undefined;
     }
     case TransactionDataTypes.BITCOIN_TYPE: {
-      const bitcoinData = unpackDataBitcoinSpecific(data);
+      const bitcoinData = unpackDataBitcoinSpecific(dataWithoutType);
       return bitcoinData ? { type: TransactionDataTypes.BITCOIN_TYPE, data: bitcoinData } : undefined;
     }
     case TransactionDataTypes.NONE:

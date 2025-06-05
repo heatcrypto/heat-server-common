@@ -25,7 +25,7 @@ expect.extend({
   },
 
   toBeValidGasValue(received: string) {
-    const pass = /^\d+$/.test(received) && BigInt(received) > 0n;
+    const pass = /^\d+$/.test(received) && BigInt(received) > BigInt(0);
     
     return {
       message: () => 
